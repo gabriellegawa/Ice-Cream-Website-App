@@ -23,7 +23,7 @@ export class AppServiceService {
   }
 
   registerUser(user : User){
-    return this.http.post<User>('/api/product',user);
+    return this.http.put<User>('/api/registerCustomer',user);
   }
 
   updateUser(user : User){
