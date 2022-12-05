@@ -80,13 +80,15 @@ app.get('/getData', (req, res) => {
     })
   })
 
+const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
+
 app.get('/getCustomer', (req, res) => {
   // res.json({
   //     "productId":1,
   //     "productName":"Ice cream"
   // })
 
-  MongoClient.connect('mongodb://localhost:27017/iCreamDB', (err, client) => {
+  MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
 
       const db = client.db('iCreamDB')
@@ -106,12 +108,12 @@ app.get('/getCustomer', (req, res) => {
 
 app.put('/customer',function(request, response){
   console.log(request.body._id);
-  MongoClient.connect('mongodb://localhost:27017/iCreamDB', (err, client) => {
+  MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
 
       const db = client.db('iCreamDB')
       // {_id: request.body._id}
-      var id = new require('mongodb').ObjectID(request.body._id);//req.params.id
+      var id = new require('mongodb').ObjectID(request.body._id)//req.params.id
 
       // db.collection('User').findOne({'_id':id})
       // .then(function(doc) {
@@ -130,10 +132,34 @@ app.put('/customer',function(request, response){
           console.log(result);
         }).catch((err) => {
             console.log(err);
-        });
-         
+        })
   })
 })
+
+app.put('/registerCustomer', function(request, response) {
+  console.log("Register Customer called")
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+    const db = client.db('iCreamDB')
+    var newUser = { 
+      firstName:request.body.firstName,
+      lastName:request.body.lastName,
+      emailAddress:request.body.emailAddress,
+      phoneNumber:request.body.phoneNumber,
+      dateOfBirth:request.body.dateOfBirth,
+      password:request.body.password
+    }
+    // TODO: Add catch error
+    db.collection('User').insertOne(newUser, function(err, res) {
+      if (err) throw err
+
+      client.close()
+    })
+  })
+  
+    response.status(200).send({'message':'Insert Successful'})
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

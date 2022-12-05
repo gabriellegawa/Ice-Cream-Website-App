@@ -1,4 +1,5 @@
 <form [formGroup]="createUserForm">
+    <!-- TODO: Improve error handling -->
     First Name: <br>
     <input type="text" formControlName="veh_firstName" />
     <span class="error" *ngIf="createUserForm.controls.veh_firstName.invalid &&
@@ -24,16 +25,21 @@
     createUserForm.controls.veh_dateOfBirth.dirty">Must be 3 characters</span>
     <br>
     Create Password: <br>
-    <input type="text" formControlName="veh_password"/>
+    <input type="password" formControlName="veh_password"/>
     <span class="error" *ngIf="createUserForm.controls.veh_password.invalid &&
     createUserForm.controls.veh_password.dirty">Must be 3 characters</span>
     <br>
     Confirm Password: <br>
-    <input type="text" formControlName="veh_confirmPassword"/>
-    <span class="error" *ngIf="createUserForm.controls.veh_confirmPassword.invalid &&
-    createUserForm.controls.veh_confirmPassword.dirty">Must be 3 characters</span>
-    <br>
-    
+    <input type="password" formControlName="veh_confirmPassword"/>
+    <ng-template [ngIf]="createUserForm.controls.veh_confirmPassword.invalid &&
+    createUserForm.controls.veh_confirmPassword.dirty" [ngIfElse]="checkPassword">
+        <span class="error" >Must be 3 characters</span>
+    </ng-template>
+    <ng-template #checkPassword>
+        <span class="error" *ngIf="createUserForm.value.veh_confirmPassword != createUserForm.value.veh_password">Password and Confirm Password does not match</span>
+    </ng-template>
+    <br/>
+    <br/>
     <button (click)="handleCreate()" [disabled]="createUserForm.invalid">Submit</button>
- <button (click)="handleClear()">Clear</button>
+    <button (click)="handleClear()">Clear</button>
 </form>
