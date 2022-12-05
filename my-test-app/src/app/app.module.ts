@@ -10,6 +10,7 @@ import { ProductDescriptionComponent } from './product-description/product-descr
 import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
+import { HeaderAppComponent } from './header-app/header-app.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CreateUserFormComponent } from './create-user-form/create-user-form.com
     ProductDescriptionComponent,
     ProductGalleryComponent,
     UpdateUserFormComponent,
-    CreateUserFormComponent
+    CreateUserFormComponent,
+    HeaderAppComponent
   ],
   imports: [
     BrowserModule,
