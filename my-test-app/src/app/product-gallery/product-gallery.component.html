@@ -1,0 +1,16 @@
+<h1>Welcome to product gallery</h1>
+<div *ngFor="let user of userList; index as i">
+    <p>Number: {{ i+1 }}</p>
+    <p>first Name {{ user.firstName }}</p>
+    <p>last Name {{ user.lastName }}</p>
+    <p>Email address {{ user.emailAddress }}</p>
+    <p>Phone Number {{ user.phoneNumber }}</p>
+    <p>Date of Birth {{ user.dateOfBirth }}</p>
+    <p>postal Code {{ user.password }}</p>
+    <app-update-user-form *ngIf="userToEdit == user" [user]="user" (on-submit)="commitEdit($event)"></app-update-user-form>
+    <button>View</button>
+    <button (click)="editUser(user)">Update</button>
+    <button>Delete</button>
+    <button (click)="onCancel()">Cancel</button>
+    <hr>
+</div>

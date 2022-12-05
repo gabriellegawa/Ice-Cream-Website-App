@@ -1,0 +1,39 @@
+<form [formGroup]="createUserForm">
+    First Name: <br>
+    <input type="text" formControlName="veh_firstName" />
+    <span class="error" *ngIf="createUserForm.controls.veh_firstName.invalid &&
+    createUserForm.controls.veh_firstName.dirty">Must be 3 characters</span>
+    <br>
+    Last Name: <br>
+    <input type="text" formControlName="veh_lastName" />
+    <span class="error" *ngIf="createUserForm.controls.veh_lastName.invalid &&
+    createUserForm.controls.veh_lastName.dirty">Must be 3 characters</span>
+    <br>
+    Email Address: <br>
+    <input type="email" formControlName="veh_emailAddress" />
+    <span class="error" *ngIf="createUserForm.controls.veh_emailAddress.invalid &&
+    createUserForm.controls.veh_emailAddress.dirty">Must be a valid email address</span><br>
+    Phone Number: <br>
+    <input type="text" formControlName="veh_phoneNumber"/>
+    <span class="error" *ngIf="createUserForm.controls.veh_phoneNumber.invalid &&
+    createUserForm.controls.veh_phoneNumber.dirty">Must be 3 characters</span>
+    <br>
+    Date of Birth: <br>
+    <input type="date" formControlName="veh_dateOfBirth"/>
+    <span class="error" *ngIf="createUserForm.controls.veh_dateOfBirth.invalid &&
+    createUserForm.controls.veh_dateOfBirth.dirty">Must be 3 characters</span>
+    <br>
+    Create Password: <br>
+    <input type="text" formControlName="veh_password"/>
+    <span class="error" *ngIf="createUserForm.controls.veh_password.invalid &&
+    createUserForm.controls.veh_password.dirty">Must be 3 characters</span>
+    <br>
+    Confirm Password: <br>
+    <input type="text" formControlName="veh_confirmPassword"/>
+    <span class="error" *ngIf="createUserForm.controls.veh_confirmPassword.invalid &&
+    createUserForm.controls.veh_confirmPassword.dirty">Must be 3 characters</span>
+    <br>
+    
+    <button (click)="handleCreate()" [disabled]="createUserForm.invalid">Submit</button>
+ <button (click)="handleClear()">Clear</button>
+</form>

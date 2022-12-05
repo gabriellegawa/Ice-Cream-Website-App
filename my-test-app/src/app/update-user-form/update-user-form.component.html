@@ -1,0 +1,18 @@
+<form ngForm #myForm="ngForm">
+    First Name: <br>
+    <input type="text" name="veh_firstName" [ngModel] = "user.firstName"/><br>
+    Last Name: <br>
+    <input type="text" name="veh_lastName" [ngModel] = "user.lastName"/><br>
+    Email Address: <br>
+    <input type="text" name="veh_emailAddress" [ngModel] = "user.emailAddress"/><br>
+    Phone Number: <br>
+    <input type="text" name="veh_phoneNumber" [ngModel] = "user.phoneNumber"/><br>
+    Date of Birth: <br>
+    <input type="date" name="veh_dateOfBirth" [ngModel] = "user.dateOfBirth"/><br>
+    Password: <br>
+    <input type="text" name="veh_password" [ngModel] = "user.password"/><br>
+    
+    <input type="hidden" name="veh__id" [ngModel] ="user._id">
+    
+    <button (click)="handleUpdate(myForm)">Submit</button>
+</form>
