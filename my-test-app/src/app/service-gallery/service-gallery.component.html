@@ -1,0 +1,24 @@
+<h1>Welcome to service gallery</h1>
+<ng-template [ngIf]="div1" [ngIfElse]="div2">
+    <div *ngFor="let service of serviceList; index as i">
+        <p>Number: {{ i+1 }}</p>
+        <p>Title {{ service.title }}</p>
+        <p>Description {{ service.description }}</p>
+        <p>Date Added {{ service.dateAdded }}</p>
+        <p>Last Modified {{ service.lastModified }}</p>
+        <p>Creator {{ service.user }}</p>
+        <!-- <app-update-service-form *ngIf="serviceToEdit == service" [service]="service" (on-submit)="commitEdit($event)"></app-update-service-form> -->
+        <button>View</button>
+        <button (click)="editService(service); hideComponent()">Update</button>
+        <button>Delete</button>
+        <button (click)="onCancel()">Cancel</button>
+        <hr>
+    </div>
+</ng-template>
+<ng-template #div2>
+    <div *ngFor="let service of serviceList; index as i">
+        <app-update-service-form *ngIf="serviceToEdit == service" [service]="service" (on-submit)="commitEdit($event); showComponent()"></app-update-service-form>
+        <button (click)="onCancel(); showComponent()">Cancel</button>
+        <hr>
+    </div>
+</ng-template>

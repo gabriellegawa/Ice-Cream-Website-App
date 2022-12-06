@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const { MongoClient } = require("mongodb");
+const dbName = "iCreamDB"
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -65,7 +66,7 @@ app.get('/getCustomer', (req, res) => {
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
 
-      const db = client.db('iCreamDB')
+      const db = client.db(dbName)
 
       db.collection('User').find().toArray((err, result) => {
       if (err) throw err
@@ -77,13 +78,28 @@ app.get('/getCustomer', (req, res) => {
   })
 })
   
+app.get('/getService', (req, res) => {
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+
+    const db = client.db(dbName)
+
+    db.collection('Service').find().toArray((err, result) => {
+      if (err) throw err
+
+      console.log("get Service method called")
+
+      res.json(result)
+    })
+  })
+})
 
 app.put('/customer',function(request, response){
 
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
 
-      const db = client.db('iCreamDB')
+      const db = client.db(dbName)
       var id = new require('mongodb').ObjectID(request.body._id)//req.params.id
 
       // db.collection('User').findOne({'_id':id})
@@ -107,11 +123,29 @@ app.put('/customer',function(request, response){
   })
 })
 
+app.put('/service', function(request, response) {
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+    
+    const db = client.db(dbName)
+    var id = new require('mongodb').ObjectID(request.body._id)
+
+    db.collection('Service').updateOne({_id : id}, {$set: {
+      title: request.body.title,
+      description: request.body.description
+    }}).then((result) => {
+      console.log(result)
+    }).catch((err) => {
+      console.log(err)
+    })
+  })
+})
+
 app.put('/registerCustomer', function(request, response) {
   console.log("Register Customer called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
-    const db = client.db('iCreamDB')
+    const db = client.db(dbName)
     var newUser = { 
       firstName:request.body.firstName,
       lastName:request.body.lastName,
