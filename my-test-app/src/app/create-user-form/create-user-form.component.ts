@@ -59,6 +59,8 @@ export class CreateUserFormComponent implements OnInit {
     )
     
     console.log(user)
+    
+    this.handleClear()
 
     this.emitter.emit()
   }

@@ -1,0 +1,13 @@
+<form ngForm #myForm="ngForm">
+    Title <br>
+    <input type="text" name="veh_title" [ngModel] = "service.title"/><br>
+    Description <br>
+    <input type="text" name="veh_description" [ngModel] = "service.description" /><br>
+    
+    <input type="hidden" name="veh_dateAdded" [ngModel] = "service.dateAdded"/><br>
+    <input type="hidden" name="veh_lastModified" [ngModel] = "service.lastModified"/><br>
+    <input type="hidden" name="veh_user" [ngModel] = "service.user"/><br>
+    <input type="hidden" name="veh__id" [ngModel] ="service._id" />
+    
+    <button (click)="handleUpdate(myForm)">Submit</button>
+</form>

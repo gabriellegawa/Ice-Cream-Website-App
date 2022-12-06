@@ -11,6 +11,9 @@ import { ProductGalleryComponent } from './product-gallery/product-gallery.compo
 import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
 import { HeaderAppComponent } from './header-app/header-app.component';
+import { ServiceDescriptionComponent } from './service-description/service-description.component';
+import { UpdateServiceFormComponent } from './update-service-form/update-service-form.component';
+import { ServiceGalleryComponent } from './service-gallery/service-gallery.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { HeaderAppComponent } from './header-app/header-app.component';
     ProductGalleryComponent,
     UpdateUserFormComponent,
     CreateUserFormComponent,
-    HeaderAppComponent
+    HeaderAppComponent,
+    ServiceDescriptionComponent,
+    UpdateServiceFormComponent,
+    ServiceGalleryComponent
   ],
   imports: [
     BrowserModule,

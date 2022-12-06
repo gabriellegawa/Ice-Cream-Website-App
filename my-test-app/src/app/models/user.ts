@@ -8,6 +8,7 @@ export class User{
     password: string;
 
     constructor(obj?:User){
+      
       this._id = obj?._id ?? 0;
       this.firstName = obj?.firstName ?? '';
       this.lastName = obj?.lastName ?? '';
