@@ -40,4 +40,17 @@ export class ServiceGalleryComponent implements OnInit {
   onCancel() {
     this.serviceToEdit = undefined
   }
+
+  div1:boolean = true
+  div2:boolean = false
+
+  hideComponent() {
+    this.div1 = false
+    this.div2 = true
+  }
+
+  showComponent() {
+    this.div1 = true
+    this.div2 = false
+  }
 }
