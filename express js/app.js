@@ -1,30 +1,19 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const { MongoClient } = require("mongodb");
 
-const MongoClient = require('mongodb').MongoClient
-
-MongoClient.connect('mongodb://localhost:27017/test', (err, client) => {
-  if (err) throw err
-
-  const db = client.db('test')
-
-  db.collection('productListing').find().toArray((err, result) => {
-    if (err) throw err
-
-    // console.log(result)
-  })
+app.get('/', (req, res) => {
+  res.send('Hello World!')
 })
-
 
 app.use(express.json());
 
 app.post('/product', function(request, response){
 
-  const { MongoClient } = require("mongodb");
+  
   // Replace the uri string with your MongoDB deployment's connection string.
-  const uri =
-    "mongodb://localhost:27017/test";
+  const uri = "mongodb://localhost:27017/test";
   const client = new MongoClient(uri);
   async function run() {
     try {
@@ -52,41 +41,26 @@ app.post('/product', function(request, response){
   response.status(200).send({'message':'Insert Successful'})
 });
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-
-
 app.get('/getData', (req, res) => {
-    // res.json({
-    //     "productId":1,
-    //     "productName":"Ice cream"
-    // })
 
-    MongoClient.connect('mongodb://localhost:27017/test', (err, client) => {
-        if (err) throw err
+  MongoClient.connect('mongodb://localhost:27017/test', (err, client) => {
+      if (err) throw err
 
-        const db = client.db('test')
+      const db = client.db('test')
 
-        db.collection('productListing').find().toArray((err, result) => {
-        if (err) throw err
+      db.collection('productListing').find().toArray((err, result) => {
+      if (err) throw err
 
-        
-        console.log('get Data method called')
-        res.json(result)
-        })
-    })
+      
+      console.log('get Data method called')
+      res.json(result)
+      })
   })
+})
 
 const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
 
 app.get('/getCustomer', (req, res) => {
-  // res.json({
-  //     "productId":1,
-  //     "productName":"Ice cream"
-  // })
 
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
@@ -95,11 +69,9 @@ app.get('/getCustomer', (req, res) => {
 
       db.collection('User').find().toArray((err, result) => {
       if (err) throw err
-
       
       console.log('get Data method called')
 
-      // console.log(result)
       res.json(result)
       })
   })
@@ -107,12 +79,11 @@ app.get('/getCustomer', (req, res) => {
   
 
 app.put('/customer',function(request, response){
-  console.log(request.body._id);
+
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
 
       const db = client.db('iCreamDB')
-      // {_id: request.body._id}
       var id = new require('mongodb').ObjectID(request.body._id)//req.params.id
 
       // db.collection('User').findOne({'_id':id})
