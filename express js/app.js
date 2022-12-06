@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const { MongoClient } = require("mongodb");
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -10,7 +11,7 @@ app.use(express.json());
 
 app.post('/product', function(request, response){
 
-  const { MongoClient } = require("mongodb");
+  
   // Replace the uri string with your MongoDB deployment's connection string.
   const uri = "mongodb://localhost:27017/test";
   const client = new MongoClient(uri);
