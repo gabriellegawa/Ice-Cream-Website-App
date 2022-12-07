@@ -14,6 +14,7 @@ import { HeaderAppComponent } from './header-app/header-app.component';
 import { ServiceDescriptionComponent } from './service-description/service-description.component';
 import { UpdateServiceFormComponent } from './update-service-form/update-service-form.component';
 import { ServiceGalleryComponent } from './service-gallery/service-gallery.component';
+import { CreateServiceFormComponent } from './create-service-form/create-service-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ServiceGalleryComponent } from './service-gallery/service-gallery.compo
     HeaderAppComponent,
     ServiceDescriptionComponent,
     UpdateServiceFormComponent,
-    ServiceGalleryComponent
+    ServiceGalleryComponent,
+    CreateServiceFormComponent
   ],
   imports: [
     BrowserModule,
