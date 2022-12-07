@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppServiceService } from '../app-service.service';
 import { Service } from '../models/service'
+import { ModalService } from '../_modal';
 
 @Component({
   selector: 'app-service-gallery',
@@ -15,7 +16,7 @@ export class ServiceGalleryComponent implements OnInit {
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private newService : AppServiceService) { }
+  constructor(private newService : AppServiceService, public modalService:ModalService) { }
 
   ngOnInit(): void {
     this.getServiceList()
@@ -57,18 +58,5 @@ export class ServiceGalleryComponent implements OnInit {
 
   onCancel() {
     this.serviceToEdit = undefined
-  }
-
-  div1:boolean = true
-  div2:boolean = false
-
-  hideComponent() {
-    this.div1 = false
-    this.div2 = true
-  }
-
-  showComponent() {
-    this.div1 = true
-    this.div2 = false
   }
 }

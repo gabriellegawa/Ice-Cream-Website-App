@@ -1,22 +1,16 @@
 <h1>Welcome to service gallery</h1>
-<ng-template [ngIf]="div1" [ngIfElse]="div2">
     <div *ngFor="let service of serviceList; index as i">
-        <p>Number: {{ i+1 }}</p>
-        <p>Title {{ service.title }}</p>
-        <p>Description {{ service.description }}</p>
-        <p>Date Added {{ service.dateAdded }}</p>
-        <p>Last Modified {{ service.lastModified }}</p>
-        <p>Creator {{ service.user }}</p>
-        <!-- <app-update-service-form *ngIf="serviceToEdit == service" [service]="service" (on-submit)="commitEdit($event)"></app-update-service-form> -->
-        <button (click)="editService(service); hideComponent()">Update</button>
-        <button (click)="deleteService(service)">Delete</button>
-        <hr>
+            <p>Number: {{ i+1 }}</p>
+            <p>Title {{ service.title }}</p>
+            <p>Description {{ service.description }}</p>
+            <p>Date Added {{ service.dateAdded }}</p>
+            <p>Last Modified {{ service.lastModified }}</p>
+            <p>Creator {{ service.user }}</p>
+            <button (click)="editService(service); modalService.open('modal-1')">Update</button>
+            <button (click)="deleteService(service)">Delete</button>
+            <hr>
+            <jw-modal id='modal-1'>
+                <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close('modal-1')"></app-update-service-form>
+                <button (click)="onCancel(); modalService.close('modal-1')">Cancel</button>
+            </jw-modal>
     </div>
-</ng-template>
-<ng-template #div2>
-    <div *ngFor="let service of serviceList; index as i">
-        <app-update-service-form *ngIf="serviceToEdit == service" [service]="service" (on-submit)="commitEdit($event); showComponent()"></app-update-service-form>
-        <button (click)="onCancel(); showComponent()">Cancel</button>
-        <hr>
-    </div>
-</ng-template>
