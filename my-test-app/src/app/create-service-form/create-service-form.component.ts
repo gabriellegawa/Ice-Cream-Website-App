@@ -42,7 +42,7 @@ export class CreateServiceFormComponent implements OnInit {
       title: input.veh_title,
       description: input.veh_description,
       dateAdded: todayString,
-      lastModified: '',
+      lastModified: todayString,
       user: ''
     })
     this.service.registerService(anotherNewService).subscribe(
