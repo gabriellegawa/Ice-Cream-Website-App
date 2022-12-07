@@ -28,6 +28,10 @@ export class CreateServiceFormComponent implements OnInit {
     })
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
+
   handleCreate() {
     var today = new Date()
     var todayString = String(today.getFullYear()) + '-' + String(today.getMonth()+1) + '-' + String(today.getDate())
@@ -38,7 +42,7 @@ export class CreateServiceFormComponent implements OnInit {
       title: input.veh_title,
       description: input.veh_description,
       dateAdded: todayString,
-      lastModified: '',
+      lastModified: todayString,
       user: ''
     })
     this.service.registerService(anotherNewService).subscribe(
@@ -48,6 +52,8 @@ export class CreateServiceFormComponent implements OnInit {
     console.log(anotherNewService)
 
     this.handleClear()
+    
+    this.refresh()
 
     this.emitter.emit()
   }

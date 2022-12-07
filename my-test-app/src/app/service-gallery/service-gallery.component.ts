@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppServiceService } from '../app-service.service';
 import { Service } from '../models/service'
 
@@ -12,10 +12,17 @@ export class ServiceGalleryComponent implements OnInit {
   serviceList:Service[] = []
   serviceToEdit?:Service
 
+  @Output("on-submit")
+  emitter = new EventEmitter
+
   constructor(private newService : AppServiceService) { }
 
   ngOnInit(): void {
     this.getServiceList()
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 
   getServiceList() {
@@ -35,6 +42,17 @@ export class ServiceGalleryComponent implements OnInit {
     this.ngOnInit()
 
     this.serviceToEdit = undefined
+  }
+
+  deleteService(u:Service) {
+    this.newService.deleteService(u).subscribe(
+      data => console.log('Success!', data),
+      error => console.error('error!', error)
+    )
+    
+    this.refresh()
+
+    this.emitter.emit()
   }
 
   onCancel() {
