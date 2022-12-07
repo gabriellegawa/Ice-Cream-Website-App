@@ -141,6 +141,19 @@ app.put('/service', function(request, response) {
   })
 })
 
+// app.put('/deleteService', function(request, response) {
+//   MongoClient.connect(db_connection_string, (err, client) => {
+//     if (err) throw err
+//     const db = client.db(dbName)
+//     var id = new require('mongodb').ObjectID(request.body._id)
+//     try {
+//       db.collection('Service').deleteOne({_id : id})
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   })
+// })
+
 app.put('/registerCustomer', function(request, response) {
   console.log("Register Customer called")
   MongoClient.connect(db_connection_string, (err, client) => {
@@ -162,7 +175,29 @@ app.put('/registerCustomer', function(request, response) {
     })
   })
   
-    response.status(200).send({'message':'Insert Successful'})
+  response.status(200).send({'message':'Insert Successful'})
+})
+
+app.put('/registerService', function(request, response) {
+  console.log("Register Service is called")
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+    const db = client.db(dbName)
+    var newService = {
+      title: request.body.title,
+      description: request.body.description,
+      dateAdded: request.body.dateAdded,
+      lastModified: request.body.lastModified,
+      user: request.body.user
+    }
+
+    db.collection('Service').insertOne(newService, function(err, res) {
+      if (err) throw err
+
+      client.close()
+    })
+  })
+  response.status(200).send({'message':'Insert Successful'})
 })
 
 

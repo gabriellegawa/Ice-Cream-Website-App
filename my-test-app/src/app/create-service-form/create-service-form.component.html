@@ -1,0 +1,16 @@
+<form [formGroup]="createServiceForm">
+    <!-- TODO: Improve error handling -->
+    Title: <br>
+    <input type="text" formControlName="veh_title" />
+    <span class="error" *ngIf="createServiceForm.controls.veh_title.invalid &&
+    createServiceForm.controls.veh_title.dirty">Must be 3 characters</span>
+    <br>
+    Description: <br>
+    <input type="text" formControlName="veh_description" />
+    <span class="error" *ngIf="createServiceForm.controls.veh_description.invalid &&
+    createServiceForm.controls.veh_description.dirty">Must be 3 characters</span>
+    <br>
+    <br/>
+    <button (click)="handleCreate()" [disabled]="createServiceForm.invalid">Submit</button>
+    <button (click)="handleClear()">Clear</button>
+</form>
