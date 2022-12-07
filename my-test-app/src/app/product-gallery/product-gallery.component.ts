@@ -36,6 +36,9 @@ export class ProductGalleryComponent implements OnInit {
 
     this.ngOnInit();
 
+    // console.log(u)
+    window.location.reload();
+
     this.userToEdit=undefined
   }
 

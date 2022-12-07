@@ -40,7 +40,7 @@ export class UpdateUserFormComponent implements OnInit {
 
     console.log(val)
 
-    this.emitter.emit()
+    this.emitter.emit(val)
   }
 
 }
