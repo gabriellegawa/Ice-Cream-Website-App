@@ -22,13 +22,16 @@ export class UpdateServiceFormComponent implements OnInit {
   }
 
   handleUpdate(nForm:NgForm) {
+    var today = new Date()
+    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth()+1) + '-' + String(today.getDate())
+
     const input = nForm.value
     const val = new Service({
       _id: input.veh__id,
       title: input.veh_title,
       description: input.veh_description,
       dateAdded: input.veh_dateAdded,
-      lastModified: input.veh_lastModified,
+      lastModified: todayString,
       user: input.veh_user
     })
 

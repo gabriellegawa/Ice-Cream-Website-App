@@ -35,6 +35,10 @@ export class AppServiceService {
     return this.http.put<Service>('/api/registerService', service)
   }
 
+  deleteService(service: Service) {
+    return this.http.put<Service>('/api/deleteService', service)
+  }
+
   updateUser(user : User){
     return this.http.put<User>('/api/customer',user)
   }

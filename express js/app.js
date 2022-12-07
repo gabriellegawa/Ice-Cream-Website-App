@@ -132,7 +132,8 @@ app.put('/service', function(request, response) {
 
     db.collection('Service').updateOne({_id : id}, {$set: {
       title: request.body.title,
-      description: request.body.description
+      description: request.body.description,
+      lastModified: request.body.lastModified
     }}).then((result) => {
       console.log(result)
     }).catch((err) => {
@@ -141,18 +142,20 @@ app.put('/service', function(request, response) {
   })
 })
 
-// app.put('/deleteService', function(request, response) {
-//   MongoClient.connect(db_connection_string, (err, client) => {
-//     if (err) throw err
-//     const db = client.db(dbName)
-//     var id = new require('mongodb').ObjectID(request.body._id)
-//     try {
-//       db.collection('Service').deleteOne({_id : id})
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   })
-// })
+app.put('/deleteService', function(request, response) {
+  console.log("Delete Service Called")
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+    const db = client.db(dbName)
+    var id = new require('mongodb').ObjectID(request.body._id)
+    try {
+      db.collection('Service').deleteOne({_id : id})
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  response.status(200).send({'message':'Delete Successful'})
+})
 
 app.put('/registerCustomer', function(request, response) {
   console.log("Register Customer called")

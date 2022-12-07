@@ -8,10 +8,8 @@
         <p>Last Modified {{ service.lastModified }}</p>
         <p>Creator {{ service.user }}</p>
         <!-- <app-update-service-form *ngIf="serviceToEdit == service" [service]="service" (on-submit)="commitEdit($event)"></app-update-service-form> -->
-        <button>View</button>
         <button (click)="editService(service); hideComponent()">Update</button>
-        <button>Delete</button>
-        <button (click)="onCancel()">Cancel</button>
+        <button (click)="deleteService(service)">Delete</button>
         <hr>
     </div>
 </ng-template>
