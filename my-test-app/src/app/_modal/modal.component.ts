@@ -9,7 +9,7 @@ import { ModalService } from './modal.service';
     encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent implements OnInit, OnDestroy {
-    @Input() id: string = '';
+    @Input() id?: string;
     private element: any;
 
     constructor(private modalService: ModalService, private el: ElementRef) {
@@ -39,7 +39,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     // remove self from modal service when component is destroyed
     ngOnDestroy(): void {
-        this.modalService.remove(this.id);
+        this.modalService.remove(Number(this.id) ?? 0);
         this.element.remove();
     }
 
