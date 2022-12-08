@@ -59,4 +59,8 @@ export class ServiceGalleryComponent implements OnInit {
   onCancel() {
     this.serviceToEdit = undefined
   }
+
+  String(number : number) {
+    return String(number)
+  }
 }

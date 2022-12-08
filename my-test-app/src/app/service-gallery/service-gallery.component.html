@@ -6,11 +6,11 @@
             <p>Date Added {{ service.dateAdded }}</p>
             <p>Last Modified {{ service.lastModified }}</p>
             <p>Creator {{ service.user }}</p>
-            <button (click)="editService(service); modalService.open(i)">Update</button>
+            <button (click)="editService(service); modalService.open(String(i))">Update</button>
             <button (click)="deleteService(service)">Delete</button>
             <hr>
             <jw-modal id='{{i}}'>
-                <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(i)"></app-update-service-form>
-                <button (click)="onCancel(); modalService.close(i)">Cancel</button>
+                <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(String(i))"></app-update-service-form>
+                <button (click)="onCancel(); modalService.close(String(i))">Cancel</button>
             </jw-modal>
     </div>
