@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router'
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
@@ -16,6 +17,13 @@ import { ServiceDescriptionComponent } from './service-description/service-descr
 import { UpdateServiceFormComponent } from './update-service-form/update-service-form.component';
 import { ServiceGalleryComponent } from './service-gallery/service-gallery.component';
 import { CreateServiceFormComponent } from './create-service-form/create-service-form.component';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
+  { path: 'user-login-form', component: UserLoginFormComponent},
+  { path: 'service-gallery', component: ServiceGalleryComponent}
+]
 
 @NgModule({
   declarations: [
@@ -28,15 +36,18 @@ import { CreateServiceFormComponent } from './create-service-form/create-service
     ServiceDescriptionComponent,
     UpdateServiceFormComponent,
     ServiceGalleryComponent,
-    CreateServiceFormComponent
+    CreateServiceFormComponent,
+    UserLoginFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ModalModule
+    ModalModule,
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

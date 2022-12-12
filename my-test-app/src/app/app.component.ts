@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from './_modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,22 @@ import { ModalService } from './_modal';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-test-app';
+  title = "my-test-app"
 
-  constructor(public modalService:ModalService) {}
+  constructor(public router: Router) {}
+
+  ngOnInit() {
+    console.log(this.redirect())
+  }
+
+  redirect() {
+
+    if (this.router.url == "/") {
+      this.router.navigate(['user-login-form'])
+      return true
+    }
+    else {
+      return false
+    }
+  }
 }

@@ -1,0 +1,8 @@
+<form ngForm #myForm="ngForm">
+    Email Address <br>
+    <input type="text" name="veh_emailAddress" [ngModel] = "user.emailAddress"/><br>
+    Password <br>
+    <input type="text" name="veh_password" [ngModel] = "user.password" /><br>
+    
+    <button (click)="handleLogin(myForm)">Login</button>
+</form>
