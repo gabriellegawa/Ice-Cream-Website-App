@@ -77,7 +77,30 @@ app.get('/getCustomer', (req, res) => {
       })
   })
 })
-  
+
+app.put('/getUser', (request, response) => {
+
+  MongoClient.connect(db_connection_string, (err, client) => {
+    
+    if (err) throw err
+    
+    const db = client.db(dbName)
+
+    console.log(request.body)
+
+    var email = request.body.emailAddress
+    var password = request.body.password
+
+    db.collection('User').findOne( { emailAddress: email, password: password}, (err, result) => {
+      if (err) throw err
+
+      console.log('get User method called')
+
+      response.status(200).send(result)
+    })
+  })
+})
+
 app.get('/getService', (req, res) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err

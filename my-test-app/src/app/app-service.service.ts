@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from './models/product';
 import { User } from './models/user';
 import { Service } from './models/service';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class AppServiceService {
 
   getUserList(){
     return this.http.get<User[]>('/api/getCustomer')
+  }
+
+  getUser(user : User) {
+    return this.http.put<User>('/api/getUser', user)
   }
 
   getServiceList() {
