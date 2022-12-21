@@ -18,11 +18,15 @@ import { UpdateServiceFormComponent } from './update-service-form/update-service
 import { ServiceGalleryComponent } from './service-gallery/service-gallery.component';
 import { CreateServiceFormComponent } from './create-service-form/create-service-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { UserLogoutComponent } from './user-logout/user-logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
   { path: 'user-login-form', component: UserLoginFormComponent},
-  { path: 'service-gallery', component: ServiceGalleryComponent}
+  { path: 'service-gallery', component: ServiceGalleryComponent},
+  { path: 'product-gallery', component: ProductGalleryComponent},
+  { path: 'user-logout', component: ProductGalleryComponent}
 ]
 
 @NgModule({
@@ -37,7 +41,8 @@ const routes: Routes = [
     UpdateServiceFormComponent,
     ServiceGalleryComponent,
     CreateServiceFormComponent,
-    UserLoginFormComponent
+    UserLoginFormComponent,
+    UserLogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
