@@ -11,37 +11,36 @@ import { User } from '../models/user'
 export class UserDescriptionComponent implements OnInit {
 
   @Input()
-  user = new User();
+  currentUser: User = new User()
+  @Input()
+  currentIndex: number = 0
 
-  userList:User[] = [];
-  currentDate = new Date();
-  testName = 'Nathan';
+  userToEdit?:User
 
-  productForm = new FormGroup({
-    productName: new FormControl(),
-    date: new FormControl()
-  })
-  constructor(private service : AppServiceService, private appService : AppServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getData()
+    console.log(this.currentIndex + ' ' +this.currentUser._id)
   }
 
-  getData(){
-    this.service.getData().subscribe((Response) => {
-      console.log('Response from API', Response)
-    }, (error)=> {
-      console.error('error',Response)
-    })
+  editUser(u:User){
+    console.log(u)
+    this.userToEdit=u
   }
 
-  
+  commitEdit(u:User){
+    //Commit to the database
 
-  onSubmit() {
-    console.log(this.productForm.value);
-    this.appService.registerProduct(this.productForm.value).subscribe(
-      data => console.log('Success!', data),
-      error => console.error('error!', error)
-    )
+    this.ngOnInit();
+
+    // console.log(u)
+    window.location.reload();
+
+    this.userToEdit=undefined
+  }
+
+  onCancel(){
+    
+    this.userToEdit=undefined
   }
 }
