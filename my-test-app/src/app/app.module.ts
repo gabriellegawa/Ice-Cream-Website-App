@@ -18,6 +18,8 @@ import { UpdateServiceFormComponent } from './update-service-form/update-service
 import { ServiceGalleryComponent } from './service-gallery/service-gallery.component';
 import { CreateServiceFormComponent } from './create-service-form/create-service-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { UserGalleryComponent } from './user-gallery/user-gallery.component';
+import { UserDescriptionComponent } from './user-description/user-description.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
@@ -37,7 +39,9 @@ const routes: Routes = [
     UpdateServiceFormComponent,
     ServiceGalleryComponent,
     CreateServiceFormComponent,
-    UserLoginFormComponent
+    UserLoginFormComponent,
+    UserGalleryComponent,
+    UserDescriptionComponent
   ],
   imports: [
     BrowserModule,
