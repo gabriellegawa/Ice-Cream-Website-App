@@ -20,6 +20,8 @@ import { CreateServiceFormComponent } from './create-service-form/create-service
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
+import { UserGalleryComponent } from './user-gallery/user-gallery.component';
+import { UserDescriptionComponent } from './user-description/user-description.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
@@ -42,7 +44,9 @@ const routes: Routes = [
     ServiceGalleryComponent,
     CreateServiceFormComponent,
     UserLoginFormComponent,
-    UserLogoutComponent
+    UserLogoutComponent,
+    UserGalleryComponent,
+    UserDescriptionComponent
   ],
   imports: [
     BrowserModule,
