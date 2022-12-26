@@ -1,0 +1,13 @@
+<p>Number: {{ currentIndex }}</p>
+<p>first Name {{ currentUser.firstName }}</p>
+<p>last Name {{ currentUser.lastName }}</p>
+<p>Email address {{ currentUser.emailAddress }}</p>
+<p>Phone Number {{ currentUser.phoneNumber }}</p>
+<p>Date of Birth {{ currentUser.dateOfBirth }}</p>
+<p>postal Code {{ currentUser.password }}</p>
+<app-update-user-form *ngIf="userToEdit == currentUser" [user]="currentUser" (on-submit)="commitEdit($event)"></app-update-user-form>
+<button>View</button>
+<button (click)="editUser(currentUser)">Update</button>
+<button>Delete</button>
+<button (click)="onCancel()">Cancel</button>
+<hr>

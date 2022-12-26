@@ -1,0 +1,4 @@
+<h1>Welcome to user gallery</h1>
+<div *ngFor="let user of userList; index as i">
+    <app-user-description [currentUser]="user" [currentIndex]="i+1"></app-user-description>
+</div>
