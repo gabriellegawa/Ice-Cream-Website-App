@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { User } from '../models/user';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-product-gallery',
@@ -11,10 +13,15 @@ export class ProductGalleryComponent implements OnInit {
 
   userList:User[] = []
   userToEdit?:User
-  constructor(private service : AppServiceService) { }
+  constructor(private service : AppServiceService, private storageService:StorageService, private router:Router) { }
 
   ngOnInit(): void {
-    this.getUserList()
+    if (!this.storageService.isLoggedIn()) {
+      this.router.navigate(["user-login-form"])
+    }
+    else {
+      this.getUserList()
+    }
   }
 
   getUserList(){

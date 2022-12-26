@@ -58,24 +58,6 @@ export class UserLoginFormComponent implements OnInit {
     })
   }
 
-  // handleLogin(nForm:NgForm) {
-  //   const input = nForm.value
-
-  //   var loginUser = new User()
-  //   loginUser.emailAddress = input.veh_emailAddress
-  //   loginUser.password = input.veh_password
-    
-  //   this.service.getUser(loginUser).subscribe((Response) => {
-  //     let copy = Object.assign({}, Response)
-
-  //     if (copy.emailAddress == input.veh_emailAddress && copy.password == input.veh_password) {
-  //       this.router.navigate(["service-gallery"])
-  //     }
-  //   }, error => {
-  //     console.log("error", error)
-  //   })
-  // }
-
   
 
 }

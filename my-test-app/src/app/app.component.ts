@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from './_services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = "my-test-app"
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private storageService:StorageService) {}
 
   ngOnInit() {
-    console.log(this.redirect())
+    this.redirect()
   }
 
   redirect() {

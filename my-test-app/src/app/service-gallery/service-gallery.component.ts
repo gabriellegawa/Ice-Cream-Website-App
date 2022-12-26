@@ -1,7 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { Service } from '../models/service'
 import { ModalService } from '../_modal';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-service-gallery',
@@ -16,10 +18,15 @@ export class ServiceGalleryComponent implements OnInit {
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private newService : AppServiceService, public modalService:ModalService) { }
+  constructor(private newService : AppServiceService, public modalService:ModalService, private storageService:StorageService, private router:Router) { }
 
   ngOnInit(): void {
-    this.getServiceList()
+    if (!this.storageService.isLoggedIn()) {
+      this.router.navigate(["user-login-form"])
+    }
+    else {
+      this.getServiceList()
+    }
   }
 
   refresh(): void {
