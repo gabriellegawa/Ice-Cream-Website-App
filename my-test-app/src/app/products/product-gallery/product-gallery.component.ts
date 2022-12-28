@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppServiceService } from '../app-service.service';
-import { User } from '../models/user';
-import { StorageService } from '../_services/storage.service';
+import { AppServiceService } from '../../app-service.service';
+import { User } from '../../models/user';
+import { StorageService } from '../../_services/storage.service';
 
 @Component({
   selector: 'app-product-gallery',

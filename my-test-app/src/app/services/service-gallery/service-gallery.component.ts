@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppServiceService } from '../app-service.service';
-import { Service } from '../models/service'
-import { ModalService } from '../_modal';
-import { StorageService } from '../_services/storage.service';
+import { AppServiceService } from '../../app-service.service';
+import { Service } from '../../models/service'
+import { ModalService } from '../../_modal';
+import { StorageService } from '../../_services/storage.service';
 
 @Component({
   selector: 'app-service-gallery',

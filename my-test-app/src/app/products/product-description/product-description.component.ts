@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AppServiceService } from '../app-service.service';
+import { AppServiceService } from '../../app-service.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { User } from '../models/user'
+import { User } from '../../models/user'
 
 @Component({
   selector: 'app-product-description',

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../_services/storage.service';
+import { StorageService } from '../../_services/storage.service';
 
 @Component({
-  selector: 'app-header-app',
-  templateUrl: './header-app.component.html',
-  styleUrls: ['./header-app.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 export class HeaderAppComponent implements OnInit {
 

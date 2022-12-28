@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AppServiceService } from '../app-service.service';
-import { Service } from '../models/service';
+import { AppServiceService } from '../../app-service.service';
+import { Service } from '../../models/service';
 
 @Component({
   selector: 'app-create-service-form',

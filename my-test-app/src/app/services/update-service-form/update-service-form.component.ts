@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { AppServiceService } from '../app-service.service';
+import { AppServiceService } from '../../app-service.service';
 import { NgForm } from '@angular/forms';
-import { Service } from '../models/service';
+import { Service } from '../../models/service';
 
 @Component({
   selector: 'app-update-service-form',

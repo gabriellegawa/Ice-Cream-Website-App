@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppServiceService } from '../app-service.service';
-import { User } from '../models/user';
+import { AppServiceService } from '../../app-service.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-user-gallery',
