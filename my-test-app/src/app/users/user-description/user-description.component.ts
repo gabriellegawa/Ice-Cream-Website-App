@@ -6,7 +6,7 @@ import { User } from '../../models/user'
 @Component({
   selector: 'app-user-description',
   templateUrl: './user-description.component.html',
-  styleUrls: ['./user-description.component.css']
+  styleUrls: ['./user-description.component.scss']
 })
 export class UserDescriptionComponent implements OnInit {
 

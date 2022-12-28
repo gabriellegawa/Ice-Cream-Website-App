@@ -6,7 +6,7 @@ import { Service } from '../../models/service';
 @Component({
   selector: 'app-update-service-form',
   templateUrl: './update-service-form.component.html',
-  styleUrls: ['./update-service-form.component.css']
+  styleUrls: ['./update-service-form.component.scss']
 })
 export class UpdateServiceFormComponent implements OnInit {
 

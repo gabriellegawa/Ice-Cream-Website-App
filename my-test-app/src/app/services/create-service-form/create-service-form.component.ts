@@ -7,7 +7,7 @@ import { Service } from '../../models/service';
 @Component({
   selector: 'app-create-service-form',
   templateUrl: './create-service-form.component.html',
-  styleUrls: ['./create-service-form.component.css']
+  styleUrls: ['./create-service-form.component.scss']
 })
 export class CreateServiceFormComponent implements OnInit {
 
