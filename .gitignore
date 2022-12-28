@@ -46,3 +46,5 @@ Thumbs.db
 
 my-test-app/node_modules/
 express js/node_modules/
+
+.angular/cache/
