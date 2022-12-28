@@ -1,3 +1,18 @@
+<h1>TEST</h1>
+<c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
+	<c-carousel-inner>
+	  <c-carousel-item *ngFor="let slide of slides">
+		<img
+		  [src]="slide.src"
+		  alt="{{slide.title}}"
+		  class="d-block w-100"
+		  loading="lazy"
+		/>
+	  </c-carousel-item>
+	</c-carousel-inner>
+	<c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+  	<c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
 <h1>Welcome to service gallery</h1>
     <div *ngFor="let service of serviceList; index as i">
             <p>Number: {{ i+1 }}</p>

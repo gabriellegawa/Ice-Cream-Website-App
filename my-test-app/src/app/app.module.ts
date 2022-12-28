@@ -28,6 +28,7 @@ import { CreateServiceFormComponent } from './services/create-service-form/creat
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { CarouselModule } from '@coreui/angular';
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
@@ -57,6 +58,7 @@ const routes: Routes = [
     FooterComponent
   ],
   imports: [
+    CarouselModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,

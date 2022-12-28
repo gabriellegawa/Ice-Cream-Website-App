@@ -12,6 +12,9 @@ import { StorageService } from '../../_services/storage.service';
 })
 export class ServiceGalleryComponent implements OnInit {
 
+  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
+
+
   serviceList:Service[] = []
   serviceToEdit?:Service
 
@@ -21,12 +24,25 @@ export class ServiceGalleryComponent implements OnInit {
   constructor(private newService : AppServiceService, public modalService:ModalService, private storageService:StorageService, private router:Router) { }
 
   ngOnInit(): void {
-    if (!this.storageService.isLoggedIn()) {
-      this.router.navigate(["user-login-form"])
-    }
-    else {
+    // if (!this.storageService.isLoggedIn()) {
+    //   this.router.navigate(["user-login-form"])
+    // }
+    // else {
       this.getServiceList()
+    // }
+    this.slides[0] = {
+      src: './assets/img/test1.jpg',
+    };
+    this.slides[1] = {
+      src: './assets/img/test2.jpg',
     }
+    this.slides[2] = {
+      src: './assets/img/test1.jpg',
+    }
+  }
+
+  onItemChange($event: any): void {
+    console.log('Carousel onItemChange', $event);
   }
 
   refresh(): void {
