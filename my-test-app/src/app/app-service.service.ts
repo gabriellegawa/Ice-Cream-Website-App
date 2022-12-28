@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from './models/product';
 import { User } from './models/user';
 import { Service } from './models/service';
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Injectable({
   providedIn: 'root'
