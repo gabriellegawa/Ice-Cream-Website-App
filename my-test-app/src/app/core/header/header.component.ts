@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 import { StorageService } from '../../_services/storage.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { StorageService } from '../../_services/storage.service';
 })
 export class HeaderAppComponent implements OnInit {
 
-  constructor(private router: Router, private storageService: StorageService) { }
+  constructor(private router: Router, private storageService: StorageService, public auth:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +22,11 @@ export class HeaderAppComponent implements OnInit {
   redirectToServiceGallery() {
     this.router.navigate(['service-gallery'])
   }
+
+  redirectToLogin() {
+    this.router.navigate(['user-login-form'])
+  }
+  
   // TODO: Move this command to the user logout component
   redirectToLogout() {
     this.storageService.clean()
