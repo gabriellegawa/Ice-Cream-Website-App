@@ -1,0 +1,31 @@
+<h1>TEST</h1>
+<c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
+	<c-carousel-inner>
+	  <c-carousel-item *ngFor="let slide of slides">
+		<img
+		  [src]="slide.src"
+		  alt="{{slide.title}}"
+		  class="d-block w-100"
+		  loading="lazy"
+		/>
+	  </c-carousel-item>
+	</c-carousel-inner>
+	<c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+  	<c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
+<h1>Welcome to service gallery</h1>
+    <div *ngFor="let service of serviceList; index as i">
+            <p>Number: {{ i+1 }}</p>
+            <p>Title {{ service.title }}</p>
+            <p>Description {{ service.description }}</p>
+            <p>Date Added {{ service.dateAdded }}</p>
+            <p>Last Modified {{ service.lastModified }}</p>
+            <p>Creator {{ service.user }}</p>
+            <button (click)="editService(service); modalService.open(String(i))">Update</button>
+            <button (click)="deleteService(service)">Delete</button>
+            <hr>
+            <jw-modal id='{{i}}'>
+                <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(String(i))"></app-update-service-form>
+                <button (click)="onCancel(); modalService.close(String(i))">Cancel</button>
+            </jw-modal>
+    </div>
