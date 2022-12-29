@@ -12,8 +12,8 @@ import { StorageService } from '../../_services/storage.service';
 })
 export class ServiceGalleryComponent implements OnInit {
 
-  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
-
+  slides: any[] = [];
+  filtersLoaded: Promise<boolean> = Promise.resolve(false);
 
   serviceList:Service[] = []
   serviceToEdit?:Service
@@ -27,8 +27,10 @@ export class ServiceGalleryComponent implements OnInit {
     // if (!this.storageService.isLoggedIn()) {
     //   this.router.navigate(["user-login-form"])
     // }
-    // else {
-      this.getServiceList()
+    // // else {
+    this.getServiceList()
+
+    console.log(this.serviceList.length)
     // }
     this.slides[0] = {
       src: './assets/img/test1.jpg',
@@ -49,13 +51,29 @@ export class ServiceGalleryComponent implements OnInit {
     window.location.reload();
   }
 
-  getServiceList() {
-    this.newService.getServiceList().subscribe((Response) => {
+  async getServiceList() {
+
+    // const response = await this.newService.getServiceList().toPromise();
+
+    // this.serviceList = response!
+
+
+    // const response = await this.newService.getServiceList().toPromise()
+    // this.serviceList = response!
+    // console.log('after')
+    // console.log('after' , response)
+
+    const response = await this.newService.getServiceList().subscribe((Response) => {
       this.serviceList = Response
       console.log('Response from API', Response)
+      console.log(this.serviceList)
+      this.filtersLoaded = Promise.resolve(true)
     }, (error) => {
       console.error('error', Response)
     })
+
+    // console.log('after')
+    // console.log(this.serviceList)
   }
 
   editService(u:Service) {
