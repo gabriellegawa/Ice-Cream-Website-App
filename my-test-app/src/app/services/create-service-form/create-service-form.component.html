@@ -11,6 +11,7 @@
     createServiceForm.controls.veh_description.dirty">Must be 3 characters</span>
     <br>
     <br/>
-    <button (click)="handleCreate()" [disabled]="createServiceForm.invalid">Submit</button>
-    <button (click)="handleClear()">Clear</button>
+    <button class="button" (click)="handleCreate()" [disabled]="createServiceForm.invalid">Submit</button>
+    &nbsp;
+    <button class="button" (click)="handleClear()">Clear</button>
 </form>

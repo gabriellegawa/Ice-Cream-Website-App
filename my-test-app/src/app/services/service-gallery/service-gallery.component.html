@@ -3,6 +3,7 @@
   <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
 </jw-modal>
 <div *ngIf="filtersLoaded | async">
+<<<<<<< HEAD
   <c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
     <c-carousel-inner>
       <c-carousel-item *ngFor="let service of serviceList; index as i">
@@ -15,9 +16,50 @@
         <c-carousel-caption class="d-none d-md-block">
           <app-service-description [currentService]="service" [currentIndex]="i+1"></app-service-description>
         </c-carousel-caption>
+=======
+  <p>{{serviceList | json}}</p>
+  <button (click)="modalService.open('Add Service')" >Add Service</button>
+  <br/>
+  <br/>
+  <c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let service of serviceList; index as i">
+      <img
+        src="assets/img/test1.jpg"
+        alt="{{service.title}}"
+        class="d-block w-100"
+        loading="lazy"
+      />
+      <c-carousel-caption class="d-none d-md-block">
+        <p>Number: {{ i+1 }}</p>
+            <p>Title {{ service.title }}</p>
+            <p>Description {{ service.description }}</p>
+            <p>Date Added {{ service.dateAdded }}</p>
+            <p>Last Modified {{ service.lastModified }}</p>
+            <p>Creator {{ service.user }}</p>
+            <button (click)="editService(service); modalService.open(String(i))">Update</button>
+            &nbsp;
+            <button (click)="modalService.open('Delete Service')">Delete</button>
+            <hr>
+            <jw-modal id='{{i}}'>
+                <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(String(i))"></app-update-service-form>
+                <button (click)="onCancel(); modalService.close(String(i))">Cancel</button>
+            </jw-modal>
+            <jw-modal id="Delete Service">
+              <p>Are you sure you want to delete this service?</p>
+              <button (click)="deleteService(service);">Yes</button>
+              &nbsp;
+              <button (click)="onCancel(); modalService.close('Delete Service')">No</button>
+            </jw-modal>
+      </c-carousel-caption>
+>>>>>>> b13a54e52fa7ae87d36dc822c092ecf33b014e4c
       </c-carousel-item>
     </c-carousel-inner>
     <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
     <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
   </c-carousel>
+
+  <jw-modal id="Add Service">
+    <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
+  </jw-modal>
 </div>
