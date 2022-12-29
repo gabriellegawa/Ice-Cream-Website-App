@@ -25,10 +25,13 @@ import { UpdateServiceFormComponent } from './services/update-service-form/updat
 import { ServiceGalleryComponent } from './services/service-gallery/service-gallery.component';
 import { CreateServiceFormComponent } from './services/create-service-form/create-service-form.component';
 
+
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { CarouselModule } from '@coreui/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
@@ -58,6 +61,7 @@ const routes: Routes = [
     FooterComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     CarouselModule,
     BrowserModule,
     HttpClientModule,
