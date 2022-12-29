@@ -4,6 +4,7 @@ const port = 3000
 const { MongoClient } = require("mongodb");
 const dbName = "iCreamDB"
 
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -61,6 +62,29 @@ app.get('/getData', (req, res) => {
 
 const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
 
+
+function logRequest(api, request) {
+  console.log("log function called")
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+
+    const db = client.db(dbName)
+    const date = new Date()
+
+    var log = {
+      date: date,
+      calledAPI: api,
+      request: request
+    }
+
+    db.collection('Logs').insertOne(log, (err, res) => {
+      if (err) throw err
+
+      client.close()
+    })
+  })
+}
+
 app.get('/getCustomer', (req, res) => {
 
   MongoClient.connect(db_connection_string, (err, client) => {
@@ -72,6 +96,7 @@ app.get('/getCustomer', (req, res) => {
       if (err) throw err
       
       console.log('get Data method called')
+      logRequest("getCustomer", "req")
 
       res.json(result)
       })
@@ -79,7 +104,6 @@ app.get('/getCustomer', (req, res) => {
 })
 
 app.put('/getUser', (request, response) => {
-
   MongoClient.connect(db_connection_string, (err, client) => {
     
     if (err) throw err
