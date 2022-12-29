@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 const dbName = "iCreamDB"
 
 
-app.get('/', (req, res) => {
+app.get('/', (request, res) => {
   res.send('Hello World!')
 })
 
@@ -43,7 +43,7 @@ app.post('/product', function(request, response){
   response.status(200).send({'message':'Insert Successful'})
 });
 
-app.get('/getData', (req, res) => {
+app.get('/getData', (request, res) => {
 
   MongoClient.connect('mongodb://localhost:27017/test', (err, client) => {
       if (err) throw err
@@ -63,18 +63,19 @@ app.get('/getData', (req, res) => {
 const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
 
 
-function logRequest(api, request) {
+function logRequest(url, method, request) {
   console.log("log function called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
 
     const db = client.db(dbName)
-    const date = new Date()
+    var date = new Date().toLocaleString()
 
     var log = {
       date: date,
-      calledAPI: api,
-      request: request
+      url: url,
+      method: method,
+      request_id: request
     }
 
     db.collection('Logs').insertOne(log, (err, res) => {
@@ -85,18 +86,17 @@ function logRequest(api, request) {
   })
 }
 
-app.get('/getCustomer', (req, res) => {
+app.get('/getCustomer', (request, res) => {
 
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
+      
+      logRequest(request.url, request.method, request.body._id)
 
       const db = client.db(dbName)
 
       db.collection('User').find().toArray((err, result) => {
       if (err) throw err
-      
-      console.log('get Data method called')
-      logRequest("getCustomer", "req")
 
       res.json(result)
       })
@@ -107,6 +107,8 @@ app.put('/getUser', (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     
     if (err) throw err
+
+    logRequest(request.url, request.method, request.body._id)
     
     const db = client.db(dbName)
 
@@ -118,23 +120,21 @@ app.put('/getUser', (request, response) => {
     db.collection('User').findOne( { emailAddress: email, password: password}, (err, result) => {
       if (err) throw err
 
-      console.log('get User method called')
-
       response.status(200).send(result)
     })
   })
 })
 
-app.get('/getService', (req, res) => {
+app.get('/getService', (request, res) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
+
+    logRequest(request.url, request.method, request.body._id)
 
     const db = client.db(dbName)
 
     db.collection('Service').find().toArray((err, result) => {
       if (err) throw err
-
-      console.log("get Service method called")
 
       res.json(result)
     })
@@ -146,15 +146,11 @@ app.put('/customer',function(request, response){
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
 
-      const db = client.db(dbName)
-      var id = new require('mongodb').ObjectID(request.body._id)//req.params.id
+      logRequest(request.url, request.method, request.body._id)
 
-      // db.collection('User').findOne({'_id':id})
-      // .then(function(doc) {
-      //        if(!doc)
-      //            throw new Error('No record found.');
-      //      console.log(doc);//else case
-      //  });
+      const db = client.db(dbName)
+      var id = new require('mongodb').ObjectID(request.body._id)
+
       db.collection('User').updateOne({_id: id},{$set:{
         firstName:request.body.firstName,
         lastName:request.body.lastName,
@@ -174,6 +170,7 @@ app.put('/service', function(request, response) {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
     
+    logRequest(request.url, request.method, request.body._id)
     const db = client.db(dbName)
     var id = new require('mongodb').ObjectID(request.body._id)
 
@@ -190,9 +187,11 @@ app.put('/service', function(request, response) {
 })
 
 app.put('/deleteService', function(request, response) {
-  console.log("Delete Service Called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
+
+    logRequest(request.url, request.method, request.body._id)
+
     const db = client.db(dbName)
     var id = new require('mongodb').ObjectID(request.body._id)
     try {
@@ -208,6 +207,8 @@ app.put('/registerCustomer', function(request, response) {
   console.log("Register Customer called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
+
+    logRequest(request.url, request.method, request.body._id)
     const db = client.db(dbName)
     var newUser = { 
       firstName:request.body.firstName,
@@ -232,6 +233,8 @@ app.put('/registerService', function(request, response) {
   console.log("Register Service is called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
+
+    logRequest(request.url, request.method, request.body._id)
     const db = client.db(dbName)
     var newService = {
       title: request.body.title,
