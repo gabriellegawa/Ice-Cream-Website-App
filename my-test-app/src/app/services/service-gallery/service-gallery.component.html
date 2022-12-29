@@ -1,6 +1,8 @@
-<h1>TEST</h1>
+<button (click)="modalService.open('Add Service')" >Add Service</button>
+<jw-modal id="Add Service">
+  <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
+</jw-modal>
 <div *ngIf="filtersLoaded | async">
-  <p>{{serviceList | json}}</p>
   <c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
     <c-carousel-inner>
       <c-carousel-item *ngFor="let service of serviceList; index as i">

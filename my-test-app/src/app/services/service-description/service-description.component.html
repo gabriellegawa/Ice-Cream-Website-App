@@ -8,9 +8,15 @@
 <p>Creator {{ currentService.user }}</p>
 <button (click)="editService(currentService); modalService.open(String(currentIndex))">Update</button>
 &nbsp;
-<button (click)="modalService.open(String(currentIndex))">Delete</button>
+<button (click)="modalService.open('Delete Service')">Delete</button>
 <hr>
 <jw-modal id='{{currentIndex}}'>
     <app-update-service-form [service]="currentService" (on-submit)="commitEdit($event); modalService.close(String(currentIndex))"></app-update-service-form>
     <button (click)="onCancel(); modalService.close(String(currentIndex))">Cancel</button>
+</jw-modal>
+<jw-modal id="Delete Service">
+    <p>Are you sure you want to delete this service?</p>
+    <button (click)="deleteService(currentService);">Yes</button>
+    &nbsp;
+    <button (click)="onCancel(); modalService.close('Delete Service')">No</button>
 </jw-modal>

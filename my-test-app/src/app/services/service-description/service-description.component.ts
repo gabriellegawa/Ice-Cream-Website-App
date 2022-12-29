@@ -32,6 +32,8 @@ export class ServiceDescriptionComponent implements OnInit {
   commitEdit(u:Service) {
     this.ngOnInit()
 
+    this.refresh()
+    
     this.serviceToEdit = undefined
   }
 
