@@ -20,4 +20,8 @@
     <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
     <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
   </c-carousel>
+
+  <jw-modal id="Add Service">
+    <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
+  </jw-modal>
 </div>
