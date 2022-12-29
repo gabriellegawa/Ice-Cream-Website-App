@@ -1,21 +1,17 @@
 <h1>TEST</h1>
-<c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
-	<c-carousel-inner>
-	  <c-carousel-item *ngFor="let slide of slides">
-		<img
-		  [src]="slide.src"
-		  alt="{{slide.title}}"
-		  class="d-block w-100"
-		  loading="lazy"
-		/>
-	  </c-carousel-item>
-	</c-carousel-inner>
-	<c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
-  	<c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
-</c-carousel>
-<h1>Welcome to service gallery</h1>
-    <div *ngFor="let service of serviceList; index as i">
-            <p>Number: {{ i+1 }}</p>
+<div *ngIf="filtersLoaded | async">
+  <p>{{serviceList | json}}</p>
+  <c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let service of serviceList; index as i">
+      <img
+        src="assets/img/test1.jpg"
+        alt="{{service.title}}"
+        class="d-block w-100"
+        loading="lazy"
+      />
+      <c-carousel-caption class="d-none d-md-block">
+        <p>Number: {{ i+1 }}</p>
             <p>Title {{ service.title }}</p>
             <p>Description {{ service.description }}</p>
             <p>Date Added {{ service.dateAdded }}</p>
@@ -28,4 +24,10 @@
                 <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(String(i))"></app-update-service-form>
                 <button (click)="onCancel(); modalService.close(String(i))">Cancel</button>
             </jw-modal>
-    </div>
+      </c-carousel-caption>
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+  </c-carousel>
+</div>
