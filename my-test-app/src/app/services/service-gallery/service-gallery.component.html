@@ -14,6 +14,9 @@
   	<c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
 </c-carousel>
 <h1>Welcome to service gallery</h1>
+    <button (click)="modalService.open('Add Service')" >Add Service</button>
+    <br/>
+    <br/>
     <div *ngFor="let service of serviceList; index as i">
             <p>Number: {{ i+1 }}</p>
             <p>Title {{ service.title }}</p>
@@ -22,10 +25,20 @@
             <p>Last Modified {{ service.lastModified }}</p>
             <p>Creator {{ service.user }}</p>
             <button (click)="editService(service); modalService.open(String(i))">Update</button>
-            <button (click)="deleteService(service)">Delete</button>
+            &nbsp;
+            <button (click)="modalService.open(String(i+1))">Delete</button>
             <hr>
             <jw-modal id='{{i}}'>
                 <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(String(i))"></app-update-service-form>
                 <button (click)="onCancel(); modalService.close(String(i))">Cancel</button>
             </jw-modal>
+            <jw-modal id="{{i+1}}">
+              <p>Are you sure you want to delete this service?</p>
+              <button (click)="deleteService(service);">Yes</button>
+              &nbsp;
+              <button (click)="onCancel(); modalService.close(String(i+1))">No</button>
+            </jw-modal>
     </div>
+    <jw-modal id="Add Service">
+        <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
+    </jw-modal>
