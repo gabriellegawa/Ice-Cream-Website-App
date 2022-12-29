@@ -4,28 +4,15 @@
   <c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
     <c-carousel-inner>
       <c-carousel-item *ngFor="let service of serviceList; index as i">
-      <img
-        src="assets/img/test1.jpg"
-        alt="{{service.title}}"
-        class="d-block w-100"
-        loading="lazy"
-      />
-      <c-carousel-caption class="d-none d-md-block">
-        <p>Number: {{ i+1 }}</p>
-            <p>Title {{ service.title }}</p>
-            <p>Description {{ service.description }}</p>
-            <p>Date Added {{ service.dateAdded }}</p>
-            <p>Last Modified {{ service.lastModified }}</p>
-            <p>Creator {{ service.user }}</p>
-            <button (click)="editService(service); modalService.open(String(i))">Update</button>
-            &nbsp;
-            <button (click)="modalService.open(String(i+1))">Delete</button>
-            <hr>
-            <jw-modal id='{{i}}'>
-                <app-update-service-form [service]="service" (on-submit)="commitEdit($event); modalService.close(String(i))"></app-update-service-form>
-                <button (click)="onCancel(); modalService.close(String(i))">Cancel</button>
-            </jw-modal>
-      </c-carousel-caption>
+        <img
+          src="assets/img/test1.jpg"
+          alt="{{service.title}}"
+          class="d-block w-100"
+          loading="lazy"
+        />
+        <c-carousel-caption class="d-none d-md-block">
+          <app-service-description [currentService]="service" [currentIndex]="i+1"></app-service-description>
+        </c-carousel-caption>
       </c-carousel-item>
     </c-carousel-inner>
     <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>

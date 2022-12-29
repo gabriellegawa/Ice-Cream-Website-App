@@ -1,1 +1,16 @@
 <p>service-description works!</p>
+
+<p>Number: {{ currentIndex }}</p>
+<p>Title {{ currentService.title }}</p>
+<p>Description {{ currentService.description }}</p>
+<p>Date Added {{ currentService.dateAdded }}</p>
+<p>Last Modified {{ currentService.lastModified }}</p>
+<p>Creator {{ currentService.user }}</p>
+<button (click)="editService(currentService); modalService.open(String(currentIndex))">Update</button>
+&nbsp;
+<button (click)="modalService.open(String(currentIndex))">Delete</button>
+<hr>
+<jw-modal id='{{currentIndex}}'>
+    <app-update-service-form [service]="currentService" (on-submit)="commitEdit($event); modalService.close(String(currentIndex))"></app-update-service-form>
+    <button (click)="onCancel(); modalService.close(String(currentIndex))">Cancel</button>
+</jw-modal>
