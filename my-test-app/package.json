@@ -25,6 +25,7 @@
     "@coreui/icons-angular": "^4.3.0",
     "@ng-bootstrap/ng-bootstrap": "^14.0.0",
     "@schematics/angular": "^15.0.4",
+    "jsonwebtoken": "^9.0.0",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
