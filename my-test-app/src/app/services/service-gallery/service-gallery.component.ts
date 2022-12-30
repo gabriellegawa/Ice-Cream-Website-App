@@ -30,7 +30,7 @@ export class ServiceGalleryComponent implements OnInit {
     // // else {
     this.getServiceList()
 
-    console.log(this.serviceList.length)
+    // console.log(this.serviceList.length)
     // }
     this.slides[0] = {
       src: './assets/img/test1.jpg',
@@ -65,8 +65,8 @@ export class ServiceGalleryComponent implements OnInit {
 
     const response = await this.newService.getServiceList().subscribe((Response) => {
       this.serviceList = Response
-      console.log('Response from API', Response)
-      console.log(this.serviceList)
+      // console.log('Response from API', Response)
+      // console.log(this.serviceList)
       this.filtersLoaded = Promise.resolve(true)
     }, (error) => {
       console.error('error', Response)

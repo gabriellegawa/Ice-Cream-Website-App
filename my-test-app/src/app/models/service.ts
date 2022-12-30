@@ -1,5 +1,3 @@
-import { User } from "./user"
-
 export class Service {
     _id : number
     title : string

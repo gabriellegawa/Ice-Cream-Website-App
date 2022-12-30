@@ -31,6 +31,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { CarouselModule } from '@coreui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselComponent } from './shared/components/carousel/carousel.component';
 
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
     UserGalleryComponent,
     UserDescriptionComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserAnimationsModule,

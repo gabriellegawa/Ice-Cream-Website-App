@@ -3,25 +3,5 @@
   <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
 </jw-modal>
 <div *ngIf="filtersLoaded | async">
-  <c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
-    <c-carousel-inner>
-      <c-carousel-item *ngFor="let service of serviceList; index as i">
-        <img
-          src="assets/img/test1.jpg"
-          alt="{{service.title}}"
-          class="d-block w-100"
-          loading="lazy"
-        />
-        <c-carousel-caption class="d-none d-md-block">
-          <app-service-description [currentService]="service" [currentIndex]="i+1"></app-service-description>
-        </c-carousel-caption>
-      </c-carousel-item>
-    </c-carousel-inner>
-    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
-    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
-  </c-carousel>
-
-  <jw-modal id="Add Service">
-    <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
-  </jw-modal>
+  <app-carousel [itemLists]="serviceList"></app-carousel>
 </div>

@@ -1,0 +1,18 @@
+<c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let item of carouselItemLists; index as i ">
+        <img
+          src="{{item.imgPath}}"
+          alt="{{item.imgAltText}}"
+          class="d-block w-100"
+          loading="lazy"
+        />
+        <c-carousel-caption class="d-none d-md-block">
+            <h3>{{item.title}}</h3>
+            <p>{{item.description}}</p>
+        </c-carousel-caption>
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
