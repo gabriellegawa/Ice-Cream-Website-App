@@ -16,7 +16,7 @@ export class UserLoginFormComponent implements OnInit {
 
   isLoggedIn:boolean = false
   isLoginFailed:boolean = false
-  errorMessage:string = ''
+  errorReponse:string = ''
   roles: string[] = []
 
   @Input()
@@ -42,20 +42,36 @@ export class UserLoginFormComponent implements OnInit {
     loginUser.emailAddress = input.veh_emailAddress
     loginUser.password =  input.veh_password
 
-    this.authService.login(loginUser).subscribe({
-      next: data => {
-        this.storageService.saveUser(data)
+    // this.authService.login(loginUser).subscribe({
+    //   next: data => {
+    //     this.storageService.saveUser(data)
+
+    //     this.isLoginFailed = false
+    //     this.isLoggedIn = true
+    //     this.roles = this.storageService.getUser().roles
+    //     this.router.navigate(["service-gallery"])
+    //   },
+    //   error: err => {
+    //     this.errorMessage = err.error.message
+    //     this.isLoginFailed = true
+    //   }
+    // })
+
+    // console.log("Test")
+    const response = this.authService.login(loginUser).subscribe((Response) => {
+
+
+      this.storageService.saveUser(Response)
 
         this.isLoginFailed = false
         this.isLoggedIn = true
         this.roles = this.storageService.getUser().roles
         this.router.navigate(["service-gallery"])
-      },
-      error: err => {
-        this.errorMessage = err.error.message
-        this.isLoginFailed = true
-      }
+    }, (error)=> {
+          this.errorReponse = error
+          this.isLoginFailed = true
     })
+
   }
 
   
