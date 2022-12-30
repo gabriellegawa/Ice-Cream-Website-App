@@ -5,11 +5,7 @@ const { MongoClient } = require("mongodb");
 const dbName = "iCreamDB"
 
 
-<<<<<<< HEAD
-app.get('/', (request, res) => {
-=======
 app.get('/', (req, res) => {
->>>>>>> b13a54e52fa7ae87d36dc822c092ecf33b014e4c
   res.send('Hello World!')
 })
 
@@ -67,32 +63,18 @@ app.get('/getData', (request, res) => {
 const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
 
 
-<<<<<<< HEAD
-function logRequest(url, method, request) {
-=======
 function logRequest(api, request) {
->>>>>>> b13a54e52fa7ae87d36dc822c092ecf33b014e4c
   console.log("log function called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
 
     const db = client.db(dbName)
-<<<<<<< HEAD
-    var date = new Date().toLocaleString()
-
-    var log = {
-      date: date,
-      url: url,
-      method: method,
-      request_id: request
-=======
     const date = new Date()
 
     var log = {
       date: date,
       calledAPI: api,
       request: request
->>>>>>> b13a54e52fa7ae87d36dc822c092ecf33b014e4c
     }
 
     db.collection('Logs').insertOne(log, (err, res) => {
@@ -103,11 +85,7 @@ function logRequest(api, request) {
   })
 }
 
-<<<<<<< HEAD
-app.get('/getCustomer', (request, res) => {
-=======
 app.get('/getCustomer', (req, res) => {
->>>>>>> b13a54e52fa7ae87d36dc822c092ecf33b014e4c
 
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
@@ -118,19 +96,16 @@ app.get('/getCustomer', (req, res) => {
 
       db.collection('User').find().toArray((err, result) => {
       if (err) throw err
-<<<<<<< HEAD
-=======
       
       console.log('get Data method called')
       logRequest("getCustomer", "req")
->>>>>>> b13a54e52fa7ae87d36dc822c092ecf33b014e4c
 
       res.json(result)
       })
   })
 })
 
-app.put('/getUser', (request, response) => {
+app.put('/login', (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     
     if (err) throw err
@@ -147,7 +122,12 @@ app.put('/getUser', (request, response) => {
     db.collection('User').findOne( { emailAddress: email, password: password}, (err, result) => {
       if (err) throw err
 
-      response.status(200).send(result)
+      if (result) {
+        response.status(200).send(result)
+      } else {
+        response.statusMessage = "Unauthorized Access";
+        response.status(401).end();
+      }
     })
   })
 })

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
+import {shareReplay } from 'rxjs/operators'
+
 
 const AUTH_API = 'http://localhost:4200/api/';
 
@@ -24,7 +26,7 @@ export class AuthService {
     newUser.emailAddress = email
     newUser.password = password
 
-    return this.http.put<User>('/api/getUser', newUser);
+    return this.http.put<User>('/api/login', newUser).pipe(shareReplay())
   }
 
   redirectToLogin() {
