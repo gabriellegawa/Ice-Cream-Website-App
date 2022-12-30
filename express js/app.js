@@ -1,12 +1,15 @@
+
 const express = require('express')
 const app = express()
 const port = 3000
-const { MongoClient } = require("mongodb");
+const { MongoClient } = require("mongodb")
 const dbName = "iCreamDB"
+const auth = require("./auth.js")
 
+module.exports = {auth}
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/', (request, response) => {
+  response.send('Hello World!')
 })
 
 app.use(express.json());
@@ -43,7 +46,7 @@ app.post('/product', function(request, response){
   response.status(200).send({'message':'Insert Successful'})
 });
 
-app.get('/getData', (request, res) => {
+app.get('/getData', (request, response) => {
 
   MongoClient.connect('mongodb://localhost:27017/test', (err, client) => {
       if (err) throw err
@@ -55,7 +58,7 @@ app.get('/getData', (request, res) => {
 
       
       console.log('get Data method called')
-      res.json(result)
+      response.json(result)
       })
   })
 })
@@ -63,21 +66,22 @@ app.get('/getData', (request, res) => {
 const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
 
 
-function logRequest(api, request) {
+function logRequest(url, method, request) {
   console.log("log function called")
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
 
     const db = client.db(dbName)
-    const date = new Date()
+    var date = new Date().toLocaleString()
 
     var log = {
       date: date,
-      calledAPI: api,
-      request: request
+      url: url,
+      method: method,
+      request_id: request
     }
 
-    db.collection('Logs').insertOne(log, (err, res) => {
+    db.collection('Logs').insertOne(log, (err, response) => {
       if (err) throw err
 
       client.close()
@@ -85,7 +89,7 @@ function logRequest(api, request) {
   })
 }
 
-app.get('/getCustomer', (req, res) => {
+app.get('/getCustomer', (request, response) => {
 
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
@@ -96,14 +100,12 @@ app.get('/getCustomer', (req, res) => {
 
       db.collection('User').find().toArray((err, result) => {
       if (err) throw err
-      
-      console.log('get Data method called')
-      logRequest("getCustomer", "req")
 
-      res.json(result)
+      response.json(result)
       })
   })
 })
+
 
 app.put('/login', (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
@@ -116,23 +118,17 @@ app.put('/login', (request, response) => {
 
     console.log(request.body)
 
-    var email = request.body.emailAddress
-    var password = request.body.password
-
-    db.collection('User').findOne( { emailAddress: email, password: password}, (err, result) => {
+    db.collection('User').findOne( { emailAddress: request.body.emailAddress, password: request.body.password}, (err, result) => {
       if (err) throw err
+      
+      response.cookie("SESSIONID", auth.generateToken(String(result._id)), {httpOnly:true, secure:true})
 
-      if (result) {
-        response.status(200).send(result)
-      } else {
-        response.statusMessage = "Unauthorized Access";
-        response.status(401).end();
-      }
+      response.status(200).send(result)
     })
   })
 })
 
-app.get('/getService', (request, res) => {
+app.get('/getService', (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
 
@@ -143,7 +139,7 @@ app.get('/getService', (request, res) => {
     db.collection('Service').find().toArray((err, result) => {
       if (err) throw err
 
-      res.json(result)
+      response.json(result)
     })
   })
 })
@@ -226,7 +222,7 @@ app.put('/registerCustomer', function(request, response) {
       password:request.body.password
     }
     // TODO: Add catch error
-    db.collection('User').insertOne(newUser, function(err, res) {
+    db.collection('User').insertOne(newUser, function(err, response) {
       if (err) throw err
 
       client.close()
@@ -251,7 +247,7 @@ app.put('/registerService', function(request, response) {
       user: request.body.user
     }
 
-    db.collection('Service').insertOne(newService, function(err, res) {
+    db.collection('Service').insertOne(newService, function(err, response) {
       if (err) throw err
 
       client.close()
