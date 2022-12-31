@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as moment from "moment"
 
 const USER_KEY = 'auth-user';
 
@@ -9,29 +11,49 @@ export class StorageService {
   constructor() {}
 
   clean(): void {
-    window.sessionStorage.clear();
+    window.localStorage.clear()
   }
 
-  public saveUser(user: any): void {
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  // public saveUser(user: any): void {
+  //   window.sessionStorage.removeItem(USER_KEY);
+  //   window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  // }
+
+  // public getUser(): any {
+  //   const user = window.sessionStorage.getItem(USER_KEY);
+  //   if (user) {
+  //     return JSON.parse(user);
+  //   }
+
+  //   return {};
+  // }
+
+  public setSession(authResult:any) {
+    const expiresAt = moment().add(authResult.expiresIn, 'second')
+
+    localStorage.setItem('id_token', authResult.idToken)
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
   }
 
-  public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return {};
+  logout() {
+    localStorage.removeItem("id_token")
+    localStorage.removeItem("expires_at")
   }
 
   public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return true;
-    }
+    return moment().isBefore(this.getExpiration())
+  }
 
-    return false;
+  isLoggedOut() {
+    return !this.isLoggedIn()
+  }
+
+  getExpiration() {
+    const expiration = localStorage.getItem("expires_at")
+    if (expiration != null) {
+      const expiresAt = JSON.parse(expiration)
+      return moment(expiresAt)
+    }
+    return 0
   }
 }

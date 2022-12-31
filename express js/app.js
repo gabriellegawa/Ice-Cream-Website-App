@@ -116,14 +116,18 @@ app.put('/login', (request, response) => {
     
     const db = client.db(dbName)
 
-    console.log(request.body)
-
     db.collection('User').findOne( { emailAddress: request.body.emailAddress, password: request.body.password}, (err, result) => {
       if (err) throw err
       
-      response.cookie("SESSIONID", auth.generateToken(String(result._id)), {httpOnly:true, secure:true})
-
-      response.status(200).send(result)
+      if (result != null) {
+        response.status(200).json({
+          idToken: auth.generateToken(String(result._id)),
+          expiresIn: 120
+        })
+      }
+      else {
+        response.status(401).send({'message':'User not found'})
+      }
     })
   })
 })
