@@ -16,7 +16,7 @@ export class UserLoginFormComponent implements OnInit {
 
   isLoggedIn:boolean = false
   isLoginFailed:boolean = false
-  errorReponse:string = ''
+  errorResponse:string = ''
   roles: string[] = []
 
   @Input()
@@ -30,7 +30,6 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true
-      this.roles = this.storageService.getUser().roles
       this.router.navigate(["service-gallery"])
     }
   }
@@ -38,37 +37,17 @@ export class UserLoginFormComponent implements OnInit {
   handleLogin(nForm:NgForm): void {
     const input = nForm.value
     var loginUser = new User()
-
+    
     loginUser.emailAddress = input.veh_emailAddress
     loginUser.password =  input.veh_password
 
-    // this.authService.login(loginUser).subscribe({
-    //   next: data => {
-    //     this.storageService.saveUser(data)
-
-    //     this.isLoginFailed = false
-    //     this.isLoggedIn = true
-    //     this.roles = this.storageService.getUser().roles
-    //     this.router.navigate(["service-gallery"])
-    //   },
-    //   error: err => {
-    //     this.errorMessage = err.error.message
-    //     this.isLoginFailed = true
-    //   }
-    // })
-
-    // console.log("Test")
     const response = this.authService.login(loginUser).subscribe((Response) => {
-
-
-      this.storageService.saveUser(Response)
-
-        this.isLoginFailed = false
-        this.isLoggedIn = true
-        this.roles = this.storageService.getUser().roles
-        this.router.navigate(["service-gallery"])
+      this.storageService.setSession(Response)
+      this.isLoginFailed = false
+      this.isLoggedIn = true
+      this.router.navigate(["service-gallery"])
     }, (error)=> {
-          this.errorReponse = error
+          this.errorResponse = error
           this.isLoginFailed = true
     })
 

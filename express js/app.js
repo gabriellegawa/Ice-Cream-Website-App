@@ -5,8 +5,7 @@ const port = 3000
 const { MongoClient } = require("mongodb")
 const dbName = "iCreamDB"
 const auth = require("./auth.js")
-
-module.exports = {auth}
+const jwtValidation = require("./jwtValidation.js")
 
 app.get('/', (request, response) => {
   response.send('Hello World!')
@@ -116,22 +115,26 @@ app.put('/login', (request, response) => {
     
     const db = client.db(dbName)
 
-    console.log(request.body)
-
     db.collection('User').findOne( { emailAddress: request.body.emailAddress, password: request.body.password}, (err, result) => {
       if (err) throw err
       
-      response.cookie("SESSIONID", auth.generateToken(String(result._id)), {httpOnly:true, secure:true})
-
-      response.status(200).send(result)
+      if (result != null) {
+        response.status(200).json({
+          idToken: auth.generateToken(String(result._id)),
+          expiresIn: 120
+        })
+      }
+      else {
+        response.status(401).send({'message':'User not found'})
+      }
     })
   })
 })
 
-app.get('/getService', (request, response) => {
+app.get('/getService', jwtValidation.checkIfAuthenticated(), (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
-
+    console.log(jwtValidation.checkIfAuthenticated())
     logRequest(request.url, request.method, request.body._id)
 
     const db = client.db(dbName)
