@@ -6,6 +6,7 @@ export class User{
     phoneNumber: number;
     dateOfBirth: string;
     password: string;
+    roles: string[];
 
     constructor(obj?:User){
       
@@ -16,6 +17,7 @@ export class User{
       this.phoneNumber = obj?.phoneNumber ?? 0;
       this.dateOfBirth = obj?.dateOfBirth ?? '';
       this.password = obj?.password ?? '';
+      this.roles = obj?.roles ?? [];
     }
     
 }
