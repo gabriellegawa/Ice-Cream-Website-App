@@ -5,8 +5,7 @@ const port = 3000
 const { MongoClient } = require("mongodb")
 const dbName = "iCreamDB"
 const auth = require("./auth.js")
-
-module.exports = {auth}
+const jwtValidation = require("./jwtValidation.js")
 
 app.get('/', (request, response) => {
   response.send('Hello World!')
@@ -132,10 +131,10 @@ app.put('/login', (request, response) => {
   })
 })
 
-app.get('/getService', (request, response) => {
+app.get('/getService', jwtValidation.checkIfAuthenticated(), (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err
-
+    console.log(jwtValidation.checkIfAuthenticated())
     logRequest(request.url, request.method, request.body._id)
 
     const db = client.db(dbName)
