@@ -1,21 +1,19 @@
+const express = require("express");
+const app = express();
+const port = 3000;
+const { MongoClient } = require("mongodb");
+const dbName = "iCreamDB";
+const auth = require("./auth.js");
+const jwtValidation = require("./jwtValidation.js");
 
-const express = require('express')
-const app = express()
-const port = 3000
-const { MongoClient } = require("mongodb")
-const dbName = "iCreamDB"
-const auth = require("./auth.js")
-const jwtValidation = require("./jwtValidation.js")
-
-app.get('/', (request, response) => {
-  response.send('Hello World!')
-})
+app.get("/", (request, response) => {
+  response.send("Hello World!");
+});
 
 app.use(express.json());
 
 // app.post('/product', function(request, response){
 
-  
 //   // Replace the uri string with your MongoDB deployment's connection string.
 //   const uri = "mongodb://localhost:27017/test";
 //   const client = new MongoClient(uri);
@@ -23,7 +21,7 @@ app.use(express.json());
 //     try {
 //       await client.connect();
 //       // database and collection code goes here
-      
+
 //     const db = client.db('test')
 //     const coll = db.collection("productListing");
 //       // insert code goes here
@@ -38,7 +36,6 @@ app.use(express.json());
 //     }
 //   }
 //   run().catch(console.dir);
-  
 
 //   console.log(request.body);      // your JSON
 //   //  response.send(request.body);    // echo the result back
@@ -55,7 +52,6 @@ app.use(express.json());
 //       db.collection('productListing').find().toArray((err, result) => {
 //       if (err) throw err
 
-      
 //       console.log('get Data method called')
 //       response.json(result)
 //       })
@@ -63,7 +59,6 @@ app.use(express.json());
 // })
 
 // const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
-
 
 // function logRequest(url, method, request) {
 //   console.log("log function called")
@@ -92,7 +87,7 @@ app.use(express.json());
 
 //   MongoClient.connect(db_connection_string, (err, client) => {
 //       if (err) throw err
-      
+
 //       logRequest(request.url, request.method, request.body._id)
 
 //       const db = client.db(dbName)
@@ -105,19 +100,18 @@ app.use(express.json());
 //   })
 // })
 
-
 // app.put('/login', (request, response) => {
 //   MongoClient.connect(db_connection_string, (err, client) => {
-    
+
 //     if (err) throw err
 
 //     logRequest(request.url, request.method, request.body._id)
-    
+
 //     const db = client.db(dbName)
 
 //     db.collection('User').findOne( { emailAddress: request.body.emailAddress, password: request.body.password}, (err, result) => {
 //       if (err) throw err
-      
+
 //       if (result != null) {
 //         response.status(200).json({
 //           idToken: auth.generateToken(String(result._id)),
@@ -175,7 +169,7 @@ app.use(express.json());
 // app.put('/service', function(request, response) {
 //   MongoClient.connect(db_connection_string, (err, client) => {
 //     if (err) throw err
-    
+
 //     logRequest(request.url, request.method, request.body._id)
 //     const db = client.db(dbName)
 //     var id = new require('mongodb').ObjectID(request.body._id)
@@ -216,7 +210,7 @@ app.use(express.json());
 
 //     logRequest(request.url, request.method, request.body._id)
 //     const db = client.db(dbName)
-//     var newUser = { 
+//     var newUser = {
 //       firstName:request.body.firstName,
 //       lastName:request.body.lastName,
 //       emailAddress:request.body.emailAddress,
@@ -231,7 +225,7 @@ app.use(express.json());
 //       client.close()
 //     })
 //   })
-  
+
 //   response.status(200).send({'message':'Insert Successful'})
 // })
 
@@ -259,7 +253,6 @@ app.use(express.json());
 //   response.status(200).send({'message':'Insert Successful'})
 // })
 
-
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
