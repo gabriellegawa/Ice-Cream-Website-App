@@ -3,11 +3,14 @@ const jwt = require("jsonwebtoken")
 
 const RSA_PRIVATE_KEY = fs.readFileSync("./demos/private.key")
 
-function generateToken(userId) {
+function generateToken(firstName, lastName, email, role) {
     return jwt.sign({}, RSA_PRIVATE_KEY, {
         algorithm: 'HS256',
         expiresIn: 120,
-        subject: userId
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        role: role
     })
 }
 
