@@ -8,7 +8,7 @@ export class User{
     phoneNumber: number
     dateOfBirth: string
     password: string
-    role: Role
+    role?: Role
 
     constructor(obj?:User){
       
@@ -19,7 +19,7 @@ export class User{
       this.phoneNumber = obj?.phoneNumber ?? 0
       this.dateOfBirth = obj?.dateOfBirth ?? ''
       this.password = obj?.password ?? ''
-      this.role = obj?.role ?? new Role()
+      this.role = obj?.role ?? Role.Customer
     }
     
 }

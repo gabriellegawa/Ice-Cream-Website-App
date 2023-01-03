@@ -104,4 +104,8 @@ export class ServiceGalleryComponent implements OnInit {
   String(number : number) {
     return String(number)
   }
+
+  getRole() {
+    return localStorage.getItem('role')
+  }
 }

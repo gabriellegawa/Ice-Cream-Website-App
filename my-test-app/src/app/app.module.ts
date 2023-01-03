@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router'
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from './_modal';
 
@@ -32,14 +32,19 @@ import { FooterComponent } from './core/footer/footer.component';
 import { CarouselModule } from '@coreui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
+import { AuthGuard } from './_helpers/auth.guard';
+import { Role } from './models/role';
+import { ErrorComponent } from './error/error.component';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
   { path: 'user-login-form', component: UserLoginFormComponent},
-  { path: 'service-gallery', component: ServiceGalleryComponent},
-  { path: 'product-gallery', component: ProductGalleryComponent},
-  { path: 'user-logout', component: ProductGalleryComponent}
+  { path: 'service-gallery', component: ServiceGalleryComponent, canActivate: [AuthGuard]},
+  { path: 'product-gallery', component: ProductGalleryComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},
+  { path: 'user-logout', component: ProductGalleryComponent},
+  { path: 'error', component: ErrorComponent}
 ]
 
 @NgModule({
@@ -60,7 +65,8 @@ const routes: Routes = [
     UserDescriptionComponent,
     HomeComponent,
     FooterComponent,
-    CarouselComponent
+    CarouselComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -73,7 +79,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

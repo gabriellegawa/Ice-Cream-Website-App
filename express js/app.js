@@ -92,16 +92,19 @@ app.get('/getCustomer', (request, response) => {
 
   MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err
-      
       logRequest(request.url, request.method, request.body._id)
-
+      
       const db = client.db(dbName)
-
-      db.collection('User').find().toArray((err, result) => {
-      if (err) throw err
-
-      response.json(result)
-      })
+      if (request.body.role !== "Admin") {
+        response.status(401).send({"message": "Unauthorized"})
+      }
+      else {
+        db.collection('User').find().toArray((err, result) => {
+          if (err) throw err
+          
+        response.status(200).json(result)
+        })
+      }
   })
 })
 
@@ -121,7 +124,11 @@ app.put('/login', (request, response) => {
       if (result != null) {
         response.status(200).json({
           idToken: auth.generateToken(String(result._id)),
-          expiresIn: 120
+          expiresIn: 120,
+          firstName: result.firstName,
+          lastName: result.lastName,
+          email: result.emailAddress,
+          role: result.role
         })
       }
       else {
