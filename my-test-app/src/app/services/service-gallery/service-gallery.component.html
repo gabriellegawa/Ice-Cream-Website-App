@@ -1,4 +1,4 @@
-<button (click)="modalService.open('Add Service')" >Add Service</button>
+<button *ngIf="getRole() == 'Admin'" (click)="modalService.open('Add Service')" >Add Service</button>
 <jw-modal id="Add Service">
   <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
 </jw-modal>

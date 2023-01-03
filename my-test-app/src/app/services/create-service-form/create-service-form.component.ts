@@ -43,7 +43,7 @@ export class CreateServiceFormComponent implements OnInit {
       description: input.veh_description,
       dateAdded: todayString,
       lastModified: todayString,
-      user: ''
+      user: localStorage.getItem('firstName') ?? ''
     })
     this.service.registerService(anotherNewService).subscribe(
       data => console.log('Success!', data),

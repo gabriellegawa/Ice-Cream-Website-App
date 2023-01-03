@@ -32,7 +32,7 @@ export class UpdateUserFormComponent implements OnInit {
       phoneNumber: input.veh_phoneNumber,
       dateOfBirth: input.veh_dateOfBirth,
       password: input.veh_password,
-      role: new Role()
+      role: Role.Employee
     })
     
     this.service.updateUser(val).subscribe(

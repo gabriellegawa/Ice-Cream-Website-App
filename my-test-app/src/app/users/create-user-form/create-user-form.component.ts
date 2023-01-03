@@ -43,9 +43,6 @@ export class CreateUserFormComponent implements OnInit {
 
   handleCreate(){
     const input = this.createUserForm.value
-    var role = new Role()
-    role.userType = "customer"
-    role.permissions = ["view"]
 
     const user = new User({ 
       _id: input.veh__id,
@@ -55,7 +52,7 @@ export class CreateUserFormComponent implements OnInit {
       phoneNumber: input.veh_phoneNumber,
       dateOfBirth: input.veh_dateOfBirth,
       password: input.veh_password,
-      role: role
+      role: Role.Employee
     })
 
     this.service.registerUser(user).subscribe(
