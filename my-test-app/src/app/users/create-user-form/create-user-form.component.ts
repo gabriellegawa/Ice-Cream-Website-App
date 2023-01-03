@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Role } from 'src/app/models/role';
 import { AppServiceService } from '../../app-service.service';
 import { User } from '../../models/user';
 
@@ -42,6 +43,10 @@ export class CreateUserFormComponent implements OnInit {
 
   handleCreate(){
     const input = this.createUserForm.value
+    var role = new Role()
+    role.userType = "customer"
+    role.permissions = ["view"]
+
     const user = new User({ 
       _id: input.veh__id,
       firstName: input.veh_firstName,
@@ -49,7 +54,8 @@ export class CreateUserFormComponent implements OnInit {
       emailAddress: input.veh_emailAddress,
       phoneNumber: input.veh_phoneNumber,
       dateOfBirth: input.veh_dateOfBirth,
-      password: input.veh_password
+      password: input.veh_password,
+      role: role
     })
 
     this.service.registerUser(user).subscribe(

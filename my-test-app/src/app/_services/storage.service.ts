@@ -33,7 +33,6 @@ export class StorageService {
 
     localStorage.setItem('id_token', authResult.idToken)
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
-    localStorage.setItem('role', authResult.role)
   }
 
   logout() {
