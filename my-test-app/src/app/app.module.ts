@@ -34,17 +34,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './models/role';
-import { ErrorComponent } from './error/error.component';
+import { ErrorComponent } from './shared/error/error.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
   { path: 'user-login-form', component: UserLoginFormComponent},
-  { path: 'service-gallery', component: ServiceGalleryComponent, canActivate: [AuthGuard]},
-  { path: 'product-gallery', component: ProductGalleryComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},
+  { path: 'service-gallery', component: ServiceGalleryComponent},
+  { path: 'product-gallery', component: ProductGalleryComponent},
   { path: 'user-logout', component: ProductGalleryComponent},
-  { path: 'error', component: ErrorComponent}
+  { path: 'error', component: ErrorComponent},
+  { path: 'user-gallery', component: UserGalleryComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}}
 ]
 
 @NgModule({

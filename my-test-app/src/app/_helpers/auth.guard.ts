@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
         if (localStorage.getItem('id_token')) {
             // check if route is restricted by role
             if (route.data.roles && route.data.roles.indexOf(localStorage.getItem('role')) === -1) {
-                // role not authorised so redirect to home page
                 this.router.navigate(['error']);
                 return false;
             }
