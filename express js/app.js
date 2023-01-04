@@ -118,17 +118,12 @@ app.put('/login', (request, response) => {
       
       if (result != null) {
         response.status(200).json({
-<<<<<<< HEAD
-          idToken: auth.generateToken(String(result._id), String(result.firstName), String(result.lastName), String(result.emailAddress, "customer")),
-          expiresIn: 120
-=======
           idToken: auth.generateToken(String(result._id)),
           expiresIn: 120,
           firstName: result.firstName,
           lastName: result.lastName,
           email: result.emailAddress,
           role: result.role
->>>>>>> fb8a4ff8e22d38cf808c03b7655ffa62a0211466
         })
       }
       else {
