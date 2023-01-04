@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent {
+export class ErrorComponent implements OnInit{
 
+  ngOnInit(): void {
+    
+  }
+
+  constructor(private router:Router) {}
+
+  redirectToHome() {
+    this.router.navigate(["service-gallery"])
+  }
 }

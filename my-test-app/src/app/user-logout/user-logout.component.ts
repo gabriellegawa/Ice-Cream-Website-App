@@ -12,7 +12,6 @@ export class UserLogoutComponent implements OnInit {
   constructor(private storageService: StorageService, private router:Router) { }
 
   ngOnInit(): void {
-    console.log("here")
     this.storageService.clean()
     this.router.navigate(["user-login-form"])
   }
