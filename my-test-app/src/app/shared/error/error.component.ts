@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/_services/storage.service';
 
 @Component({
   selector: 'app-error',
@@ -12,9 +13,15 @@ export class ErrorComponent implements OnInit{
     
   }
 
-  constructor(private router:Router) {}
+  constructor(private router:Router, private storageService:StorageService) {}
 
   redirectToHome() {
-    this.router.navigate(["service-gallery"])
+    if (this.storageService.isLoggedIn()) {
+      this.router.navigate(["service-gallery"])
+    }
+    else {
+      this.router.navigate(["user-login-form"])
+    }
+    
   }
 }
