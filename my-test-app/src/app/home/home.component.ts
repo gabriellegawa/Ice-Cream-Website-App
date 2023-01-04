@@ -10,20 +10,21 @@ import { Router } from '@angular/router'
 export class HomeComponent implements OnInit {
   
 
-  allRoutes:String[] = ['/service-gallery', '/product-gallery', '/user-gallery', '/user-login-form', '/user-logout', '/user-gallery']
-  exist:boolean = false
+  allRoutes:String[] = ['/', '/service-gallery', '/product-gallery', '/user-gallery', '/user-login-form', '/user-logout', '/user-gallery']
+  exists:boolean = false
 
   constructor(public router:Router) { }
 
   ngOnInit(): void {
   }
 
-  checkCurrentRoute() {
-    for (const route in this.allRoutes) {
+  routeExists() {
+    for (let route of this.allRoutes) {
       if (this.router.url == route) {
-        this.exist = true
+        return true
       }
     }
+    return false
   }
 
 }

@@ -4,6 +4,6 @@
 <app-user-gallery *ngIf="router.url == '/user-gallery'"></app-user-gallery>
 <app-user-login-form *ngIf="router.url == '/user-login-form'"></app-user-login-form>
 <app-user-logout *ngIf="router.url == '/user-logout'"></app-user-logout>
-<app-error *ngIf="!exist"></app-error>
+<app-error *ngIf="routeExists() == false"></app-error>
 <app-user-gallery *ngIf="router.url == '/user-gallery'"></app-user-gallery>
 <app-footer></app-footer>
