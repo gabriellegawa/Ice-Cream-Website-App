@@ -91,17 +91,15 @@ function logRequest(url, method, request) {
 app.get('/getCustomer', (request, response) => {
 
   MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err
+    logRequest(request.url, request.method, request.body._id)
+    
+    const db = client.db(dbName)
+    db.collection('User').find().toArray((err, result) => {
       if (err) throw err
       
-      logRequest(request.url, request.method, request.body._id)
-
-      const db = client.db(dbName)
-
-      db.collection('User').find().toArray((err, result) => {
-      if (err) throw err
-
-      response.json(result)
-      })
+      response.status(200).json(result)
+    })
   })
 })
 
@@ -120,8 +118,12 @@ app.put('/login', (request, response) => {
       
       if (result != null) {
         response.status(200).json({
-          idToken: auth.generateToken(String(result._id), String(result.firstName), String(result.lastName), String(result.emailAddress, "customer")),
-          expiresIn: 120
+          idToken: auth.generateToken(String(result._id)),
+          expiresIn: 120,
+          firstName: result.firstName,
+          lastName: result.lastName,
+          email: result.emailAddress,
+          role: result.role
         })
       }
       else {

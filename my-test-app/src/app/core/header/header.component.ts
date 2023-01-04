@@ -15,8 +15,16 @@ export class HeaderAppComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getRole() {
+    return localStorage.getItem('role')
+  }
+
   redirectToProductGallery() {
     this.router.navigate(['product-gallery'])
+  }
+
+  redirectToUserGallery() {
+    this.router.navigate(['user-gallery'])
   }
 
   redirectToServiceGallery() {

@@ -28,10 +28,10 @@ export class UserLoginFormComponent implements OnInit {
   constructor(private service : AppServiceService, private router : Router, private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true
-      this.router.navigate(["service-gallery"])
-    }
+    // if (this.storageService.isLoggedIn()) {
+    //   this.isLoggedIn = true
+    //   this.router.navigate(["service-gallery"])
+    // }
   }
 
   handleLogin(nForm:NgForm): void {
