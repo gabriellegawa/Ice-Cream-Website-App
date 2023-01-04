@@ -2,6 +2,7 @@ import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
 import { AppServiceService } from '../../app-service.service';
 import { NgForm } from '@angular/forms';
 import { User } from '../../models/user';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'app-update-user-form',
@@ -30,7 +31,8 @@ export class UpdateUserFormComponent implements OnInit {
       emailAddress: input.veh_emailAddress,
       phoneNumber: input.veh_phoneNumber,
       dateOfBirth: input.veh_dateOfBirth,
-      password: input.veh_password
+      password: input.veh_password,
+      role: Role.Employee
     })
     
     this.service.updateUser(val).subscribe(

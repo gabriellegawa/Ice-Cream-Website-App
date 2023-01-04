@@ -10,20 +10,14 @@ import { StorageService } from './_services/storage.service';
 export class AppComponent {
   title = "my-test-app"
 
-  constructor(public router: Router, private storageService:StorageService) {}
+  constructor(private router: Router, private storageService:StorageService) {}
 
   ngOnInit() {
-    this.redirect()
-  }
-
-  redirect() {
-
-    if (this.router.url == "/") {
-      this.router.navigate(['user-login-form'])
-      return true
-    }
-    else {
-      return false
-    }
+    // if (!this.storageService.isLoggedIn()) {
+    //   this.router.navigate(['user-login-form'])
+    // }
+    // else {
+    //   this.router.navigate(['service-gallery'])
+    // }
   }
 }
