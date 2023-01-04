@@ -20,7 +20,6 @@ export class UserDescriptionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.currentIndex + ' ' +this.currentUser._id)
   }
 
   editUser(u:User){
