@@ -1,5 +1,11 @@
+const userAccountModels = require("../../userAccount/models/userAccount.models")
+const userAccountControllers = require('../../userAccount/controllers/userAccount.controllers')
+
+var crypto = require("crypto")
+
 const isPasswordAndUserMatch = (req, res, next) => {
-    UserModel.findByEmail(req.body.email)
+    if (req.body.userName) {
+        userAccountControllers.getUserAccountByUserName(req)
         .then((user)=>{
             if(!user[0]){
                 res.status(404).send({});
@@ -9,20 +15,18 @@ const isPasswordAndUserMatch = (req, res, next) => {
                 let hash = crypto.createHmac('sha512', salt)
                                  .update(req.body.password)
                                  .digest("base64")
+                console.log(hash)
                 if (hash === passwordFields[1]) {
-                    req.body = {
-                        userId: user[0]._id,
-                        email: user[0].email,
-                        permissionLevel: user[0].permissionLevel,
-                        provider: 'email',
-                        name: user[0].firstName + ' ' + user[0].lastName,
-                    }
                     return next()
                 } else {
                     return res.status(400).send({errors: ['Invalid email or password']})
                 }
             }
         })
+    } else {
+        return next()
+    }
+    
 }
  
 const hasAuthValidFields = (req, res, next) => {

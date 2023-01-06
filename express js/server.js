@@ -10,11 +10,15 @@ app.get('/', (request, response) => {
   response.send('App is working')
 })
 
-const routes = require('./api/customers/routes/customers.routes.js')
+const customerRoutes = require('./api/customers/routes/customers.routes')
+const authorizationRoute = require('./api/authorization/routes/authorization.routes')
 
 app.use(express.json());
 
-app.use('/api', routes)
+app.use('/api/customers', customerRoutes)
+app.use('/auth', authorizationRoute)
+
+
 
 
 // app.post('/product', function(request, response){

@@ -5,11 +5,10 @@ const getCustomerDb = () => {
     return result
 }
 
+//TODO: instead of passing req, make it into parameter like address,city,postalCode...
 const createCustomerDb = (req) => {
     // console.log(req.body)
-
-    const customer = new customers({
-        userName: req.body.userName,
+    var customer = new customers({
         address: req.body.address,
         city: req.body.city,
         postalCode: req.body.postalCode,
@@ -17,16 +16,19 @@ const createCustomerDb = (req) => {
         emailAddress: req.body.emailAddress,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        password: req.body.password,
         permissionLevel: req.body.permissionLevel
 	})
 
     var result = customer.save()
-    // console.log(result)
     return result
+}
+
+const getCustomerByUserAccountIdDb = (userAccountId) => {
+    return (new customers).findByUserAccountId(userAccountId)
 }
 
 module.exports = {
     createCustomerDb,
+    getCustomerByUserAccountIdDb,
     getCustomerDb,
 }

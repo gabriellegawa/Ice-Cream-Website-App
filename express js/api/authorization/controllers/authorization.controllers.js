@@ -1,6 +1,12 @@
+var crypto = require("crypto")
+const fs = require("fs")
+const jwt = require("jsonwebtoken")
+var jwtSecret = fs.readFileSync("./api/authentication/demos/private.key")
+
 const login = (req, res) => {
+    console.log(req.body)
     try {
-        let refreshId = req.body.userId + jwtSecret
+        let refreshId = req.body.userName + jwtSecret
         let salt = crypto.randomBytes(16).toString('base64')
         let hash = crypto.createHmac('sha512', salt).update(refreshId).digest("base64")
         req.body.refreshKey = salt

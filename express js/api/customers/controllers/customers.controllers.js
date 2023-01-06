@@ -1,4 +1,5 @@
 const { getCustomerDb } = require("../services/customers.services")
+const { getCustomerByUserAccountIdDb } = require("../services/customers.services")
 const { createCustomerDb } = require("../services/customers.services")
 
 const getCustomer = async (request, response, next) => {
@@ -13,7 +14,21 @@ const getCustomer = async (request, response, next) => {
         console.log(e.message)
         response.sendStatus(500).send(e)
     }
+}
 
+const getCustomerByUserAccountId = async (request, response, next) => {
+    try {
+        console.log(request.body)
+        var customerData = await getCustomerByUserAccountIdDb(request.body.userAccountId)
+
+        response.status(200).json(customerData)
+
+        next()
+
+    } catch(e) {
+        console.log(e.message)
+        response.sendStatus(500).send(e)
+    }
 }
 
 const createCustomer = async (request, response, next) => {
@@ -24,7 +39,7 @@ const createCustomer = async (request, response, next) => {
             result = res
         })
         
-        response.status(200).json(result)
+        response.status(200).json(result._id)
 
         next()
 
@@ -37,5 +52,6 @@ const createCustomer = async (request, response, next) => {
 
 module.exports = {
     getCustomer,
+    getCustomerByUserAccountId,
     createCustomer
 }
