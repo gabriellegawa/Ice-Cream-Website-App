@@ -1,10 +1,7 @@
 const express = require('express')
+const compression = require('compression')
 const app = express()
 const port = 3000
-// const { MongoClient } = require("mongodb")
-// const dbName = "iCreamDB"
-// const auth = require("./api/authentication/auth.js")
-// const jwtValidation = require("./api/validations/jwtValidation.js")
 
 app.get('/', (request, response) => {
   response.send('App is working')
@@ -14,6 +11,7 @@ const customerRoutes = require('./api/customers/routes/customers.routes')
 const authorizationRoute = require('./api/authorization/routes/authorization.routes')
 
 app.use(express.json());
+app.use(compression());
 
 app.use('/api/customers', customerRoutes)
 app.use('/auth', authorizationRoute)
