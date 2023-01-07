@@ -18,10 +18,11 @@ const getUserAccount = async (request, response, next) => {
 
 const getUserAccountByUserName = async (request, response, next) => {
     try {
+        // console.log(request.body.userName)
         var customerData = await getUserAccountByUserNameDb(request.body.userName)
 
+        console.log(customerData)
         // response.status(200).json(customerData)
-
         request.body = {
             userAccountId: customerData[0]._id,
             userName: customerData[0].userName,

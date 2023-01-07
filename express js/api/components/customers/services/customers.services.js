@@ -1,4 +1,4 @@
-const customers = require("../models/customers.models")
+const customers = require("../../../../models/customers.models")
 
 const getCustomerDb = () => {
     var result = customers.find()

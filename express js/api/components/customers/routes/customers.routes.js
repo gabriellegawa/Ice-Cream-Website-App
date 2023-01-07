@@ -1,6 +1,6 @@
 const controllers = require('../controllers/customers.controllers.js')
 const router = require('express').Router()
-const validationMiddleware = require('../../authorization/middlewares/auth.validation.middleware')
+const validationMiddleware = require('../../../authentication/middlewares/auth.validation.middleware')
 const userAccountControllers = require('../../userAccount/controllers/userAccount.controllers')
 
 router.get('/', [

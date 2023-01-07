@@ -7,8 +7,8 @@ app.get('/', (request, response) => {
   response.send('App is working')
 })
 
-const customerRoutes = require('./api/customers/routes/customers.routes')
-const authorizationRoute = require('./api/authorization/routes/authorization.routes')
+const customerRoutes = require('./api/components/customers/routes/customers.routes')
+const authorizationRoute = require('./api/authentication/routes/authentication.routes')
 
 app.use(express.json());
 app.use(compression());

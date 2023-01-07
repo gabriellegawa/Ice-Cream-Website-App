@@ -1,4 +1,4 @@
-const userAccounts = require("../models/userAccount.models")
+const userAccounts = require("../../../../models/userAccount.models")
 
 const getUserAccountDb = () => {
     var result = userAccounts.find()

@@ -1,5 +1,5 @@
-const userAccountModels = require("../../userAccount/models/userAccount.models")
-const userAccountControllers = require('../../userAccount/controllers/userAccount.controllers')
+const userAccountModels = require('../../../models/userAccount.models')
+const userAccountControllers = require('../../components/userAccount/controllers/userAccount.controllers')
 
 var crypto = require("crypto")
 
