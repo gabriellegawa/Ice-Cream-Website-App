@@ -4,14 +4,14 @@ const validationMiddleware = require('../../../authentication/middlewares/auth.v
 const userAccountControllers = require('../../userAccount/controllers/userAccount.controllers')
 
 router.get('/', [
-    validationMiddleware.validJWTNeeded,
+    // validationMiddleware.validJWTNeeded,
     controllers.getCustomer
 ])
 router.post('/customers', controllers.createCustomer)
 
 router.get('/test', [
     userAccountControllers.getUserAccountByUserName,
-    controllers.getCustomerByUserAccountId
+    // controllers.getCustomerByUserAccountId
 ])
 
 module.exports = router

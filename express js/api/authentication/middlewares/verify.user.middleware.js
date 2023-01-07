@@ -1,25 +1,25 @@
 const userAccountModels = require('../../../models/userAccount.models')
 const userAccountControllers = require('../../components/userAccount/controllers/userAccount.controllers')
 
+const { getUserAccountByUserNameDb } = require('../../components/userAccount/services/userAccount.services')
 var crypto = require("crypto")
 
-const isPasswordAndUserMatch = (req, res, next) => {
-    if (req.body.userName) {
-        userAccountControllers.getUserAccountByUserName(req)
+const isPasswordAndUserMatch = (request, response, next) => {
+    if (request.body.userName) {
+        getUserAccountByUserNameDb(request.body.userName)
         .then((user)=>{
             if(!user[0]){
-                res.status(404).send({});
+                response.status(404).send({});
             }else{
                 let passwordFields = user[0].password.split('$')
                 let salt = passwordFields[0]
                 let hash = crypto.createHmac('sha512', salt)
-                                 .update(req.body.password)
+                                 .update(request.body.password)
                                  .digest("base64")
-                console.log(hash)
                 if (hash === passwordFields[1]) {
-                    return next()
+                    return response.status(200).send()
                 } else {
-                    return res.status(400).send({errors: ['Invalid email or password']})
+                    return response.status(400).send({errors: ['Invalid email or password']})
                 }
             }
         })
