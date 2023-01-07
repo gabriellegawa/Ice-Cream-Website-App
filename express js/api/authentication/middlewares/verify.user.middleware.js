@@ -17,7 +17,7 @@ const isPasswordAndUserMatch = (request, response, next) => {
                                  .update(request.body.password)
                                  .digest("base64")
                 if (hash === passwordFields[1]) {
-                    return response.status(200).send()
+                    return next()
                 } else {
                     return response.status(400).send({errors: ['Invalid email or password']})
                 }

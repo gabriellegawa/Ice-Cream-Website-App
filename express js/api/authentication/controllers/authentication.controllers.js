@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken")
 var jwtSecret = fs.readFileSync("./api/authentication/demos/private.key")
 
 const login = (req, res) => {
-    console.log(req.body)
     try {
         let refreshId = req.body.userName + jwtSecret
         let salt = crypto.randomBytes(16).toString('base64')
