@@ -9,8 +9,15 @@ const validJWTNeeded = (req, res, next) => {
             if (authorization[0] !== 'Bearer') {
                 return res.status(401).send()
             } else {
-                req.jwt = jwt.verify(authorization[1], jwtSecret)
-                return next()
+                req.jwt = jwt.verify(authorization[1], jwtSecret, function(err, decoded) {
+                    if(err){
+                        res.status(401).send({msg:"Invalid JWT Token"})
+                    }
+
+                    if(decoded) {
+                        next()
+                    }
+                })
             }
         } catch (err) {
             console.log(err)
