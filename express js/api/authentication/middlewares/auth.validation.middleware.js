@@ -1,3 +1,7 @@
+const jwt = require("jsonwebtoken");
+const fs = require("fs")
+var jwtSecret = fs.readFileSync("./api/authentication/demos/private.key")
+
 const validJWTNeeded = (req, res, next) => {
     if (req.headers['authorization']) {
         try {
@@ -5,10 +9,11 @@ const validJWTNeeded = (req, res, next) => {
             if (authorization[0] !== 'Bearer') {
                 return res.status(401).send()
             } else {
-                req.jwt = jwt.verify(authorization[1], secret)
+                req.jwt = jwt.verify(authorization[1], jwtSecret)
                 return next()
             }
         } catch (err) {
+            console.log(err)
             return res.status(403).send()
         }
     } else {
