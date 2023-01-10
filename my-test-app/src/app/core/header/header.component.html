@@ -13,6 +13,7 @@
                     <a href="index.html" class="nav-item nav-link active">Home</a>
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a (click)="redirectToProductGallery()" class="nav-item nav-link">Product</a>
+                    <a *ngIf="getRole() === 'Admin'" (click)="redirectToUserGallery()" class="nav-item nav-link">User</a>
                 </div>
                 <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
                     <h1 class="m-0 display-4 text-primary"><span class="text-secondary">i</span>CREAM</h1>

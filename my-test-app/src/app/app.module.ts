@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router'
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from './_modal';
 
@@ -33,16 +33,12 @@ import { CarouselModule } from '@coreui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 
+import { ErrorComponent } from './shared/error/error.component';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { AppRoutingModule } from './app-routing.module';
+
 import { ChatModule } from './chat/chat.module'
 
-
-const routes: Routes = [
-  { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
-  { path: 'user-login-form', component: UserLoginFormComponent},
-  { path: 'service-gallery', component: ServiceGalleryComponent},
-  { path: 'product-gallery', component: ProductGalleryComponent},
-  { path: 'user-logout', component: ProductGalleryComponent}
-]
 
 @NgModule({
   declarations: [
@@ -62,7 +58,8 @@ const routes: Routes = [
     UserDescriptionComponent,
     HomeComponent,
     FooterComponent,
-    CarouselComponent
+    CarouselComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -72,11 +69,13 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     ModalModule,
-    ChatModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   exports: [RouterModule],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
