@@ -33,6 +33,8 @@ import { CarouselModule } from '@coreui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 
+import { ChatModule } from './chat/chat.module'
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'service-gallery', pathMatch: 'full'},
@@ -70,6 +72,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     ModalModule,
+    ChatModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
