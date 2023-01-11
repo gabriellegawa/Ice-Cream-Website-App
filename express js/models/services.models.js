@@ -1,11 +1,22 @@
 const mongoose = require("mongoose");
+var validate = require('mongoose-validator');
+
+var titleValidator = [
+    validate({
+      validator: 'isLength',
+      arguments: [15, 50],
+      message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
+    })
+];
+  
+
 var objectId = require('mongoose').Types.ObjectId; 
 
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost:27017/iCreamDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const servicesSchema = mongoose.Schema({
-    title: String,
+    title: { type: String, required: true, validate: titleValidator },
     description: String,
     dateAdded: Date,
     lastUpdated: String,

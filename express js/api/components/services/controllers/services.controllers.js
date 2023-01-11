@@ -20,9 +20,20 @@ const createService = async (request, response, next) => {
         var requestResult = await createServiceDb(request)
 
         response.status(200).json(requestResult)
-    } catch(e) {
-        console.log(e.message)
-        response.sendStatus(500).send(e)
+    } catch(error) {
+        if (error.name === "ValidationError") {
+            let errors = {};
+      
+            Object.keys(error.errors).forEach((key) => {
+              errors[key] = error.errors[key].message;
+            });
+      
+            return response.status(400).send(errors);
+          }
+        
+
+        console.log(error.message)
+        response.sendStatus(500).send(error)
     }
 }
 
