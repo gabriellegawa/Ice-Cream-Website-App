@@ -29,7 +29,7 @@ const getServiceByIdDb = (request) => {
 
 const updateServiceDb = (request) => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
-    return (new serviceModel).updateByServiceId(request.params.id, request.body.title, request.body.description, request.body.dateAdded, request.body.lastUpdated, request.body.userAccount)
+    return (new serviceModel).updateByServiceId(request.params.id, request.body.title, request.body.description, request.body.lastUpdated, request.body.userAccount)
 }
 
 const deleteServiceByIdDb = (request) => {

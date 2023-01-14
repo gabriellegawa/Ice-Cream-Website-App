@@ -48,12 +48,11 @@ servicesSchema.methods.findByUserAccountId = function(val) {
     return mongoose.model("services").find({ userAccount : new objectId(val) });
 }
 
-servicesSchema.methods.updateByServiceId = function(serviceId, title, description, dateAdded, lastUpdated, userAccount) {
+servicesSchema.methods.updateByServiceId = function(serviceId, title, description, lastUpdated, userAccount) {
     return mongoose.model("services").findOneAndUpdate({ _id: new objectId(serviceId) }, {
         title: title,
         description: description,
-        dateAdded: new Date(dateAdded),
-        lastUpdated: new Date(lastUpdated),
+        lastUpdated: lastUpdated,
         userAccount: userAccount
     }, {new: true});
 }
