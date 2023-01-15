@@ -1,17 +1,25 @@
-
 const express = require('express')
+const compression = require('compression')
 const app = express()
 const port = 3000
-const { MongoClient } = require("mongodb")
-const dbName = "iCreamDB"
-const auth = require("./auth.js")
-const jwtValidation = require("./jwtValidation.js")
 
 app.get('/', (request, response) => {
-  response.send('Hello World!')
+  response.send('App is working')
 })
 
+const customerRoutes = require('./api/components/customers/routes/customers.routes')
+const serviceRoutes = require('./api/components/services/routes/services.routes')
+const authorizationRoute = require('./api/authentication/routes/authentication.routes')
+
 app.use(express.json());
+app.use(compression());
+
+app.use('/api/customers', customerRoutes)
+app.use('/api/services', serviceRoutes)
+app.use('/auth', authorizationRoute)
+
+
+
 
 // app.post('/product', function(request, response){
 
@@ -63,48 +71,6 @@ app.use(express.json());
 // })
 
 // const db_connection_string = 'mongodb://localhost:27017/iCreamDB'
-
-
-// function logRequest(url, method, request) {
-//   console.log("log function called")
-//   MongoClient.connect(db_connection_string, (err, client) => {
-//     if (err) throw err
-
-//     const db = client.db(dbName)
-//     var date = new Date().toLocaleString()
-
-//     var log = {
-//       date: date,
-//       url: url,
-//       method: method,
-//       request_id: request
-//     }
-
-//     db.collection('Logs').insertOne(log, (err, response) => {
-//       if (err) throw err
-
-//       client.close()
-//     })
-//   })
-// }
-
-// app.get('/getCustomer', (request, response) => {
-
-//   MongoClient.connect(db_connection_string, (err, client) => {
-//       if (err) throw err
-      
-//       logRequest(request.url, request.method, request.body._id)
-
-//       const db = client.db(dbName)
-
-//       db.collection('User').find().toArray((err, result) => {
-//       if (err) throw err
-
-//       response.json(result)
-//       })
-//   })
-// })
-
 
 // app.put('/login', (request, response) => {
 //   MongoClient.connect(db_connection_string, (err, client) => {
