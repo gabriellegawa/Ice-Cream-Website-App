@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 var objectId = require('mongoose').Types.ObjectId; 
 
-var userAccountModel = require('./userAccount.models')
+var userAccountsModel = require('./userAccounts.models')
 
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost:27017/iCreamDB", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,7 +25,7 @@ const servicesSchema = mongoose.Schema({
         required: true,
         validate: {
             async validator(val) {
-                const result = await userAccountModel.findOne({
+                const result = await userAccountsModel.findOne({
                     "_id": val
                 })
                 return result != null ? true : false
