@@ -1,4 +1,6 @@
 const serviceModel = require("../../../../models/services.models")
+const ValidationError = require('../../../utils/ValidationError')
+const ValidatorError = require('../../../utils/ValidatorError')
 
 const getAllServicesDb = () => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
@@ -28,7 +30,21 @@ const getServiceByIdDb = (request) => {
 }
 
 const updateServiceDb = (request) => {
+    errorsList = []
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
+    if(!request.body.title){
+        // erre.title = {message:'Title is missing'}
+        errorsList['title'] = new ValidatorError("Invalid/Missing Title", 'title', 'INVALID_TITLE')
+        errorsList['title1'] = new ValidatorError("Invalid/Missing Title", 'title', 'INVALID_TITLE')
+        // throw {name: 'ValidationError', errors: { title:{ message: 'Invalid/Missing Title', name: 'ValidatorError'}} }
+        // throw {name: 'ValidationError', errors: new Map([['Title', 'Yesy']]) }
+        // throw ValidationError()
+    }
+
+    if(Array.isArray(errorsList) || errorsList.length){
+        throw new ValidationError(errorsList)
+    }
+
     return (new serviceModel).updateByServiceId(request.params.id, request.body.title, request.body.description, request.body.lastUpdated, request.body.userAccount)
 }
 
