@@ -1,6 +1,6 @@
 const serviceModel = require("../../../../models/services.models")
-const ValidationError = require('../../../utils/ValidationError')
-const ValidatorError = require('../../../utils/ValidatorError')
+const ValidationError = require('../../../lib/Validation/Exception/ValidationError')
+const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError')
 
 const getAllServicesDb = () => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
