@@ -1,7 +1,4 @@
-const userAccountModels = require('../../../models/userAccount.models')
-const userAccountControllers = require('../../components/userAccount/controllers/userAccount.controllers')
-
-const { getUserAccountByUserNameDb } = require('../../components/userAccount/services/userAccount.services')
+const { getUserAccountByUserNameDb } = require('../../components/userAccounts/services/userAccounts.services')
 var crypto = require("crypto")
 
 const isPasswordAndUserMatch = (request, response, next) => {

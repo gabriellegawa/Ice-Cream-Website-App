@@ -1,6 +1,6 @@
-const { getUserAccountDb } = require('../services/userAccount.services')
-const { getUserAccountByUserNameDb } = require('../services/userAccount.services')
-const { createUserAccountDb } = require('../services/userAccount.services')
+const { getUserAccountDb } = require('../services/userAccounts.services')
+const { getUserAccountByUserNameDb } = require('../services/userAccounts.services')
+const { createUserAccountDb } = require('../services/userAccounts.services')
 
 const getUserAccount = async (request, response, next) => {
     try {
