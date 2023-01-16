@@ -1,5 +1,5 @@
 const customers = require("../../../../models/customers.models")
-const userAccounts = require('../../../../models/userAccounts.models')
+const { createUserAccountDb } = require('../../userAccounts/services/userAccounts.services')
 
 const getCustomerDb = () => {
     var result = customers.find()
@@ -9,19 +9,12 @@ const getCustomerDb = () => {
 //TODO: instead of passing req, make it into parameter like address,city,postalCode...
 const createCustomerDb = (req) => {
     // console.log(req.body)
-    var userAccount = new userAccounts({
-        userName: req.body.userName,
-        password: req.body.password,
-    })
-
-    var userAccountResult = userAccount.save()
-
-    if(!userAccountResult){
+    if(!createUserAccountDb(req.body.userName,req.body.password)){
         //TODO: use error custom class
-        throw {name: 'ValidationError', errors: { title:{ message: 'Invalid/Missing Title', name: 'ValidatorError'}} }
+        throw {name: 'ValidationError', errors: { title:{ message: 'Failed Creating User Account Object', name: 'ValidatorError'}} }
     }
 
-    var customer = new customers({
+    var customerResult = new customers({
         address: req.body.address,
         city: req.body.city,
         postalCode: req.body.postalCode,
@@ -31,13 +24,11 @@ const createCustomerDb = (req) => {
         lastName: req.body.lastName,
         permissionLevel: req.body.permissionLevel,
         userAccount:req.body.userAccount
-	})
-
-    var customerResult = customer.save()
+	}).save()
 
     if(!customerResult){
         //TODO: use error custom class
-        throw {name: 'ValidationError', errors: { title:{ message: 'Invalid/Missing Title', name: 'ValidatorError'}} }
+        throw {name: 'ValidationError', errors: { title:{ message: 'Failed Creating Customer Object', name: 'ValidatorError'}} }
     }
 
     return customerResult
