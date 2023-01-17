@@ -5,7 +5,7 @@ const getUserAccountDb = () => {
     return result
 }
 
-const createUserAccountDb = (userName, password) => {
+const createUserAccountDb = async (userName, password, session = null) => {
     // console.log(req.body)
     // TO DO: ADD DECRYPTION AND ENCRYPTION MIDDLE WARE
     // TO DECRYPT THE TEMPORARY ENCRYPTION FROM FRONT END
@@ -15,8 +15,8 @@ const createUserAccountDb = (userName, password) => {
         password: password,
     })
 
-    var result = userAccount.save()
-    // console.log(result)
+    var result = userAccount.save({session: session})
+    
     return result
 }
 

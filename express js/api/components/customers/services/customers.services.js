@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const customers = require("../../../../models/customers.models")
 const { createUserAccountDb } = require('../../userAccounts/services/userAccounts.services')
 
@@ -7,14 +9,17 @@ const getCustomerDb = () => {
 }
 
 //TODO: instead of passing req, make it into parameter like address,city,postalCode...
-const createCustomerDb = (req) => {
+const createCustomerDb = async (req) => {
+    const session = await mongoose.startSession();
+    session.startTransaction()
+
     // console.log(req.body)
-    if(!createUserAccountDb(req.body.userName,req.body.password)){
+    if(!createUserAccountDb(req.body.userName,req.body.password, session)){
         //TODO: use error custom class
         throw {name: 'ValidationError', errors: { title:{ message: 'Failed Creating User Account Object', name: 'ValidatorError'}} }
     }
 
-    var customerResult = new customers({
+    var customerResult = await customers({
         address: req.body.address,
         city: req.body.city,
         postalCode: req.body.postalCode,
@@ -24,12 +29,14 @@ const createCustomerDb = (req) => {
         lastName: req.body.lastName,
         permissionLevel: req.body.permissionLevel,
         userAccount:req.body.userAccount
-	}).save()
+	}).save({ session: session })
 
     if(!customerResult){
         //TODO: use error custom class
         throw {name: 'ValidationError', errors: { title:{ message: 'Failed Creating Customer Object', name: 'ValidatorError'}} }
     }
+
+    await session.commitTransaction();
 
     return customerResult
 }
