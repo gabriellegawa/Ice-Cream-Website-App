@@ -35,6 +35,7 @@ export class UserLoginFormComponent implements OnInit {
   }
 
   handleLogin(nForm:NgForm): void {
+    console.log("handleLogin called")
     const input = nForm.value
     var loginUser = new User()
     
@@ -42,15 +43,32 @@ export class UserLoginFormComponent implements OnInit {
     loginUser.password =  input.veh_password
 
     const response = this.authService.login(loginUser).subscribe((Response) => {
+      console.log(Response)
       this.storageService.setSession(Response)
       this.isLoginFailed = false
       this.isLoggedIn = true
       this.router.navigate(["service-gallery"])
     }, (error)=> {
+          console.log("error")
           this.errorResponse = error
           this.isLoginFailed = true
     })
 
+  }
+
+  failLogin() {
+    this.isLoginFailed = true
+    this.isLoggedIn = false
+  }
+
+  successfulLogin() {
+    this.isLoggedIn = true
+    this.isLoginFailed = false
+  }
+
+  resetLogin() {
+    this.isLoggedIn = false
+    this.isLoginFailed = false
   }
 
   

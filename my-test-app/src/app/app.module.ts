@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router'
+import { RouterModule } from '@angular/router'
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from './_modal';
 
 import { AppComponent } from './app.component';
@@ -32,8 +31,6 @@ import { FooterComponent } from './core/footer/footer.component';
 import { CarouselModule } from '@coreui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
-import { AuthGuard } from './_helpers/auth.guard';
-import { Role } from './models/role';
 import { ErrorComponent } from './shared/error/error.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { AppRoutingModule } from './app-routing.module';
@@ -75,6 +72,6 @@ import { AppRoutingModule } from './app-routing.module';
     httpInterceptorProviders,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
