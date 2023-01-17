@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UpdateServiceFormComponent } from './update-service-form.component';
 
@@ -9,7 +10,11 @@ describe('UpdateServiceFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule, 
+        FormsModule,
+        ReactiveFormsModule,
+      ],
       declarations: [ UpdateServiceFormComponent ]
     })
     .compileComponents();
