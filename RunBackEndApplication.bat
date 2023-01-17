@@ -1,2 +1,2 @@
 cd "express js"
-nodemon server.js
+nodemon app.js

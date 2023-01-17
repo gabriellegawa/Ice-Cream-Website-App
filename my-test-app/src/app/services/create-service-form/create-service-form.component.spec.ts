@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateServiceFormComponent } from './create-service-form.component';
@@ -8,6 +9,7 @@ describe('CreateServiceFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ CreateServiceFormComponent ]
     })
     .compileComponents();
