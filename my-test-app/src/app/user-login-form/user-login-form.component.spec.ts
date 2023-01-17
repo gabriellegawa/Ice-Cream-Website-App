@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 describe('UserLoginFormComponent', () => {
   let component: UserLoginFormComponent;
   let fixture: ComponentFixture<UserLoginFormComponent>;
+  let loginButton:HTMLButtonElement
   let authService:AuthService
   let storageService:StorageService
   let router:Router
@@ -38,6 +39,7 @@ describe('UserLoginFormComponent', () => {
     router = r
     fixture = TestBed.createComponent(UserLoginFormComponent);
     component = fixture.componentInstance;
+    loginButton = fixture.debugElement.nativeElement.querySelector("button")
     component.resetLogin()
     fixture.detectChanges();
   }));
@@ -50,7 +52,6 @@ describe('UserLoginFormComponent', () => {
     spyOn(component, "handleLogin").and.callThrough()
     spyOn(authService, "login").and.returnValue(throwError(() => new Error("{status: 401}")))
 
-    let loginButton = fixture.debugElement.nativeElement.querySelector("button")
     loginButton.click()
 
     tick()
@@ -75,23 +76,26 @@ describe('UserLoginFormComponent', () => {
     spyOn(component, "handleLogin").and.callThrough()
     spyOn(authService, "login").and.returnValue(of(response))
     spyOn(storageService, "setSession").and.callThrough()
+    spyOn(router, "navigate").and.callThrough()
 
-    let loginButton = fixture.debugElement.nativeElement.querySelector("button")
     loginButton.click()
 
     tick()
     fixture.detectChanges()
 
+    expect(localStorage.getItem("id_token")).toBeTruthy()
     expect(component.isLoggedIn).toBe(true)
+    expect(router.url).toBe("/service-gallery")
 
   }))
 
-  it("should call handleLogin method", fakeAsync(() => {
+  it("should call handleLogin method", fakeAsync(() => {   
     spyOn(component, "handleLogin")
-    let loginButton = fixture.debugElement.nativeElement.querySelector("button")
+
     loginButton.click()
 
     tick()
+    fixture.detectChanges()
 
     expect(component.handleLogin).toHaveBeenCalled()
   }))
