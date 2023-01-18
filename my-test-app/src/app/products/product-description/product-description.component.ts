@@ -38,11 +38,6 @@ export class ProductDescriptionComponent implements OnInit {
   
 
   onSubmit() {
-    console.log(this.productForm.value);
-    // this.appService.registerProduct(this.productForm.value).subscribe(
-    //   data => console.log('Success!', data),
-    //   error => console.error('error!', error)
-    // )
   }
 
 }

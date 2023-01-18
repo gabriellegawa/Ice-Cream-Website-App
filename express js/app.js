@@ -52,7 +52,6 @@ app.get("/getData", (request, response) => {
       .toArray((err, result) => {
         if (err) throw err;
 
-        console.log("get Data method called");
         response.json(result);
       });
   });
@@ -61,7 +60,6 @@ app.get("/getData", (request, response) => {
 const db_connection_string = "mongodb://localhost:27017/iCreamDB";
 
 function logRequest(url, method, request) {
-  console.log("log function called");
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
 
@@ -138,7 +136,6 @@ app.get(
   (request, response) => {
     MongoClient.connect(db_connection_string, (err, client) => {
       if (err) throw err;
-      console.log(jwtValidation.checkIfAuthenticated());
       logRequest(request.url, request.method, request.body._id);
 
       const db = client.db(dbName);
@@ -232,7 +229,6 @@ app.put("/deleteService", function (request, response) {
 });
 
 app.put("/registerCustomer", function (request, response) {
-  console.log("Register Customer called");
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
 
@@ -258,7 +254,6 @@ app.put("/registerCustomer", function (request, response) {
 });
 
 app.put("/registerService", function (request, response) {
-  console.log("Register Service is called");
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
 

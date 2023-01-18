@@ -23,7 +23,6 @@ export class UserDescriptionComponent implements OnInit {
   }
 
   editUser(u:User){
-    console.log(u)
     this.userToEdit=u
   }
 
@@ -32,7 +31,6 @@ export class UserDescriptionComponent implements OnInit {
 
     this.ngOnInit();
 
-    // console.log(u)
     window.location.reload();
 
     this.userToEdit=undefined

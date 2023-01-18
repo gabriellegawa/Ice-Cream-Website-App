@@ -34,7 +34,6 @@ export class ProductGalleryComponent implements OnInit {
   }
 
   editUser(u:User){
-    console.log(u)
     this.userToEdit=u
   }
 
@@ -42,8 +41,6 @@ export class ProductGalleryComponent implements OnInit {
     //Commit to the database
 
     this.ngOnInit();
-
-    // console.log(u)
     window.location.reload();
 
     this.userToEdit=undefined

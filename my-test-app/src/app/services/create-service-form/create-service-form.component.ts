@@ -49,7 +49,6 @@ export class CreateServiceFormComponent implements OnInit {
       data => console.log('Success!', data),
       error => console.error('error!', error)
     )
-    console.log(anotherNewService)
 
     this.handleClear()
     

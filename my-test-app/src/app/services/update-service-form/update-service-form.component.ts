@@ -40,7 +40,6 @@ export class UpdateServiceFormComponent implements OnInit {
       error => console.log('Error', error)
     )
     
-    console.log(val)
 
     this.emitter.emit()
   }
