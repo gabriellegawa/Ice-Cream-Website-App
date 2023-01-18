@@ -60,8 +60,6 @@ export class CreateUserFormComponent implements OnInit {
       error => console.error('error!', error)
     )
     
-    console.log(user)
-    
     this.handleClear()
 
     this.emitter.emit()

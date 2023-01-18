@@ -8,7 +8,7 @@ export class User{
     phoneNumber: number
     dateOfBirth: string
     password: string
-    role?: Role
+    role: Role
 
     constructor(obj?:User){
       

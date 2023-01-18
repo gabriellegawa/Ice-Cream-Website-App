@@ -13,11 +13,5 @@ export class AppComponent {
   constructor(private router: Router, private storageService:StorageService) {}
 
   ngOnInit() {
-    // if (!this.storageService.isLoggedIn()) {
-    //   this.router.navigate(['user-login-form'])
-    // }
-    // else {
-    //   this.router.navigate(['service-gallery'])
-    // }
   }
 }
