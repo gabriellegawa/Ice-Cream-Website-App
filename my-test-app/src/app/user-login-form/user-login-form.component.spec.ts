@@ -1,11 +1,9 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserLoginFormComponent } from './user-login-form.component';
-import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
-import { By } from '@angular/platform-browser';
-import { AppServiceService } from '../app-service.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { StorageService } from '../_services/storage.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { throwError } from 'rxjs'
