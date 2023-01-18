@@ -12,6 +12,10 @@ export class UserLogoutComponent implements OnInit {
   constructor(private storageService: StorageService, private router:Router) { }
 
   ngOnInit(): void {
+    this.logout()
+  }
+
+  logout() {
     this.storageService.clean()
     this.router.navigate(["user-login-form"])
   }

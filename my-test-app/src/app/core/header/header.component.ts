@@ -37,9 +37,7 @@ export class HeaderAppComponent implements OnInit {
   
   // TODO: Move this command to the user logout component
   redirectToLogout() {
-    this.storageService.clean()
-    this.router.navigate(["user-login-form"])
-    // this.router.navigate(["user-logout"])
+    this.router.navigate(["user-logout"])
   }
 
   isLoggedIn() {

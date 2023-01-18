@@ -8,6 +8,7 @@ import { ErrorComponent } from './shared/error/error.component'
 import { AuthGuard } from './_helpers/auth.guard'
 import { Role } from './models/role'
 import { StorageService } from './_services/storage.service'
+import { UserLogoutComponent } from './user-logout/user-logout.component'
 
 var defaultPath = ''
 var storageService = new StorageService()
@@ -22,6 +23,7 @@ else {
 const routes: Routes = [
     { path: '', redirectTo: defaultPath, pathMatch: 'full'},
     { path: 'user-login-form', component: UserLoginFormComponent},
+    { path: 'user-logout', component: UserLogoutComponent},
     { path: 'service-gallery', component: ServiceGalleryComponent},
     { path: 'product-gallery', component: ProductGalleryComponent},
     { path: 'user-gallery', component: UserGalleryComponent, canActivate: [AuthGuard], data: {roles: [Role.Admin]}},
