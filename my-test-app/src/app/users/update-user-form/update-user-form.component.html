@@ -1,18 +1,71 @@
-<form ngForm #myForm="ngForm">
-    First Name: <br>
-    <input type="text" name="veh_firstName" [ngModel] = "user.firstName"/><br>
-    Last Name: <br>
-    <input type="text" name="veh_lastName" [ngModel] = "user.lastName"/><br>
-    Email Address: <br>
-    <input type="text" name="veh_emailAddress" [ngModel] = "user.emailAddress"/><br>
-    Phone Number: <br>
-    <input type="text" name="veh_phoneNumber" [ngModel] = "user.phoneNumber"/><br>
-    Date of Birth: <br>
-    <input type="date" name="veh_dateOfBirth" [ngModel] = "user.dateOfBirth"/><br>
-    Password: <br>
-    <input type="text" name="veh_password" [ngModel] = "user.password"/><br>
-    
-    <input type="hidden" name="veh__id" [ngModel] ="user._id">
-    
-    <button (click)="handleUpdate(myForm)">Submit</button>
+<form [formGroup]="updateUserForm">
+  <!-- TODO: Improve error handling -->
+  First Name: <br />
+  <input type="text" formControlName="veh_firstName" />
+  <span
+    class="error"
+    *ngIf="
+      updateUserForm.controls.veh_firstName.invalid &&
+      updateUserForm.controls.veh_firstName.dirty
+    "
+    >Must be 3 characters</span
+  >
+  <br />
+  Last Name: <br />
+  <input type="text" formControlName="veh_lastName" />
+  <span
+    class="error"
+    *ngIf="
+      updateUserForm.controls.veh_lastName.invalid &&
+      updateUserForm.controls.veh_lastName.dirty
+    "
+    >Must be 3 characters</span
+  >
+  <br />
+  Email Address: <br />
+  <input type="email" formControlName="veh_emailAddress" />
+  <span
+    class="error"
+    *ngIf="
+      updateUserForm.controls.veh_emailAddress.invalid &&
+      updateUserForm.controls.veh_emailAddress.dirty
+    "
+    >Must be a valid email address</span
+  ><br />
+  Phone Number: <br />
+  <input type="text" formControlName="veh_phoneNumber" />
+  <span
+    class="error"
+    *ngIf="
+      updateUserForm.controls.veh_phoneNumber.invalid &&
+      updateUserForm.controls.veh_phoneNumber.dirty
+    "
+    >Must be 3 characters</span
+  >
+  <br />
+  Date of Birth: <br />
+  <input type="date" formControlName="veh_dateOfBirth" />
+  <span
+    class="error"
+    *ngIf="
+      updateUserForm.controls.veh_dateOfBirth.invalid &&
+      updateUserForm.controls.veh_dateOfBirth.dirty
+    "
+    >Must be 3 characters</span
+  >
+  <br />
+  Create Password: <br />
+  <input type="password" formControlName="veh_password" />
+  <span
+    class="error"
+    *ngIf="
+      updateUserForm.controls.veh_password.invalid &&
+      updateUserForm.controls.veh_password.dirty
+    "
+    >Must be 3 characters</span
+  >
+  <br />
+  <button (click)="handleUpdate()" [disabled]="updateUserForm.invalid">
+    Submit
+  </button>
 </form>
