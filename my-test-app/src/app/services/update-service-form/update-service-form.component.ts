@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AppServiceService } from '../../app-service.service';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Service } from '../../models/service';
 
 @Component({
@@ -10,36 +10,42 @@ import { Service } from '../../models/service';
 })
 export class UpdateServiceFormComponent implements OnInit {
 
+  updateServiceForm !: FormGroup
+
   @Input()
   service = new Service()
 
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private newService:AppServiceService) { }
+  constructor(private appService: AppServiceService) { }
 
   ngOnInit(): void {
+    this.updateServiceForm = new FormGroup({
+      veh_title: new FormControl(this.service.title, [Validators.minLength(3), Validators.required]),
+      veh_description: new FormControl(this.service.description, [Validators.minLength(3), Validators.required])
+    })
   }
 
-  handleUpdate(nForm:NgForm) {
+  handleUpdate() {
     var today = new Date()
-    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth()+1) + '-' + String(today.getDate())
+    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth() + 1) + '-' + String(today.getDate())
 
-    const input = nForm.value
+    const input = this.updateServiceForm.value
     const val = new Service({
-      _id: input.veh__id,
+      _id: this.service._id,
       title: input.veh_title,
       description: input.veh_description,
-      dateAdded: input.veh_dateAdded,
+      dateAdded: this.service.dateAdded,
       lastModified: todayString,
       user: input.veh_user
     })
 
-    this.newService.updateService(val).subscribe(
+    this.appService.updateService(val).subscribe(
       data => console.log('Success', data),
       error => console.log('Error', error)
     )
-    
+
 
     this.emitter.emit()
   }
