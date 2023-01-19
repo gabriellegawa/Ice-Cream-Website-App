@@ -1,6 +1,6 @@
 import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
 import { AppServiceService } from '../../app-service.service';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { Role } from 'src/app/models/role';
 
@@ -10,6 +10,7 @@ import { Role } from 'src/app/models/role';
   styleUrls: ['./update-user-form.component.scss']
 })
 export class UpdateUserFormComponent implements OnInit {
+  updateUserForm !: FormGroup
 
   @Input()
   user = new User()
@@ -20,12 +21,26 @@ export class UpdateUserFormComponent implements OnInit {
   constructor(private service : AppServiceService) { }
 
   ngOnInit(): void {
+    this.updateUserForm = new FormGroup({
+      veh_firstName: new FormControl(
+      this.user.firstName, [Validators.minLength(3), Validators.required]),
+      veh_lastName: new FormControl(
+      this.user.lastName, [Validators.minLength(3), Validators.required]),
+      veh_emailAddress: new FormControl(
+      this.user.emailAddress, [Validators.email, Validators.required]),
+      veh_phoneNumber: new FormControl(
+      this.user.phoneNumber, [Validators.minLength(3), Validators.required]),
+      veh_dateOfBirth: new FormControl(
+      this.user.dateOfBirth, [Validators.minLength(3), Validators.required]),
+      veh_password: new FormControl(
+      this.user.password, [Validators.minLength(3), Validators.required]),
+      })
   }
 
-  handleUpdate(nForm:NgForm){
-    const input = nForm.value
+  handleUpdate(){
+    const input = this.updateUserForm.value
     const val = new User({
-      _id: input.veh__id,
+      _id: this.user._id,
       firstName: input.veh_firstName,
       lastName: input.veh_lastName,
       emailAddress: input.veh_emailAddress,
