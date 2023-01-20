@@ -1,6 +1,9 @@
 <h1>Welcome to user gallery</h1>
 <button (click)="modalService.open('Add User')">Add User</button>
 <jw-modal id="Add User">
+  <div align="right">
+    <button (click)="modalService.close('Add User')">&#10006;</button>
+  </div>
   <app-create-user-form
     (on-submit)="modalService.close('Add User')"
   ></app-create-user-form>

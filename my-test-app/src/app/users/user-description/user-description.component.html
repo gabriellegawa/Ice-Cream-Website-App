@@ -17,6 +17,9 @@
 <hr />
 
 <jw-modal id="{{ currentIndex }}">
+  <div align="right">
+    <button (click)="modalService.close(String(currentIndex))">&#10006;</button>
+  </div>
   <app-update-user-form
     *ngIf="userToEdit == currentUser"
     [user]="currentUser"
