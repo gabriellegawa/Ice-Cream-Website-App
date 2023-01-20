@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AppServiceService } from '../../app-service.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { User } from '../../models/user'
+import { ModalService } from 'src/app/_modal';
 
 @Component({
   selector: 'app-user-description',
@@ -15,29 +16,34 @@ export class UserDescriptionComponent implements OnInit {
   @Input()
   currentIndex: number = 0
 
-  userToEdit?:User
+  userToEdit?: User
 
-  constructor() { }
+  constructor(public modalService: ModalService) { }
 
   ngOnInit(): void {
   }
 
-  editUser(u:User){
-    this.userToEdit=u
+  editUser(u: User) {
+    this.userToEdit = u
   }
 
-  commitEdit(u:User){
+  commitEdit(u: User) {
     //Commit to the database
 
     this.ngOnInit();
 
     window.location.reload();
 
-    this.userToEdit=undefined
+    this.userToEdit = undefined
   }
 
-  onCancel(){
-    
-    this.userToEdit=undefined
+  onCancel() {
+
+    this.userToEdit = undefined
   }
+
+  String(number: number) {
+    return String(number)
+  }
+
 }
