@@ -1,4 +1,13 @@
 <h1>Welcome to user gallery</h1>
+<button (click)="modalService.open('Add User')">Add User</button>
+<jw-modal id="Add User">
+  <app-create-user-form
+    (on-submit)="modalService.close('Add User')"
+  ></app-create-user-form>
+</jw-modal>
 <div *ngFor="let user of userList; index as i">
-    <app-user-description [currentUser]="user" [currentIndex]="i+1"></app-user-description>
+  <app-user-description
+    [currentUser]="user"
+    [currentIndex]="i + 1"
+  ></app-user-description>
 </div>

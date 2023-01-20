@@ -5,9 +5,24 @@
 <p>Phone Number {{ currentUser.phoneNumber }}</p>
 <p>Date of Birth {{ currentUser.dateOfBirth }}</p>
 <p>postal Code {{ currentUser.password }}</p>
-<app-update-user-form *ngIf="userToEdit == currentUser" [user]="currentUser" (on-submit)="commitEdit($event)"></app-update-user-form>
+
 <button>View</button>
-<button (click)="editUser(currentUser)">Update</button>
+<button
+  (click)="editUser(currentUser); modalService.open(String(currentIndex))"
+>
+  Update
+</button>
 <button>Delete</button>
 <button (click)="onCancel()">Cancel</button>
-<hr>
+<hr />
+
+<jw-modal id="{{ currentIndex }}">
+  <app-update-user-form
+    *ngIf="userToEdit == currentUser"
+    [user]="currentUser"
+    (on-submit)="commitEdit($event); modalService.close(String(currentIndex))"
+  ></app-update-user-form>
+  <button (click)="onCancel(); modalService.close(String(currentIndex))">
+    Cancel
+  </button>
+</jw-modal>
