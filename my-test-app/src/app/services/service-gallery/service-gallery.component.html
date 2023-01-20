@@ -1,6 +1,13 @@
-<button *ngIf="getRole() == 'Admin'" (click)="modalService.open('Add Service')" >Add Service</button>
+<button *ngIf="getRole() == 'Admin'" (click)="modalService.open('Add Service')">
+  Add Service
+</button>
 <jw-modal id="Add Service">
-  <app-create-service-form (on-submit)="modalService.close('Add Service')"></app-create-service-form>
+  <div align="right">
+    <button (click)="modalService.close('Add Service')">&#10006;</button>
+  </div>
+  <app-create-service-form
+    (on-submit)="modalService.close('Add Service')"
+  ></app-create-service-form>
 </jw-modal>
 <div *ngIf="filtersLoaded | async">
   <app-carousel [itemLists]="serviceList"></app-carousel>
