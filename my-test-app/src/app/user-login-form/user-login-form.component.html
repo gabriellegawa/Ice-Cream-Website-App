@@ -18,7 +18,7 @@
       <div class="col-lg-9">
         <div class="contact-form bg-light rounded p-5">
           <div id="success"></div>
-          <form
+          <!-- <form
             name="userLogin"
             id="loginForm"
             novalidate="novalidate"
@@ -56,7 +56,54 @@
                 class="btn btn-primary btn-block py-3 px-5"
                 type="submit"
                 id="loginButton"
-                (click)="handleLogin(myForm)"
+                (click)="handleLogin()"
+              >
+                Login
+              </button>
+            </div>
+          </form> -->
+          <form [formGroup]="loginForm">
+            <div class="control-group">
+              <input
+                class="form-control p-4"
+                type="text"
+                formControlName="veh_email"
+                placeholder="Email Address"
+              />
+              <span
+                class="help-block text-danger"
+                *ngIf="
+                  loginForm.controls.veh_email.invalid &&
+                  loginForm.controls.veh_email.dirty
+                "
+              >
+                Must be 3 characters
+              </span>
+            </div>
+            <br />
+            <div class="control-group">
+              <input
+                class="form-control p-4"
+                placeholder="Password"
+                type="text"
+                formControlName="veh_password"
+              />
+              <span
+                class="help-block text-danger"
+                *ngIf="
+                  loginForm.controls.veh_password.invalid &&
+                  loginForm.controls.veh_password.dirty
+                "
+                >Must be 3 characters</span
+              >
+            </div>
+            <br />
+            <div>
+              <button
+                class="btn btn-primary btn-block py-3 px-5"
+                type="submit"
+                id="loginButton"
+                (click)="handleLogin()"
               >
                 Login
               </button>

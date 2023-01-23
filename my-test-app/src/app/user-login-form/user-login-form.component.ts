@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AppServiceService } from '../app-service.service';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
@@ -14,9 +14,10 @@ import { StorageService } from '../_services/storage.service';
 })
 export class UserLoginFormComponent implements OnInit {
 
-  isLoggedIn:boolean = false
-  isLoginFailed:boolean = false
-  errorResponse:string = ''
+  loginForm !: FormGroup
+  isLoggedIn: boolean = false
+  isLoginFailed: boolean = false
+  errorResponse: string = ''
   roles: string[] = []
 
   @Input()
@@ -25,30 +26,30 @@ export class UserLoginFormComponent implements OnInit {
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private service : AppServiceService, private router : Router, private authService: AuthService, private storageService: StorageService) { }
+  constructor(private service: AppServiceService, private router: Router, private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit(): void {
-    // if (this.storageService.isLoggedIn()) {
-    //   this.isLoggedIn = true
-    //   this.router.navigate(["service-gallery"])
-    // }
+    this.loginForm = new FormGroup({
+      veh_email: new FormControl(this.user.emailAddress, [Validators.minLength(3), Validators.required]),
+      veh_password: new FormControl(this.user.password, [Validators.minLength(3), Validators.required])
+    })
   }
 
-  handleLogin(nForm:NgForm): void {
-    const input = nForm.value
+  handleLogin(): void {
+    const input = this.loginForm.value
     var loginUser = new User()
-    
-    loginUser.emailAddress = input.veh_emailAddress
-    loginUser.password =  input.veh_password
+
+    loginUser.emailAddress = input.veh_email
+    loginUser.password = input.veh_password
 
     const response = this.authService.login(loginUser).subscribe((Response) => {
       this.storageService.setSession(Response)
       this.isLoginFailed = false
       this.isLoggedIn = true
       this.router.navigate(["service-gallery"])
-    }, (error)=> {
-          this.errorResponse = error
-          this.isLoginFailed = true
+    }, (error) => {
+      this.errorResponse = error
+      this.isLoginFailed = true
     })
 
   }
@@ -68,6 +69,6 @@ export class UserLoginFormComponent implements OnInit {
     this.isLoginFailed = false
   }
 
-  
+
 
 }
