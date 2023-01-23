@@ -33,3 +33,11 @@ function isUndefinedString(val){
 function isTruthyString(val){
     return val ? true : false
 }
+
+function isStringLengthValid(str, minLength, maxLength){
+    return val ? true : false
+}
+
+module.exports = {
+    isEmptyString,isNullString,isUndefinedString,isTruthyString,isStringLengthValid
+}

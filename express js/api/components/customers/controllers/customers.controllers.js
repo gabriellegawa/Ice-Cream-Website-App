@@ -43,9 +43,18 @@ const createCustomer = async (request, response, next) => {
 
         next()
 
-    } catch(e) {
-        console.log(e.message)
-        response.sendStatus(500).send(e)
+    } catch(error) {
+        if (error.name === "ValidationError") {
+            let errors = {};
+
+            error.errors.forEach((value, key) => {
+                errors[key] = value.message;
+            });
+
+            return response.status(400).json({"ValidationError" : errors});
+        }
+        console.log(error.message)
+        response.sendStatus(500).send(error)
     }
 
 }
