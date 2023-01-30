@@ -18,50 +18,6 @@
       <div class="col-lg-9">
         <div class="contact-form bg-light rounded p-5">
           <div id="success"></div>
-          <!-- <form
-            name="userLogin"
-            id="loginForm"
-            novalidate="novalidate"
-            ngForm
-            #myForm="ngForm"
-          >
-            <div class="control-group">
-              <input
-                type="text"
-                class="form-control p-4"
-                name="veh_emailAddress"
-                [ngModel]="user.emailAddress"
-                id="veh_emailAddress"
-                placeholder="Email Address"
-                required="required"
-                data-validation-required-message="Please enter your email Address"
-              />
-              <p class="help-block text-danger"></p>
-            </div>
-            <div class="control-group">
-              <input
-                type="text"
-                class="form-control p-4"
-                name="veh_password"
-                [ngModel]="user.password"
-                id="veh_password"
-                placeholder="Password"
-                required="required"
-                data-validation-required-message="Please enter your password"
-              />
-              <p class="help-block text-danger"></p>
-            </div>
-            <div>
-              <button
-                class="btn btn-primary btn-block py-3 px-5"
-                type="submit"
-                id="loginButton"
-                (click)="handleLogin()"
-              >
-                Login
-              </button>
-            </div>
-          </form> -->
           <form [formGroup]="loginForm">
             <div class="control-group">
               <input
@@ -73,11 +29,17 @@
               <span
                 class="help-block text-danger"
                 *ngIf="
-                  loginForm.controls.veh_email.invalid &&
+                  loginForm.controls.veh_email.value == '' &&
                   loginForm.controls.veh_email.dirty
                 "
               >
-                Must be 3 characters
+                Please enter your email address
+              </span>
+              <span
+                class="help-block text-danger"
+                *ngIf="loginForm.controls.veh_email.invalid && loginForm.controls.veh_email.dirty && loginForm.controls.veh_email.value != ''"
+              >
+                Invalid email address
               </span>
             </div>
             <br />
@@ -91,11 +53,12 @@
               <span
                 class="help-block text-danger"
                 *ngIf="
-                  loginForm.controls.veh_password.invalid &&
+                  loginForm.controls.veh_password.value == '' &&
                   loginForm.controls.veh_password.dirty
                 "
-                >Must be 3 characters</span
               >
+                Please enter your password
+              </span>
             </div>
             <br />
             <div>
