@@ -1,71 +1,59 @@
-<form [formGroup]="updateUserForm">
-  <!-- TODO: Improve error handling -->
-  First Name: <br />
-  <input type="text" formControlName="veh_firstName" />
-  <span
-    class="error"
-    *ngIf="
-      updateUserForm.controls.veh_firstName.invalid &&
-      updateUserForm.controls.veh_firstName.dirty
-    "
-    >Must be 3 characters</span
-  >
-  <br />
-  Last Name: <br />
-  <input type="text" formControlName="veh_lastName" />
-  <span
-    class="error"
-    *ngIf="
-      updateUserForm.controls.veh_lastName.invalid &&
-      updateUserForm.controls.veh_lastName.dirty
-    "
-    >Must be 3 characters</span
-  >
-  <br />
-  Email Address: <br />
-  <input type="email" formControlName="veh_emailAddress" />
-  <span
-    class="error"
-    *ngIf="
-      updateUserForm.controls.veh_emailAddress.invalid &&
-      updateUserForm.controls.veh_emailAddress.dirty
-    "
-    >Must be a valid email address</span
-  ><br />
-  Phone Number: <br />
-  <input type="text" formControlName="veh_phoneNumber" />
-  <span
-    class="error"
-    *ngIf="
-      updateUserForm.controls.veh_phoneNumber.invalid &&
-      updateUserForm.controls.veh_phoneNumber.dirty
-    "
-    >Must be 3 characters</span
-  >
-  <br />
-  Date of Birth: <br />
-  <input type="date" formControlName="veh_dateOfBirth" />
-  <span
-    class="error"
-    *ngIf="
-      updateUserForm.controls.veh_dateOfBirth.invalid &&
-      updateUserForm.controls.veh_dateOfBirth.dirty
-    "
-    >Must be 3 characters</span
-  >
-  <br />
-  Create Password: <br />
-  <input type="password" formControlName="veh_password" />
-  <span
-    class="error"
-    *ngIf="
-      updateUserForm.controls.veh_password.invalid &&
-      updateUserForm.controls.veh_password.dirty
-    "
-    >Must be 3 characters</span
-  >
-  <br />
-  <button (click)="handleUpdate()" [disabled]="updateUserForm.invalid">
-    Submit
-  </button>
-</form>
+<h1 mat-dialog-title>Edit Person</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="updateUserForm">
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" 
+        name="firstName" formControlName="veh_firstName">
+        <mat-error *ngIf="
+        updateUserForm.controls['firstName']?.errors?.required">field required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" name="lastName" formControlName="veh_lastName" />
+        <mat-error *ngIf="
+        updateUserForm.controls['age']?.errors?.required">field required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" name="emailAddress" formControlName="veh_emailAddress" />
+        <mat-error *ngIf="
+        updateUserForm.controls['emailAddress']?.errors?.required">field required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="text" name="phoneNumber" formControlName="veh_phoneNumber" />
+        <mat-error *ngIf="
+        updateUserForm.controls['phoneNumber']?.errors?.required">field required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Date Of Birth</mat-label>
+        <input matInput type="date" name="dateOfBirth" formControlName="veh_dateOfBirth" />
+        <mat-error *ngIf="
+        updateUserForm.controls['dateOfBirth']?.errors?.required">field required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt">
+
+    </div>
+  </form>
+</div>
+
+<div class="mt" mat-dialog-actions>
+  <button mat-raised-button color="primary" 
+  [disabled]="updateUserForm.dirty && updateUserForm.errors"
+    cdkFocusInitial>Yes</button>
+  <button mat-raised-button mat-dialog-close>No</button>
+
+</div>

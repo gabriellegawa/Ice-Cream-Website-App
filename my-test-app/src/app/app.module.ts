@@ -45,6 +45,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ConfirmationDialogComponent } from './users/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { MatSelectModule } from '@angular/material/select';
     FooterComponent,
     CarouselComponent,
     ErrorComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -94,5 +96,9 @@ import { MatSelectModule } from '@angular/material/select';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmationDialogComponent,
+    UpdateUserFormComponent
+  ],
 })
 export class AppModule { }

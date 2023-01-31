@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Subscription } from 'rxjs';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateUserFormComponent } from '../update-user-form/update-user-form.component';
 
 
 
@@ -27,7 +30,7 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
 
   userToEdit?: User
 
-  constructor(public modalService: ModalService, private service: AppServiceService) {
+  constructor(public modalService: ModalService, private service: AppServiceService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<User>();
   }
 
@@ -55,6 +58,17 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   editUser(u: User) {
+    const dialogRef = this.dialog.open(UpdateUserFormComponent, {
+      data: u
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(u);
+      }
+    });
+
+
     this.userToEdit = u
   }
 
@@ -76,6 +90,25 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
   String(number: number) {
     return String(number)
   }
+
+  delete(u: User) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(u);
+      }
+    });
+  }
+
+  // this.newService.deleteService(u).subscribe(
+  //   data => console.log('Success!', data),
+  //   error => console.error('error!', error)
+  // )
+
+  // this.refresh()
+
+  // this.emitter.emit()
 
 
 
