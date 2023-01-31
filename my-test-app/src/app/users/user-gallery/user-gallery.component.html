@@ -8,9 +8,6 @@
     (on-submit)="modalService.close('Add User')"
   ></app-create-user-form>
 </jw-modal>
-<div *ngFor="let user of userList; index as i">
-  <app-user-description
-    [currentUser]="user"
-    [currentIndex]="i + 1"
-  ></app-user-description>
+<div>
+  <app-user-description></app-user-description>
 </div>
