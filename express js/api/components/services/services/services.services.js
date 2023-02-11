@@ -1,6 +1,11 @@
+const mongoose = require("mongoose");
+
 const serviceModel = require("../../../../models/services.models")
 const ValidationError = require('../../../lib/Validation/Exception/ValidationError')
 const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError')
+const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator');
+
+const { createImageDb } = require('../../images/services/images.services')
 
 const getAllServicesDb = () => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
@@ -8,20 +13,77 @@ const getAllServicesDb = () => {
     return result
 }
 
-//TODO: instead of passing req, make it into parameter like address,city,postalCode...
-const createServiceDb = (request) => {
+const createServiceDb = async(request) => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
-    // console.log(req.body)
-    var newService = new serviceModel({
-        title: request.body.title,
-        description: request.body.description,
-        dateAdded: new Date(request.body.dateAdded),
-        lastUpdated: new Date(request.body.lastUpdated),
-        userAccount: request.body.userAccount
-	})
+    const session = await mongoose.startSession()
+    session.startTransaction()
 
-    var result = newService.save()
-    return result
+    // let yourDate = new Date()
+    // const offset = yourDate.getTimezoneOffset()
+    // yourDate = new Date(yourDate.getTime() - (offset*60*1000))
+    // let currentDateStamp = yourDate.toISOString().split('T')[0]
+
+    let currentDateStamp = new Date()
+    
+    var errorsList = new Map()
+
+    console.log(request.body)
+
+    if(request.body.containsImage){
+
+        
+
+        try{
+            var newImage = await createImageDb(request, session)
+        }catch(error){
+            if(error instanceof ValidationError){
+                error.errors.forEach((value, key) => errorsList.set(key, value));
+            }
+        }
+
+        if(isUndefinedString(request.body.title)){
+            errorsList.set('title', new ValidatorError("Invalid title", 'title', 'INVALID_INPUT'))
+        }
+
+        if(isUndefinedString(request.body.description)){
+            errorsList.set('description', new ValidatorError("Invalid description", 'description', 'INVALID_INPUT'))
+        }
+
+        var newService = new serviceModel({
+            title: request.body.title,
+            description: request.body.description,
+            dateAdded: currentDateStamp,
+            lastUpdated: currentDateStamp,
+            image: newImage
+        })
+
+    }else{
+
+        var newService = new serviceModel({
+            title: request.body.title,
+            description: request.body.description,
+            dateAdded: currentDateStamp,
+            lastUpdated: currentDateStamp
+        })
+    }
+    
+    var serviceResult = await newService.save({session: session})
+
+    if(!serviceResult){
+
+        //TODO: Replace with more appropriate custom error class
+        throw new ValidationError(new ValidatorError("Failed Creating Service Object", 'service', 'FAILED_CREATION'))
+    }
+
+    if(errorsList.size == 0){
+        await session.commitTransaction()
+        session.endSession()
+        
+        return serviceResult._id
+    }
+
+    await session.abortTransaction()
+    throw new ValidationError(errorsList)
 }
 
 const getServiceByIdDb = (request) => {
