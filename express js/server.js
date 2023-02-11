@@ -9,6 +9,7 @@ app.get('/', (request, response) => {
 
 const customerRoutes = require('./api/components/customers/routes/customers.routes')
 const serviceRoutes = require('./api/components/services/routes/services.routes')
+const imageRoutes = require('./api/components/images/routes/images.routes')
 const authorizationRoute = require('./api/authentication/routes/authentication.routes')
 
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(compression());
 
 app.use('/api/customers', customerRoutes)
 app.use('/api/services', serviceRoutes)
+app.use('/api/images', imageRoutes)
 app.use('/auth', authorizationRoute)
 
 

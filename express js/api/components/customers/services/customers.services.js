@@ -17,16 +17,13 @@ const createCustomerDb = async (req) => {
     const session = await mongoose.startSession()
     session.startTransaction();
 
-
     var errorsList = new Map();
 
     try{
         var newUserAccount = await createUserAccountDb(req.body.userName,req.body.password, session)
-        // console.log("UserAccount" + newUserAccount)
     }catch(error){
         if(error instanceof ValidationError){
             error.errors.forEach((value, key) => errorsList.set(key, value));
-            // errorsList = new Map([[...errorsList, ...error.errors]]);
         }
     }
 
@@ -36,7 +33,7 @@ const createCustomerDb = async (req) => {
     }
 
     if(StringValidator.isUndefinedString(req.body.city)){
-        errorsList.set('address', new ValidatorError("Invalid address", 'address', 'INVALID_INPUT'))
+        errorsList.set('city', new ValidatorError("Invalid city", 'city', 'INVALID_INPUT'))
     }
 
     var customerResult = await customers({
@@ -63,8 +60,7 @@ const createCustomerDb = async (req) => {
         return true
     }
 
-    await session.abortTransaction();
-
+    await session.abortTransaction()
 
     throw new ValidationError(errorsList)
 }

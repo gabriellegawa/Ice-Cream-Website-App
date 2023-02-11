@@ -11,16 +11,15 @@ const login = (req, res) => {
         req.body.refreshKey = salt
         let token = jwt.sign(
             {
-                // we can pass value 
                 req:req.body
             }, 
             jwtSecret,
             {
-              expiresIn: "2h",
+              expiresIn: "1h",
             })
         let b = Buffer.from(hash)
         let refresh_token = b.toString('base64')
-        res.status(201).send({accessToken: token, refreshToken: refresh_token})
+        res.status(201).send({accessToken: token, expiresIn: 60})
     } catch (err) {
         res.status(500).send({errors: err})
     }

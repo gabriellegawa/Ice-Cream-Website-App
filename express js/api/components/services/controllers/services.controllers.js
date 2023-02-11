@@ -20,15 +20,18 @@ const createService = async (request, response, next) => {
 
         response.status(200).json(requestResult)
     } catch(error) {
-        if (error.name === "ValidationError") {
-            let errors = {};
-      
-            Object.keys(error.errors).forEach((key) => {
-              errors[key] = error.errors[key].message;
-            });
-      
-            return response.status(400).send(errors);
-        }
+
+        console.log(error)
+        // if (error.name === "ValidationError") {
+        //     let errors = {};
+
+        //     error.errors.forEach((value, key) => {
+        //         errors[key] = value.message;
+        //     });
+
+        //     return response.status(400).json({"ValidationError" : errors});
+        // }
+        // console.log(error.message)
         response.sendStatus(500).send(error)
     }
 }
