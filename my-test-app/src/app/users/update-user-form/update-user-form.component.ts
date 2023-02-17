@@ -40,8 +40,6 @@ export class UpdateUserFormComponent implements OnInit {
       veh_password: new FormControl(
         this.user.password, [Validators.minLength(3), Validators.required]),
     })
-
-    this.updateUserForm.setValue(this.user);
   }
 
   handleUpdate() {
@@ -62,9 +60,8 @@ export class UpdateUserFormComponent implements OnInit {
       error => console.error('error!', error)
     )
 
-    console.log(val)
-
     this.emitter.emit(val)
+    this.service.refresh();
   }
 
 }

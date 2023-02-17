@@ -1,15 +1,7 @@
 <h1>Welcome to user gallery</h1>
-<button mat-icon-button (click)="modalService.open('Add User')">
+<button mat-icon-button (click)="createUser()">
   <mat-icon color='primary'>add</mat-icon>
 </button>
-<jw-modal id="Add User">
-  <div align="right">
-    <button (click)="modalService.close('Add User')">&#10006;</button>
-  </div>
-  <app-create-user-form
-    (on-submit)="modalService.close('Add User')"
-  ></app-create-user-form>
-</jw-modal>
 <div>
   <app-user-description></app-user-description>
 </div>

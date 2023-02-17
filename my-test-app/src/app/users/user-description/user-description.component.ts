@@ -29,8 +29,6 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
   public columnsFilters = {};
   userList: User[] = [];
 
-  userToEdit?: User
-
   constructor(public modalService: ModalService, private service: AppServiceService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<User>();
   }
@@ -60,32 +58,9 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
 
   editUser(u: User) {
     const dialogRef = this.dialog.open(UpdateUserFormComponent, {
-      data: u
+      data: u,
+      width: '25%',
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log(u);
-      }
-    });
-
-
-    this.userToEdit = u
-  }
-
-  commitEdit(u: User) {
-    //Commit to the database
-
-    this.ngOnInit();
-
-    window.location.reload();
-
-    this.userToEdit = undefined
-  }
-
-  onCancel() {
-
-    this.userToEdit = undefined
   }
 
   String(number: number) {

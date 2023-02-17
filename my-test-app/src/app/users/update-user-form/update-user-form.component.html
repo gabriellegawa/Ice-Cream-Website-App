@@ -8,39 +8,39 @@
         <input matInput type="text" 
         name="firstName" formControlName="veh_firstName">
         <mat-error *ngIf="
-        updateUserForm.controls['firstName']?.errors?.required">field required</mat-error>
+        updateUserForm.controls['veh_firstName']?.errors?.required">Field is required</mat-error>
       </mat-form-field>
     </div>
-    <div class="mt">
+    <div class="mt-1">
       <mat-form-field class="fullWidth" appearance="outline">
         <mat-label>Last Name</mat-label>
         <input matInput type="text" name="lastName" formControlName="veh_lastName" />
         <mat-error *ngIf="
-        updateUserForm.controls['age']?.errors?.required">field required</mat-error>
+        updateUserForm.controls['veh_lastName']?.errors?.required">Field is required/</mat-error>
       </mat-form-field>
     </div>
-    <div class="mt">
+    <div class="mt-1">
       <mat-form-field class="fullWidth" appearance="outline">
         <mat-label>Email Address</mat-label>
         <input matInput type="email" name="emailAddress" formControlName="veh_emailAddress" />
         <mat-error *ngIf="
-        updateUserForm.controls['emailAddress']?.errors?.required">field required</mat-error>
+        updateUserForm.controls['veh_emailAddress']?.errors?.required">Field is required/</mat-error>
       </mat-form-field>
     </div>
-    <div class="mt">
+    <div class="mt-1">
       <mat-form-field class="fullWidth" appearance="outline">
         <mat-label>Phone Number</mat-label>
         <input matInput type="text" name="phoneNumber" formControlName="veh_phoneNumber" />
         <mat-error *ngIf="
-        updateUserForm.controls['phoneNumber']?.errors?.required">field required</mat-error>
+        updateUserForm.controls['veh_phoneNumber']?.errors?.required">Field is required/</mat-error>
       </mat-form-field>
     </div>
-    <div class="mt">
+    <div class="mt-1">
       <mat-form-field class="fullWidth" appearance="outline">
         <mat-label>Date Of Birth</mat-label>
         <input matInput type="date" name="dateOfBirth" formControlName="veh_dateOfBirth" />
         <mat-error *ngIf="
-        updateUserForm.controls['dateOfBirth']?.errors?.required">field required</mat-error>
+        updateUserForm.controls['veh_dateOfBirth']?.errors?.required">Field is required/</mat-error>
       </mat-form-field>
     </div>
 
@@ -53,7 +53,7 @@
 <div class="mt" mat-dialog-actions>
   <button mat-raised-button color="primary" 
   [disabled]="updateUserForm.dirty && updateUserForm.errors"
-    cdkFocusInitial>Yes</button>
+    cdkFocusInitial mat-dialog-close (click)="handleUpdate()">Yes</button>
   <button mat-raised-button mat-dialog-close>No</button>
 
 </div>

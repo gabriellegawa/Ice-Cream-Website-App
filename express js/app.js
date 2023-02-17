@@ -85,7 +85,6 @@ app.get("/getCustomer", (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
     logRequest(request.url, request.method, request.body._id);
-
     const db = client.db(dbName);
     db.collection("User")
       .find()

@@ -9,17 +9,21 @@ import { Service } from './models/service';
 })
 export class AppServiceService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getData(){
+  refresh() {
+    window.location.reload();
+  }
+
+  getData() {
     return this.http.get('/api/getData')
   }
 
-  getUserList(){
+  getUserList() {
     return this.http.get<User[]>('/api/getCustomer')
   }
 
-  getUser(user : User) {
+  getUser(user: User) {
     return this.http.put<User>('/api/getUser', user)
   }
 
@@ -27,12 +31,12 @@ export class AppServiceService {
     return this.http.get<Service[]>('/api/getService')
   }
 
-  registerProduct(product : Product){
-    return this.http.post<Product>('/api/product',product)
+  registerProduct(product: Product) {
+    return this.http.post<Product>('/api/product', product)
   }
 
-  registerUser(user : User){
-    return this.http.put<User>('/api/registerCustomer',user)
+  registerUser(user: User) {
+    return this.http.put<User>('/api/registerCustomer', user)
   }
 
   registerService(service: Service) {
@@ -43,11 +47,11 @@ export class AppServiceService {
     return this.http.put<Service>('/api/deleteService', service)
   }
 
-  updateUser(user : User){
-    return this.http.put<User>('/api/customer',user)
+  updateUser(user: User) {
+    return this.http.put<User>('/api/customer', user)
   }
 
-  updateService(service : Service) {
+  updateService(service: Service) {
     return this.http.put<Service>('/api/service', service)
   }
 }
