@@ -20,7 +20,7 @@ export class AppServiceService {
   }
 
   getUserList() {
-    return this.http.get<User[]>('/api/getCustomer')
+    return this.http.get<User[]>('/api/getUserList')
   }
 
   getUser(user: User) {
@@ -36,7 +36,7 @@ export class AppServiceService {
   }
 
   registerUser(user: User) {
-    return this.http.put<User>('/api/registerCustomer', user)
+    return this.http.put<User>('/api/registerUser', user)
   }
 
   registerService(service: Service) {
@@ -52,7 +52,7 @@ export class AppServiceService {
   }
 
   updateUser(user: User) {
-    return this.http.put<User>('/api/customer', user)
+    return this.http.put<User>('/api/user', user)
   }
 
   updateService(service: Service) {

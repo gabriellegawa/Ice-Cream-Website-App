@@ -81,7 +81,7 @@ function logRequest(url, method, request) {
   });
 }
 
-app.get("/getCustomer", (request, response) => {
+app.get("/getUserList", (request, response) => {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
     logRequest(request.url, request.method, request.body._id);
@@ -115,7 +115,7 @@ app.put("/login", (request, response) => {
         if (result != null) {
           response.status(200).json({
             idToken: auth.generateToken(String(result._id)),
-            expiresIn: 120,
+            expiresIn: "2h",
             firstName: result.firstName,
             lastName: result.lastName,
             email: result.emailAddress,
@@ -150,7 +150,7 @@ app.get(
   }
 );
 
-app.put("/customer", function (request, response) {
+app.put("/user", function (request, response) {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
 
@@ -244,7 +244,7 @@ app.post("/deleteUser", function (request, response) {
   response.status(200).send({ message: "Delete Successful" });
 });
 
-app.put("/registerCustomer", function (request, response) {
+app.put("/registerUser", function (request, response) {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;
 
@@ -280,6 +280,7 @@ app.put("/registerService", function (request, response) {
       description: request.body.description,
       dateAdded: request.body.dateAdded,
       lastModified: request.body.lastModified,
+      imgPath: request.body.imgPath,
       user: request.body.user,
     };
 

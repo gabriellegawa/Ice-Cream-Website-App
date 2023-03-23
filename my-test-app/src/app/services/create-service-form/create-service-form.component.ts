@@ -19,12 +19,13 @@ export class CreateServiceFormComponent implements OnInit {
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private service : AppServiceService) { }
+  constructor(private service: AppServiceService) { }
 
   ngOnInit(): void {
     this.createServiceForm = new FormGroup({
       veh_title: new FormControl(this.newService.title, [Validators.minLength(3), Validators.required]),
-      veh_description: new FormControl(this.newService.description, [Validators.minLength(3), Validators.required])
+      veh_description: new FormControl(this.newService.description, [Validators.minLength(3), Validators.required]),
+      veh_img_name: new FormControl(this.newService.imgPath, [Validators.minLength(3), Validators.required]),
     })
   }
 
@@ -34,8 +35,8 @@ export class CreateServiceFormComponent implements OnInit {
 
   handleCreate() {
     var today = new Date()
-    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth()+1) + '-' + String(today.getDate())
-​
+    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth() + 1) + '-' + String(today.getDate())
+
     const input = this.createServiceForm.value
     const anotherNewService = new Service({
       _id: input.veh__id,
@@ -43,6 +44,7 @@ export class CreateServiceFormComponent implements OnInit {
       description: input.veh_description,
       dateAdded: todayString,
       lastModified: todayString,
+      imgPath: "./assets/img/" + input.veh_img_name,
       user: localStorage.getItem('firstName') ?? ''
     })
     this.service.registerService(anotherNewService).subscribe(
@@ -51,7 +53,7 @@ export class CreateServiceFormComponent implements OnInit {
     )
 
     this.handleClear()
-    
+
     this.refresh()
 
     this.emitter.emit()
