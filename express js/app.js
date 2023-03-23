@@ -227,6 +227,23 @@ app.put("/deleteService", function (request, response) {
   response.status(200).send({ message: "Delete Successful" });
 });
 
+app.post("/deleteUser", function (request, response) {
+  MongoClient.connect(db_connection_string, (err, client) => {
+    if (err) throw err;
+
+    logRequest(request.url, request.method, request.body._id);
+
+    const db = client.db(dbName);
+    var id = new require("mongodb").ObjectID(request.body._id);
+    try {
+      db.collection("User").deleteOne({ _id: id });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+  response.status(200).send({ message: "Delete Successful" });
+});
+
 app.put("/registerCustomer", function (request, response) {
   MongoClient.connect(db_connection_string, (err, client) => {
     if (err) throw err;

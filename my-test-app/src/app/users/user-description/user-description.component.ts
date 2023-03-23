@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { AppServiceService } from '../../app-service.service';
 import { User } from '../../models/user'
 import { ModalService } from 'src/app/_modal';
@@ -28,6 +28,9 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
   private serviceSubscribe !: Subscription;
   public columnsFilters = {};
   userList: User[] = [];
+
+  @Output("on-submit")
+  emitter = new EventEmitter
 
   constructor(public modalService: ModalService, private service: AppServiceService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<User>();
@@ -67,12 +70,23 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
     return String(number)
   }
 
+  refresh() {
+    window.location.reload();
+  }
+
   delete(u: User) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(u);
+        this.service.deleteUser(u).subscribe(
+          data => console.log('Success!', data),
+          error => console.error('error!', error)
+        )
+
+        this.refresh()
+
+        this.emitter.emit()
       }
     });
   }
