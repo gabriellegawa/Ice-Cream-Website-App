@@ -37,8 +37,7 @@ export class UpdateServiceFormComponent implements OnInit {
       title: input.veh_title,
       description: input.veh_description,
       dateAdded: this.service.dateAdded,
-      lastModified: todayString,
-      user: input.veh_user
+      lastModified: todayString
     })
 
     this.appService.updateService(val).subscribe(

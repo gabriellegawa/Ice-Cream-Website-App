@@ -5,7 +5,6 @@
 <p>Description {{ currentService.description }}</p>
 <p>Date Added {{ currentService.dateAdded }}</p>
 <p>Last Modified {{ currentService.lastModified }}</p>
-<p>Creator {{ currentService.user }}</p>
 <button
   (click)="editService(currentService); modalService.open(String(currentIndex))"
 >

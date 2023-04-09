@@ -16,12 +16,12 @@ export class ProductGalleryComponent implements OnInit {
   constructor(private service : AppServiceService, private storageService:StorageService, private router:Router) { }
 
   ngOnInit(): void {
-    if (!this.storageService.isLoggedIn()) {
-      this.router.navigate(["user-login-form"])
-    }
-    else {
+    // if (!this.storageService.isLoggedIn()) {
+    //   this.router.navigate(["user-login-form"])
+    // }
+    // else {
       this.getUserList()
-    }
+    // }
   }
 
   getUserList(){

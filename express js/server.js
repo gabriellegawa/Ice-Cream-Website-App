@@ -3,7 +3,21 @@ const compression = require('compression')
 const app = express()
 const port = 3000
 
+app.use(compression());
+// app.use(express.json());
+// app.use(express.urlencoded({
+//   extended: true
+// }));
+
+app.use(express.json({limit: '200mb'}));
+app.use(express.urlencoded({limit: '200mb', extended: true}));
+
 app.get('/', (request, response) => {
+  response.send('App is working')
+})
+
+app.post('/', (request, response) => {
+  console.log(request)
   response.send('App is working')
 })
 
@@ -12,8 +26,7 @@ const serviceRoutes = require('./api/components/services/routes/services.routes'
 const imageRoutes = require('./api/components/images/routes/images.routes')
 const authorizationRoute = require('./api/authentication/routes/authentication.routes')
 
-app.use(express.json());
-app.use(compression());
+
 
 app.use('/api/customers', customerRoutes)
 app.use('/api/services', serviceRoutes)

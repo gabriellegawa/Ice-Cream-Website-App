@@ -1,3 +1,7 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
+<h1>HOME PAGE :)</h1>
+<div *ngIf="this.authService.isLogged | async">
+    <h1>PASS</h1>
+</div>
 <app-footer></app-footer>

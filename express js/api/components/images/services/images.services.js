@@ -1,16 +1,37 @@
 const mongoose = require("mongoose");
 
+const fs = require("fs")
+const path = require("path")
+
 const imageModel = require("../../../../models/images.models")
 const ValidationError = require('../../../lib/Validation/Exception/ValidationError')
 const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError')
+const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator')
 
 //TODO: instead of passing req, make it into parameter like address,city,postalCode...
 const createImageDb = (request, session = null) => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
+
+    var errorsList = new Map()
+    
+    if(isUndefinedString(request.body.imageName)){
+        errorsList.set('imageName', new ValidatorError("Invalid image name", 'imageName', 'INVALID_INPUT'))
+    }
+
+    if(isUndefinedString(request.body.data)){
+        errorsList.set('data', new ValidatorError("Invalid data", 'data', 'INVALID_INPUT'))
+    }
+
+    let filePath = `/images/${Date.now()}_${request.body.imageName}.jpg`
+    let buffer = Buffer.from(request.body.data.split(',')[1],"base64")
+
+    console.log(buffer)
+    fs.writeFileSync(path.join('./',filePath),buffer,'base64')
+
     
     var newImage = new imageModel({
-        shortDescription: request.body.image.shortDescription,
-        imagePath: request.body.image.imagePath
+        shortDescription: request.body.shortDescription,
+        imagePath: request.body.imagePath
 	})
 
     var result = newImage.save({session: session})

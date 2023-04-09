@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const serviceModel = require("../../../../models/services.models")
 const ValidationError = require('../../../lib/Validation/Exception/ValidationError')
 const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError')
-const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator');
+const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator')
 
 const { createImageDb } = require('../../images/services/images.services')
 
@@ -27,12 +27,7 @@ const createServiceDb = async(request) => {
     
     var errorsList = new Map()
 
-    console.log(request.body)
-
     if(request.body.containsImage){
-
-        
-
         try{
             var newImage = await createImageDb(request, session)
         }catch(error){

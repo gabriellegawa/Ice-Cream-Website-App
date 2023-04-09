@@ -11,6 +11,16 @@
     createServiceForm.controls.veh_description.dirty">Must be 3 characters</span>
     <br>
     <br/>
+
+
+    <label class="image-upload-container btn btn-bwm">
+        <span>Select Image</span>
+        <input #imageInput
+               type="file"
+               accept="image/*"
+               formControlName="veh_image">
+      </label>
+
     <button class="button" (click)="handleCreate()" [disabled]="createServiceForm.invalid">Submit</button>
     &nbsp;
     <button class="button" (click)="handleClear()">Clear</button>
