@@ -24,7 +24,7 @@
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                     <a *ngIf="isLoggedIn() == true; else login" (click)="redirectToLogout()" class="nav-item nav-link">Log Out</a>
                     <ng-template #login>
-                        <a href="" (click)="redirectToLogout()" class="nav-item nav-link">Login</a>
+                        <a (click)="redirectToLogout()" class="nav-item nav-link">Login</a>
                     </ng-template>
                 </div>
             </div>
