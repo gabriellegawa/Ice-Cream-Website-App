@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../../_modal/modal.service';
 import { AppServiceService } from '../../app-service.service';
 import { User } from '../../models/user';
+import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-gallery',
@@ -10,39 +12,14 @@ import { User } from '../../models/user';
 })
 export class UserGalleryComponent implements OnInit {
 
-  userList: User[] = []
-  userToEdit?: User
-  constructor(private service: AppServiceService, public modalService: ModalService) { }
+  constructor(public modalService: ModalService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getUserList()
   }
 
-  getUserList() {
-    this.service.getUserList().subscribe((Response) => {
-      this.userList = Response;
-      console.log('Response from API', Response)
-    }, (error) => {
-      console.error('error', Response)
-    })
-  }
-
-  editUser(u: User) {
-    this.userToEdit = u
-  }
-
-  commitEdit(u: User) {
-    //Commit to the database
-
-    this.ngOnInit();
-
-    window.location.reload();
-
-    this.userToEdit = undefined
-  }
-
-  onCancel() {
-
-    this.userToEdit = undefined
+  createUser() {
+    const dialogRef = this.dialog.open(CreateUserFormComponent, {
+      width: '25%'
+    });
   }
 }

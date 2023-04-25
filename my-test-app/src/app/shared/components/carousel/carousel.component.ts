@@ -7,7 +7,7 @@ import { carousel } from '../../../models/carousel'
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent implements OnInit {
-  
+
   @Input()
   itemLists: any[] = []
 
@@ -19,10 +19,10 @@ export class CarouselComponent implements OnInit {
     console.log(this.itemLists)
 
     for (let i = 0; i < this.itemLists.length; i++) {
-      this.carouselItemLists[i] = new carousel(this.itemLists[0])
+      this.carouselItemLists[i] = new carousel(this.itemLists[i])
       console.log(this.carouselItemLists[i])
     }
-    
+
   }
 
   onItemChange($event: any): void {

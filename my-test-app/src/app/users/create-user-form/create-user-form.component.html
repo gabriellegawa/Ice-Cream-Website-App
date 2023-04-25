@@ -1,6 +1,6 @@
-<form [formGroup]="createUserForm">
+<!-- <form [formGroup]="createUserForm">
     <!-- TODO: Improve error handling -->
-    First Name: <br>
+    <!-- First Name: <br>
     <input type="text" formControlName="veh_firstName" />
     <span class="error" *ngIf="createUserForm.controls.veh_firstName.invalid &&
     createUserForm.controls.veh_firstName.dirty">Must be 3 characters</span>
@@ -40,6 +40,66 @@
     </ng-template>
     <br/>
     <br/>
-    <button (click)="handleCreate()" [disabled]="createUserForm.invalid">Submit</button>
-    <button (click)="handleClear()">Clear</button>
-</form>
+    <button (click)="handleCreate()" [disabled]="createUserForm.invalid">Submit</button> -->
+    <!-- <button (click)="handleClear()">Clear</button>
+</form> -->
+
+<h1 mat-dialog-title>Create New User</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="createUserForm">
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" 
+        name="firstName" formControlName="veh_firstName">
+        <mat-error *ngIf="
+        createUserForm.controls['veh_firstName']?.errors?.required">Field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" name="lastName" formControlName="veh_lastName" />
+        <mat-error *ngIf="
+        createUserForm.controls['veh_lastName']?.errors?.required">Field is required/</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" name="emailAddress" formControlName="veh_emailAddress" />
+        <mat-error *ngIf="
+        createUserForm.controls['veh_emailAddress']?.errors?.required">Field is required/</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="text" name="phoneNumber" formControlName="veh_phoneNumber" />
+        <mat-error *ngIf="
+        createUserForm.controls['veh_phoneNumber']?.errors?.required">Field is required/</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Date Of Birth</mat-label>
+        <input matInput type="date" name="dateOfBirth" formControlName="veh_dateOfBirth" />
+        <mat-error *ngIf="
+        createUserForm.controls['veh_dateOfBirth']?.errors?.required">Field is required/</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt">
+
+    </div>
+  </form>
+</div>
+
+<div class="mt" mat-dialog-actions>
+  <button mat-raised-button color="primary" 
+  [disabled]="createUserForm.dirty && createUserForm.errors"
+    cdkFocusInitial mat-dialog-close (click)="handleCreate()">Yes</button>
+  <button mat-raised-button mat-dialog-close>No</button>
+
+</div>
