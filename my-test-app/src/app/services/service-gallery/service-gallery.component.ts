@@ -25,20 +25,6 @@ export class ServiceGalleryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getServiceList()
-
-    this.slides[0] = {
-      src: './assets/img/test1.jpg',
-    };
-    this.slides[1] = {
-      src: './assets/img/test2.jpg',
-    }
-    this.slides[2] = {
-      src: './assets/img/test1.jpg',
-    }
-  }
-
-  onItemChange($event: any): void {
-    console.log('Carousel onItemChange', $event);
   }
 
   refresh(): void {

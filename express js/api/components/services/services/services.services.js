@@ -27,7 +27,7 @@ const createServiceDb = async(request) => {
     
     var errorsList = new Map()
 
-    if(request.body.containsImage){
+    if(request.body.image){
         try{
             var newImage = await createImageDb(request, session)
         }catch(error){

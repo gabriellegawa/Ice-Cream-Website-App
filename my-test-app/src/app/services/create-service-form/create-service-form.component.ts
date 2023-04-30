@@ -1,6 +1,9 @@
+import { empty } from '@angular-devkit/schematics';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SrvRecord } from 'dns';
+import { read } from 'fs';
 import { Image } from 'src/app/models/image';
 import { AppServiceService } from '../../app-service.service';
 import { Service } from '../../models/service';
@@ -13,6 +16,9 @@ import { Service } from '../../models/service';
 export class CreateServiceFormComponent implements OnInit {
 
   createServiceForm !: FormGroup
+
+  uploadedImage : Image = new Image()
+  url:string= ''
 
   @Input()
   newService = new Service()
@@ -37,6 +43,8 @@ export class CreateServiceFormComponent implements OnInit {
 
   handleCreate() {
     var today = new Date()
+
+
     var todayString = String(today.getFullYear()) + '-' + String(today.getMonth()+1) + '-' + String(today.getDate())
 ​
     const input = this.createServiceForm.value
@@ -45,11 +53,7 @@ export class CreateServiceFormComponent implements OnInit {
       title: input.veh_title,
       description: input.veh_description,
       containsImage: true,
-      image: new Image({ 
-        _id: 1,
-        shortDescription:input.veh_shortDescription,
-        imagePath:input.veh_image
-      })
+      image: this.uploadedImage
     })
 
     console.log(anotherNewService)
@@ -68,21 +72,31 @@ export class CreateServiceFormComponent implements OnInit {
   handleClear() {
     this.createServiceForm.controls.veh_title.reset();
     this.createServiceForm.controls.veh_description.reset();
+    this.createServiceForm.controls.veh_image.reset();
   }
 
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
+  handleFileInput(event: Event) {
 
-    reader.addEventListener('load', (event: any) => {
+    var element = event.currentTarget as HTMLInputElement;
+    var fileList: FileList | null = element.files;
+    if (fileList) {
+      console.log("FileUpload -> files", fileList);
 
-      console.log(file)
+      var file: File = fileList[0];
+      var reader = new FileReader();
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = reader.result as string;
+
+        this.uploadedImage.base64 = reader.result as string 
+        this.uploadedImage.imagePath = file.name
       
-      
-    });
+      }
 
-    reader.readAsDataURL(file);
+
+      reader.readAsDataURL(file);
+
+    }
+    
   }
-
-  
 }

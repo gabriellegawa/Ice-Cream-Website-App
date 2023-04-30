@@ -14,18 +14,23 @@ const createImageDb = (request, session = null) => {
 
     var errorsList = new Map()
     
-    if(isUndefinedString(request.body.imageName)){
-        errorsList.set('imageName', new ValidatorError("Invalid image name", 'imageName', 'INVALID_INPUT'))
+    if(isUndefinedString(request.body.image.imagePath)){
+        errorsList.set('imagePath', new ValidatorError("Invalid image path", 'imagePath', 'INVALID_INPUT'))
     }
 
-    if(isUndefinedString(request.body.data)){
-        errorsList.set('data', new ValidatorError("Invalid data", 'data', 'INVALID_INPUT'))
+    if(isUndefinedString(request.body.image.shortDescription)){
+        errorsList.set('shortDescription', new ValidatorError("Invalid short description", 'shortDescription', 'INVALID_INPUT'))
     }
 
-    let filePath = `/images/${Date.now()}_${request.body.imageName}.jpg`
-    let buffer = Buffer.from(request.body.data.split(',')[1],"base64")
+    if(isUndefinedString(request.body.image.base64)){
+        errorsList.set('base64', new ValidatorError("Invalid base64", 'base64', 'INVALID_INPUT'))
+    }
+    
+    //TODO: add if to only save when there isnt any error
+    let filePath = `/images/${Date.now()}_${request.body.image.imagePath}`
+    let buffer = Buffer.from(request.body.image.base64.split(',')[1],"base64")
+    
 
-    console.log(buffer)
     fs.writeFileSync(path.join('./',filePath),buffer,'base64')
 
     

@@ -18,8 +18,10 @@
         <input #imageInput
                type="file"
                accept="image/*"
-               formControlName="veh_image">
-      </label>
+               formControlName="veh_image"
+               (change)="handleFileInput($event)">
+        <img id="blah" [src]="url || 'http://placehold.it/180'" alt="your image" />
+    </label>
 
     <button class="button" (click)="handleCreate()" [disabled]="createServiceForm.invalid">Submit</button>
     &nbsp;
