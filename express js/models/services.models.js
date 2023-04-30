@@ -38,15 +38,15 @@ const servicesSchema = mongoose.Schema({
     image: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "image",
-        validate: {
-            async validator(val) {
-                const result = await imageModel.findOne({
-                    "_id": val
-                })
-                return result != null ? true : false
-            },
-            message: "image doesn't exists"
-        }
+        // validate: {
+        //     async validator(val) {
+        //         const result = await imageModel.findOne({
+        //             "_id": val
+        //         })
+        //         return result != null ? true : false
+        //     },
+        //     message: "image doesn't exists"
+        // }
     }
  });
 

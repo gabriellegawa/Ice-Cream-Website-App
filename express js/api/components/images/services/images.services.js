@@ -9,7 +9,7 @@ const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError
 const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator')
 
 //TODO: instead of passing req, make it into parameter like address,city,postalCode...
-const createImageDb = (request, session = null) => {
+const createImageDb = async (request, session = null) => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
 
     var errorsList = new Map()
@@ -35,11 +35,11 @@ const createImageDb = (request, session = null) => {
 
     
     var newImage = new imageModel({
-        shortDescription: request.body.shortDescription,
-        imagePath: request.body.imagePath
+        shortDescription: request.body.image.shortDescription,
+        imagePath: request.body.image.imagePath
 	})
 
-    var result = newImage.save({session: session})
+    var result = await newImage.save({session: session})
     return result._id
 }
 
