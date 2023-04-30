@@ -2,8 +2,8 @@
     <c-carousel-inner>
       <c-carousel-item *ngFor="let item of carouselItemLists; index as i ">
         <img
-          src="{{item.imgPath}}"
-          alt="{{item.imgAltText}}"
+          src="{{item.image.imagePath}}"
+          alt="{{item.image.shortDescription}}"
           class="d-block w-100"
           loading="lazy"
           width="500" height="600"

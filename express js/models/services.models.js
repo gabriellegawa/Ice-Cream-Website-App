@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var objectId = require('mongoose').Types.ObjectId; 
 
 var userAccountModel = require('./userAccounts.models')
-var imageModel = require('./images.models')
+var imageModel = require('./image.models')
 
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost:27017/iCreamDB", { useNewUrlParser: true, useUnifiedTopology: true });

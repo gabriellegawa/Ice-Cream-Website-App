@@ -7,9 +7,9 @@ const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/Strin
 
 const { createImageDb } = require('../../images/services/images.services')
 
-const getAllServicesDb = () => {
+const getAllServicesDb = async () => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
-    var result = serviceModel.find()
+    var result = await serviceModel.find().populate('image')
     return result
 }
 

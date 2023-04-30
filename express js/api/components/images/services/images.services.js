@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const fs = require("fs")
 const path = require("path")
 
-const imageModel = require("../../../../models/images.models")
+const imageModel = require("../../../../models/image.models")
 const ValidationError = require('../../../lib/Validation/Exception/ValidationError')
 const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError')
 const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator')
@@ -27,7 +27,8 @@ const createImageDb = async (request, session = null) => {
     }
     
     //TODO: add if to only save when there isnt any error
-    let filePath = `/images/${Date.now()}_${request.body.image.imagePath}`
+    let fileName = `${Date.now()}_${request.body.image.imagePath}`
+    let filePath = '/public/images/' + fileName
     let buffer = Buffer.from(request.body.image.base64.split(',')[1],"base64")
     
 
@@ -36,7 +37,7 @@ const createImageDb = async (request, session = null) => {
     
     var newImage = new imageModel({
         shortDescription: request.body.image.shortDescription,
-        imagePath: request.body.image.imagePath
+        imagePath: fileName
 	})
 
     var result = await newImage.save({session: session})

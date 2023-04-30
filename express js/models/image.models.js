@@ -10,11 +10,11 @@ const imagesSchema = mongoose.Schema({
 });
 
 imagesSchema.methods.findByImageId = function(val) {
-    return mongoose.model("Images").find({ _id : new objectId(val) });
+    return mongoose.model("image").find({ _id : new objectId(val) });
 }
 
 imagesSchema.methods.updateByImageId = function(imageId, shortDescription, imagePath) {
-    return mongoose.model("Images").findOneAndUpdate({ _id: new objectId(imageId) }, {
+    return mongoose.model("image").findOneAndUpdate({ _id: new objectId(imageId) }, {
         shortDescription: shortDescription,
         imagePath: imagePath
     }, {new: true});
@@ -22,7 +22,7 @@ imagesSchema.methods.updateByImageId = function(imageId, shortDescription, image
 
 imagesSchema.methods.deleteByImageId = function(val) {
     //add soft delete to move to another collection
-    return mongoose.model("Images").findByIdAndRemove({ _id: new objectId(val) });
+    return mongoose.model("image").findByIdAndRemove({ _id: new objectId(val) });
 }
 
-module.exports = mongoose.model("Images", imagesSchema);
+module.exports = mongoose.model("image", imagesSchema);
