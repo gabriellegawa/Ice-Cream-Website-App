@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppServiceService } from '../app-service.service';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
@@ -69,6 +69,8 @@ export class UserLoginFormComponent implements OnInit {
     this.isLoginFailed = false
   }
 
-
+  redirectToRegister() {
+    this.router.navigate(["user-register-form"])
+  }
 
 }
