@@ -10,6 +10,7 @@ import { Role } from './models/role'
 import { StorageService } from './_services/storage.service'
 import { UserLogoutComponent } from './user-logout/user-logout.component'
 import { UnauthorizedComponent } from './shared/unauthorized/unauthorized.component'
+import { UserRegisterFormComponent } from './user-register-form/user-register-form.component'
 
 var defaultPath = ''
 var storageService = new StorageService()
@@ -23,6 +24,7 @@ else {
 
 const routes: Routes = [
     { path: '', redirectTo: defaultPath, pathMatch: 'full' },
+    { path: 'user-register-form', component: UserRegisterFormComponent },
     { path: 'user-login-form', component: UserLoginFormComponent },
     { path: 'user-logout', component: UserLogoutComponent },
     { path: 'service-gallery', component: ServiceGalleryComponent },

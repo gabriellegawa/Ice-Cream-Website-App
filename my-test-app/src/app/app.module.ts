@@ -46,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ConfirmationDialogComponent } from './users/confirmation-dialog/confirmation-dialog.component';
+import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { ConfirmationDialogComponent } from './users/confirmation-dialog/confirm
     CarouselComponent,
     ErrorComponent,
     ConfirmationDialogComponent,
+    UserRegisterFormComponent,
   ],
   imports: [
     BrowserAnimationsModule,
