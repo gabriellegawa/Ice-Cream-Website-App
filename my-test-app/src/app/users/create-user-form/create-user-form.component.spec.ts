@@ -29,4 +29,19 @@ describe('CreateUserFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`should have as title 'Create User'`, () => {
+    let title = fixture.debugElement.nativeElement.querySelectorAll("h1").item(0).textContent
+    expect(title).toEqual('Create New User');
+  })
+
+  it('should have a button with text "Create"', () => {
+    let button = fixture.debugElement.nativeElement.querySelectorAll("button").item(0).textContent
+    expect(button).toEqual('Create User');
+  })
+
+  it('should have a button with text "Cancel"', () => {
+    let button = fixture.debugElement.nativeElement.querySelectorAll("button").item(1).textContent
+    expect(button).toEqual('Cancel');
+  })
 });

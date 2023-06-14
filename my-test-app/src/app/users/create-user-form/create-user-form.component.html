@@ -1,49 +1,3 @@
-<!-- <form [formGroup]="createUserForm">
-    <!-- TODO: Improve error handling -->
-    <!-- First Name: <br>
-    <input type="text" formControlName="veh_firstName" />
-    <span class="error" *ngIf="createUserForm.controls.veh_firstName.invalid &&
-    createUserForm.controls.veh_firstName.dirty">Must be 3 characters</span>
-    <br>
-    Last Name: <br>
-    <input type="text" formControlName="veh_lastName" />
-    <span class="error" *ngIf="createUserForm.controls.veh_lastName.invalid &&
-    createUserForm.controls.veh_lastName.dirty">Must be 3 characters</span>
-    <br>
-    Email Address: <br>
-    <input type="email" formControlName="veh_emailAddress" />
-    <span class="error" *ngIf="createUserForm.controls.veh_emailAddress.invalid &&
-    createUserForm.controls.veh_emailAddress.dirty">Must be a valid email address</span><br>
-    Phone Number: <br>
-    <input type="text" formControlName="veh_phoneNumber"/>
-    <span class="error" *ngIf="createUserForm.controls.veh_phoneNumber.invalid &&
-    createUserForm.controls.veh_phoneNumber.dirty">Must be 3 characters</span>
-    <br>
-    Date of Birth: <br>
-    <input type="date" formControlName="veh_dateOfBirth"/>
-    <span class="error" *ngIf="createUserForm.controls.veh_dateOfBirth.invalid &&
-    createUserForm.controls.veh_dateOfBirth.dirty">Must be 3 characters</span>
-    <br>
-    Create Password: <br>
-    <input type="password" formControlName="veh_password"/>
-    <span class="error" *ngIf="createUserForm.controls.veh_password.invalid &&
-    createUserForm.controls.veh_password.dirty">Must be 3 characters</span>
-    <br>
-    Confirm Password: <br>
-    <input type="password" formControlName="veh_confirmPassword"/>
-    <ng-template [ngIf]="createUserForm.controls.veh_confirmPassword.invalid &&
-    createUserForm.controls.veh_confirmPassword.dirty" [ngIfElse]="checkPassword">
-        <span class="error" >Must be 3 characters</span>
-    </ng-template>
-    <ng-template #checkPassword>
-        <span class="error" *ngIf="createUserForm.value.veh_confirmPassword != createUserForm.value.veh_password">Password and Confirm Password does not match</span>
-    </ng-template>
-    <br/>
-    <br/>
-    <button (click)="handleCreate()" [disabled]="createUserForm.invalid">Submit</button> -->
-    <!-- <button (click)="handleClear()">Clear</button>
-</form> -->
-
 <h1 mat-dialog-title>Create New User</h1>
 
 <div mat-dialog-content>
@@ -51,8 +5,7 @@
     <div class="mt-1">
       <mat-form-field class="fullWidth" appearance="outline">
         <mat-label>First Name</mat-label>
-        <input matInput type="text" 
-        name="firstName" formControlName="veh_firstName">
+        <input matInput type="text" name="firstName" formControlName="veh_firstName">
         <mat-error *ngIf="
         createUserForm.controls['veh_firstName']?.errors?.required">Field is required</mat-error>
       </mat-form-field>
@@ -62,7 +15,7 @@
         <mat-label>Last Name</mat-label>
         <input matInput type="text" name="lastName" formControlName="veh_lastName" />
         <mat-error *ngIf="
-        createUserForm.controls['veh_lastName']?.errors?.required">Field is required/</mat-error>
+        createUserForm.controls['veh_lastName']?.errors?.required">Field is required</mat-error>
       </mat-form-field>
     </div>
     <div class="mt-1">
@@ -70,7 +23,7 @@
         <mat-label>Email Address</mat-label>
         <input matInput type="email" name="emailAddress" formControlName="veh_emailAddress" />
         <mat-error *ngIf="
-        createUserForm.controls['veh_emailAddress']?.errors?.required">Field is required/</mat-error>
+        createUserForm.controls['veh_emailAddress']?.errors?.required">Field is required</mat-error>
       </mat-form-field>
     </div>
     <div class="mt-1">
@@ -78,7 +31,7 @@
         <mat-label>Phone Number</mat-label>
         <input matInput type="text" name="phoneNumber" formControlName="veh_phoneNumber" />
         <mat-error *ngIf="
-        createUserForm.controls['veh_phoneNumber']?.errors?.required">Field is required/</mat-error>
+        createUserForm.controls['veh_phoneNumber']?.errors?.required">Field is required</mat-error>
       </mat-form-field>
     </div>
     <div class="mt-1">
@@ -86,20 +39,29 @@
         <mat-label>Date Of Birth</mat-label>
         <input matInput type="date" name="dateOfBirth" formControlName="veh_dateOfBirth" />
         <mat-error *ngIf="
-        createUserForm.controls['veh_dateOfBirth']?.errors?.required">Field is required/</mat-error>
+        createUserForm.controls['veh_dateOfBirth']?.errors?.required">Field is required</mat-error>
       </mat-form-field>
     </div>
-
-    <div class="mt">
-
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" formControlName="veh_password" />
+        <mat-error *ngIf="
+        createUserForm.controls['veh_password']?.errors?.required">Field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt-1">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" name="confirmPassword" formControlName="veh_confirmPassword" />
+        <mat-error *ngIf="
+        createUserForm.controls['veh_confirmPassword']?.errors?.required">Field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mt" mat-dialog-actions>
+      <button mat-raised-button color="primary" [disabled]="createUserForm.invalid" cdkFocusInitial mat-dialog-close
+        (click)="handleCreate()">Create User</button>
+      <button mat-raised-button mat-dialog-close>Cancel</button>
     </div>
   </form>
-</div>
-
-<div class="mt" mat-dialog-actions>
-  <button mat-raised-button color="primary" 
-  [disabled]="createUserForm.dirty && createUserForm.errors"
-    cdkFocusInitial mat-dialog-close (click)="handleCreate()">Yes</button>
-  <button mat-raised-button mat-dialog-close>No</button>
-
 </div>
