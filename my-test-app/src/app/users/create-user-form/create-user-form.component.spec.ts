@@ -131,4 +131,46 @@ describe('CreateUserFormComponent', () => {
     let button = fixture.debugElement.nativeElement.querySelectorAll("button").item(0)
     expect(button.disabled).toBeTruthy();
   })
+
+  it('should disable button when all fields are filled except dateOfBirth', () => {
+    setFormControlValue('veh_firstName', 'John');
+    setFormControlValue('veh_lastName', 'Doe');
+    setFormControlValue('veh_emailAddress', 'john.doe@gmail.com');
+    setFormControlValue('veh_phoneNumber', '1234567890');
+    setFormControlValue('veh_password', 'password');
+    setFormControlValue('veh_confirmPassword', 'password');
+
+    fixture.detectChanges();
+
+    let button = fixture.debugElement.nativeElement.querySelectorAll("button").item(0)
+    expect(button.disabled).toBeTruthy();
+  })
+
+  it('should disable button when all fields are filled except password', () => {
+    setFormControlValue('veh_firstName', 'John');
+    setFormControlValue('veh_lastName', 'Doe');
+    setFormControlValue('veh_emailAddress', 'john.doe@gmail.com');
+    setFormControlValue('veh_phoneNumber', '1234567890');
+    setFormControlValue('veh_dateOfBirth', '01/01/2000');
+    setFormControlValue('veh_confirmPassword', 'password');
+
+    fixture.detectChanges();
+
+    let button = fixture.debugElement.nativeElement.querySelectorAll("button").item(0)
+    expect(button.disabled).toBeTruthy();
+  })
+
+  it('should disable button when all fields are filled except confirmPassword', () => {
+    setFormControlValue('veh_firstName', 'John');
+    setFormControlValue('veh_lastName', 'Doe');
+    setFormControlValue('veh_emailAddress', 'john.doe@gmail.com');
+    setFormControlValue('veh_phoneNumber', '1234567890');
+    setFormControlValue('veh_dateOfBirth', '01/01/2000');
+    setFormControlValue('veh_password', 'password');
+
+    fixture.detectChanges();
+
+    let button = fixture.debugElement.nativeElement.querySelectorAll("button").item(0)
+    expect(button.disabled).toBeTruthy();
+  })
 });
