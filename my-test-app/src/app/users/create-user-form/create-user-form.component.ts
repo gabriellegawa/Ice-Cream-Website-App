@@ -26,19 +26,19 @@ export class CreateUserFormComponent implements OnInit {
   ngOnInit(): void {
     this.createUserForm = new FormGroup({
       veh_firstName: new FormControl(
-        this.newUser.firstName, [Validators.minLength(3), Validators.required]),
+        "", [Validators.minLength(3), Validators.required]),
       veh_lastName: new FormControl(
-        this.newUser.lastName, [Validators.minLength(3), Validators.required]),
+        "", [Validators.minLength(3), Validators.required]),
       veh_emailAddress: new FormControl(
-        this.newUser.emailAddress, [Validators.email, Validators.required]),
+        "", [Validators.email, Validators.required]),
       veh_phoneNumber: new FormControl(
-        this.newUser.phoneNumber, [Validators.minLength(3), Validators.required]),
+        "", [Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern("^[0-9]*$")]),
       veh_dateOfBirth: new FormControl(
-        this.newUser.dateOfBirth, [Validators.minLength(3), Validators.required]),
+        "", [Validators.minLength(3), Validators.required]),
       veh_password: new FormControl(
-        this.newUser.password, [Validators.minLength(3), Validators.required]),
+        "", [Validators.minLength(3), Validators.required]),
       veh_confirmPassword: new FormControl(
-        this.newUser.password, [Validators.minLength(3), Validators.required]),
+        "", [Validators.minLength(3), Validators.required]),
     })
   }
 
