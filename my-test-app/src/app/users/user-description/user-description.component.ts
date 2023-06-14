@@ -56,25 +56,27 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnDestroy(): void {
-    this.serviceSubscribe.unsubscribe();
+    if (this.serviceSubscribe) {
+      this.serviceSubscribe.unsubscribe();
+    }
   }
 
-  editUser(u: User) {
+  editUser(u: User): void {
     const dialogRef = this.dialog.open(UpdateUserFormComponent, {
       data: u,
       width: '25%',
     });
   }
 
-  String(number: number) {
+  String(number: number): String {
     return String(number)
   }
 
-  refresh() {
+  refresh(): void {
     window.location.reload();
   }
 
-  delete(u: User) {
+  delete(u: User): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {

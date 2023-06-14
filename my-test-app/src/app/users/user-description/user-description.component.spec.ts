@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserDescriptionComponent } from './user-description.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 describe('UserDescriptionComponent', () => {
   let component: UserDescriptionComponent;
@@ -8,9 +10,13 @@ describe('UserDescriptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserDescriptionComponent ]
+      imports: [HttpClientTestingModule, MatDialogModule],
+      declarations: [UserDescriptionComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
