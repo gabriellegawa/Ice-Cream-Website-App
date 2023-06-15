@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ServiceGalleryComponent } from './service-gallery.component';
 import { ModalComponent } from 'src/app/_modal/modal.component';
 import { CreateServiceFormComponent } from '../create-service-form/create-service-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('ServiceGalleryComponent', () => {
   let component: ServiceGalleryComponent;
@@ -10,7 +11,11 @@ describe('ServiceGalleryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        FormsModule
+      ],
       declarations: [
         ServiceGalleryComponent,
         ModalComponent,

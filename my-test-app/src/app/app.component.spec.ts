@@ -1,15 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HomeComponent } from './home/home.component';
+import { HeaderAppComponent } from './core/header/header.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FooterComponent } from './core/footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        AppRoutingModule,
+      ],
       declarations: [
         AppComponent,
         HomeComponent,
+        HeaderAppComponent,
+        FooterComponent
       ],
     }).compileComponents();
   });
