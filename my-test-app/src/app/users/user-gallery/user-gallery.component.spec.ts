@@ -5,6 +5,10 @@ import { UserGalleryComponent } from './user-gallery.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { UserDescriptionComponent } from '../user-description/user-description.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('UserGalleryComponent', () => {
   let component: UserGalleryComponent;
@@ -16,6 +20,11 @@ describe('UserGalleryComponent', () => {
         HttpClientTestingModule,
         MatDialogModule,
         MatIconModule,
+        MatPaginatorModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatTableModule,
+        BrowserAnimationsModule
       ],
       declarations: [
         UserGalleryComponent,

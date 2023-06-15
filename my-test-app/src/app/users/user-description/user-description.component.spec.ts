@@ -2,8 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { UserDescriptionComponent } from './user-description.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CdkTableModule } from '@angular/cdk/table';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -26,7 +25,6 @@ describe('UserDescriptionComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        CdkTableModule,
         MatDialogModule,
         MatTableModule,
         MatPaginatorModule,
@@ -39,10 +37,15 @@ describe('UserDescriptionComponent', () => {
         MatSelectModule,
         BrowserAnimationsModule,
       ],
-      declarations: [UserDescriptionComponent],
+      declarations: [
+        UserDescriptionComponent,
+      ],
       providers: [
-        { provide: MatDialogRef, useValue: {} }
-      ]
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
+      errorOnUnknownElements: false,
+      errorOnUnknownProperties: false,
     })
       .compileComponents();
   });
