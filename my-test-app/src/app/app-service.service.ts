@@ -3,16 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from './models/product';
 import { User } from './models/user';
 import { Service } from './models/service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppServiceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  refresh() {
+  reloadPage() {
     window.location.reload();
+  }
+
+  reloadComponent(self: boolean, urlToNavigateTo?: string) {
+    const url = self ? this.router.url : urlToNavigateTo;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`/${url}`]);
+    })
   }
 
   getData() {

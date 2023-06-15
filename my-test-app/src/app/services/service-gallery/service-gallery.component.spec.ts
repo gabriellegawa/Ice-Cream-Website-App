@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ServiceGalleryComponent } from './service-gallery.component';
+import { ModalComponent } from 'src/app/_modal/modal.component';
+import { CreateServiceFormComponent } from '../create-service-form/create-service-form.component';
 
 describe('ServiceGalleryComponent', () => {
   let component: ServiceGalleryComponent;
@@ -9,9 +11,13 @@ describe('ServiceGalleryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [ ServiceGalleryComponent ]
+      declarations: [
+        ServiceGalleryComponent,
+        ModalComponent,
+        CreateServiceFormComponent,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

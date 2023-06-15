@@ -54,7 +54,7 @@ export class CreateServiceFormComponent implements OnInit {
 
     this.handleClear()
 
-    this.refresh()
+    this.service.reloadComponent(true)
 
     this.emitter.emit()
   }

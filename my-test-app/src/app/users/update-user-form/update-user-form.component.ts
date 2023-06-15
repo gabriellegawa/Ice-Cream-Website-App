@@ -61,7 +61,7 @@ export class UpdateUserFormComponent implements OnInit {
     )
 
     this.emitter.emit(val)
-    this.service.refresh();
+    this.service.reloadComponent(true);
   }
 
 }
