@@ -17,32 +17,32 @@ export class ServiceDescriptionComponent implements OnInit {
 
   @Output("on-submit")
   emitter = new EventEmitter
-  serviceToEdit?:Service
+  serviceToEdit?: Service
 
-  constructor(private newService : AppServiceService, public modalService:ModalService) { }
+  constructor(private newService: AppServiceService, public modalService: ModalService) { }
 
   ngOnInit(): void {
-    console.log(this.currentIndex + ' ' +this.currentService._id)
+    console.log(this.currentIndex + ' ' + this.currentService._id)
   }
 
-  editService(u:Service) {
+  editService(u: Service) {
     this.serviceToEdit = u
   }
 
-  commitEdit(u:Service) {
+  commitEdit(u: Service) {
     this.ngOnInit()
 
-    this.refresh()
-    
+    this.newService.reloadComponent(true);
+
     this.serviceToEdit = undefined
   }
 
-  deleteService(u:Service) {
+  deleteService(u: Service) {
     this.newService.deleteService(u).subscribe(
       data => console.log('Success!', data),
       error => console.error('error!', error)
     )
-    
+
     this.refresh()
 
     this.emitter.emit()
@@ -52,7 +52,7 @@ export class ServiceDescriptionComponent implements OnInit {
     this.serviceToEdit = undefined
   }
 
-  String(number : number) {
+  String(number: number) {
     return String(number)
   }
 

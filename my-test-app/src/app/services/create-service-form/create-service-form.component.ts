@@ -17,8 +17,8 @@ export class CreateServiceFormComponent implements OnInit {
 
   createServiceForm !: FormGroup
 
-  uploadedImage : Image = new Image()
-  url:string= ''
+  uploadedImage: Image = new Image()
+  url: string = ''
 
   @Input()
   newService = new Service()
@@ -45,8 +45,8 @@ export class CreateServiceFormComponent implements OnInit {
     var today = new Date()
 
 
-    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth()+1) + '-' + String(today.getDate())
-​
+    var todayString = String(today.getFullYear()) + '-' + String(today.getMonth() + 1) + '-' + String(today.getDate())
+
     const input = this.createServiceForm.value
     const anotherNewService = new Service({
       _id: input.veh__id,
@@ -63,8 +63,8 @@ export class CreateServiceFormComponent implements OnInit {
     )
 
     this.handleClear()
-    
-    // this.refresh()
+
+    this.service.reloadComponent(true)
 
     this.emitter.emit()
   }
@@ -88,15 +88,15 @@ export class CreateServiceFormComponent implements OnInit {
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = reader.result as string;
 
-        this.uploadedImage.base64 = reader.result as string 
+        this.uploadedImage.base64 = reader.result as string
         this.uploadedImage.imagePath = file.name
-      
+
       }
 
 
       reader.readAsDataURL(file);
 
     }
-    
+
   }
 }

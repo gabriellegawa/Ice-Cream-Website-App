@@ -64,7 +64,7 @@ export class CreateUserFormComponent implements OnInit {
     this.handleClear()
 
     this.emitter.emit()
-    this.service.refresh();
+    this.service.reloadComponent(true);
   }
 
   handleClear() {

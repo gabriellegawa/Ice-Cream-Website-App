@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserGalleryComponent } from './user-gallery.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { UserDescriptionComponent } from '../user-description/user-description.component';
 
 describe('UserGalleryComponent', () => {
   let component: UserGalleryComponent;
@@ -10,8 +12,15 @@ describe('UserGalleryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule],
-      declarations: [UserGalleryComponent]
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule,
+        MatIconModule,
+      ],
+      declarations: [
+        UserGalleryComponent,
+        UserDescriptionComponent,
+      ]
     })
       .compileComponents();
   });

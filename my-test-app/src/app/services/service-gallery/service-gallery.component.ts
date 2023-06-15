@@ -15,13 +15,13 @@ export class ServiceGalleryComponent implements OnInit {
   slides: any[] = [];
   filtersLoaded: Promise<boolean> = Promise.resolve(false);
 
-  serviceList:Service[] = []
-  serviceToEdit?:Service
+  serviceList: Service[] = []
+  serviceToEdit?: Service
 
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private newService : AppServiceService, public modalService:ModalService, private storageService:StorageService, private router:Router) { }
+  constructor(private newService: AppServiceService, public modalService: ModalService, private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
     this.getServiceList()
@@ -41,23 +41,23 @@ export class ServiceGalleryComponent implements OnInit {
     })
   }
 
-  editService(u:Service) {
+  editService(u: Service) {
     this.serviceToEdit = u
   }
 
-  commitEdit(u:Service) {
+  commitEdit(u: Service) {
     this.ngOnInit()
 
     this.serviceToEdit = undefined
   }
 
-  deleteService(u:Service) {
+  deleteService(u: Service) {
     this.newService.deleteService(u).subscribe(
       data => console.log('Success!', data),
       error => console.error('error!', error)
     )
-    
-    this.refresh()
+
+    this.newService.reloadComponent(true);
 
     this.emitter.emit()
   }
@@ -66,7 +66,7 @@ export class ServiceGalleryComponent implements OnInit {
     this.serviceToEdit = undefined
   }
 
-  String(number : number) {
+  String(number: number) {
     return String(number)
   }
 

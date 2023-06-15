@@ -72,10 +72,6 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
     return String(number)
   }
 
-  refresh(): void {
-    window.location.reload();
-  }
-
   delete(u: User): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
@@ -86,21 +82,12 @@ export class UserDescriptionComponent implements OnInit, AfterViewInit, OnDestro
           error => console.error('error!', error)
         )
 
-        this.refresh()
+        this.service.reloadComponent(true);
 
         this.emitter.emit()
       }
     });
   }
-
-  // this.newService.deleteService(u).subscribe(
-  //   data => console.log('Success!', data),
-  //   error => console.error('error!', error)
-  // )
-
-  // this.refresh()
-
-  // this.emitter.emit()
 
 
 

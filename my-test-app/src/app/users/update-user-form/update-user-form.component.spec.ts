@@ -3,6 +3,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UpdateUserFormComponent } from './update-user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from 'src/app/app.component';
 
 describe('UpdateUserFormComponent', () => {
   let component: UpdateUserFormComponent;
@@ -15,8 +19,11 @@ describe('UpdateUserFormComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
       ],
-      declarations: [UpdateUserFormComponent],
+      declarations: [UpdateUserFormComponent, AppComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
