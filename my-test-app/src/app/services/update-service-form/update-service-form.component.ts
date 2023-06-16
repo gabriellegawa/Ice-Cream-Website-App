@@ -23,7 +23,8 @@ export class UpdateServiceFormComponent implements OnInit {
   ngOnInit(): void {
     this.updateServiceForm = new FormGroup({
       veh_title: new FormControl(this.service.title, [Validators.minLength(3), Validators.required]),
-      veh_description: new FormControl(this.service.description, [Validators.minLength(3), Validators.required])
+      veh_description: new FormControl(this.service.description, [Validators.minLength(3), Validators.required]),
+      veh_img_name: new FormControl(this.service.imgPath, [Validators.minLength(3), Validators.required])
     })
   }
 

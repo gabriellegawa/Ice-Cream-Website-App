@@ -20,58 +20,39 @@
           <div id="success"></div>
           <form [formGroup]="loginForm">
             <div class="control-group">
-              <input
-                class="form-control p-4"
-                type="text"
-                formControlName="veh_email"
-                placeholder="Email Address"
-              />
-              <span
-                class="help-block text-danger"
-                *ngIf="
+              <input class="form-control p-4" type="text" formControlName="veh_email" placeholder="Email Address" />
+              <span class="help-block text-danger" *ngIf="
                   loginForm.controls.veh_email.value == '' &&
                   loginForm.controls.veh_email.dirty
-                "
-              >
+                ">
                 Please enter your email address
               </span>
-              <span
-                class="help-block text-danger"
-                *ngIf="loginForm.controls.veh_email.invalid && loginForm.controls.veh_email.dirty && loginForm.controls.veh_email.value != ''"
-              >
+              <span class="help-block text-danger"
+                *ngIf="loginForm.controls.veh_email.invalid && loginForm.controls.veh_email.dirty && loginForm.controls.veh_email.value != ''">
                 Invalid email address
               </span>
             </div>
             <br />
             <div class="control-group">
-              <input
-                class="form-control p-4"
-                placeholder="Password"
-                type="text"
-                formControlName="veh_password"
-              />
-              <span
-                class="help-block text-danger"
-                *ngIf="
+              <input class="form-control p-4" placeholder="Password" type="password" formControlName="veh_password" />
+              <span class="help-block text-danger" *ngIf="
                   loginForm.controls.veh_password.value == '' &&
                   loginForm.controls.veh_password.dirty
-                "
-              >
+                ">
                 Please enter your password
               </span>
             </div>
             <br />
             <div>
-              <button
-                class="btn btn-primary btn-block py-3 px-5"
-                type="submit"
-                id="loginButton"
-                (click)="handleLogin()"
-              >
+              <button class="btn btn-primary btn-block py-3 px-5" type="submit" id="loginButton"
+                (click)="handleLogin()">
                 Login
               </button>
             </div>
           </form>
+          <br>
+          <p class="text-center">Don't have an account yet? <a (click)="redirectToRegister()"
+              class="nav-item nav-link">Register here</a></p>
         </div>
       </div>
     </div>

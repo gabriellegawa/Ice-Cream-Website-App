@@ -1,0 +1,109 @@
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h1 class="section-title position-relative text-center mb-5">
+                    Register Page
+                </h1>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-center">
+            <div>
+                <h1 *ngIf="isLoginFailed">
+                    Invalid Email Address/Password combination
+                </h1>
+            </div>
+        </div> -->
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="contact-form bg-light rounded p-5">
+                    <div id="success"></div>
+                    <form [formGroup]="registerForm">
+                        <div class="control-group">
+                            <input class="form-control p-4" type="text" formControlName="veh_first_name"
+                                placeholder="First Name" />
+                            <span class="help-block text-danger" *ngIf="
+                    registerForm.controls.veh_first_name.value == '' &&
+                    registerForm.controls.veh_first_name.dirty
+                  ">
+                                Please enter your first name
+                            </span>
+                        </div>
+                        <br />
+                        <div class="control-group">
+                            <input class="form-control p-4" type="text" formControlName="veh_last_name"
+                                placeholder="Last Name" />
+                            <span class="help-block text-danger" *ngIf="
+                    registerForm.controls.veh_last_name.value == '' &&
+                    registerForm.controls.veh_last_name.dirty
+                  ">
+                                Please enter your last name
+                            </span>
+                        </div>
+                        <br />
+                        <div class="control-group">
+                            <input class="form-control p-4" type="text" formControlName="veh_email"
+                                placeholder="Email Address" />
+                            <span class="help-block text-danger" *ngIf="
+                    registerForm.controls.veh_email.value == '' &&
+                    registerForm.controls.veh_email.dirty
+                  ">
+                                Please enter your email address
+                            </span>
+                            <span class="help-block text-danger"
+                                *ngIf="registerForm.controls.veh_email.invalid && registerForm.controls.veh_email.dirty && registerForm.controls.veh_email.value != ''">
+                                Invalid email address
+                            </span>
+                        </div>
+                        <br />
+                        <div class="control-group">
+                            <input class="form-control p-4" type="text" formControlName="veh_phone_number"
+                                placeholder="Phone Number" />
+                            <span class="help-block text-danger" *ngIf="
+                    registerForm.controls.veh_phone_number.value == '' &&
+                    registerForm.controls.veh_phone_number.dirty
+                  ">
+                                Please enter your phone number
+                            </span>
+                            <span class="help-block text-danger"
+                                *ngIf="registerForm.controls.veh_phone_number.invalid && registerForm.controls.veh_phone_number.dirty && registerForm.controls.veh_phone_number.value != ''">
+                                Invalid phone number
+                            </span>
+                        </div>
+                        <br />
+                        <div class="control-group">
+                            <input class="form-control p-4" placeholder="Date of Birth" type="date"
+                                formControlName="veh_date_of_birth" />
+                            <span class="help-block text-danger" *ngIf="
+                    registerForm.controls.veh_date_of_birth.value == '' &&
+                    registerForm.controls.veh_date_of_birth.dirty
+                  ">
+                                Please enter your date of birth
+                            </span>
+                        </div>
+                        <br />
+                        <div class="control-group">
+                            <input class="form-control p-4" placeholder="Password" type="password"
+                                formControlName="veh_password" />
+                            <span class="help-block text-danger" *ngIf="
+                    registerForm.controls.veh_password.value == '' &&
+                    registerForm.controls.veh_password.dirty
+                  ">
+                                Please enter your password
+                            </span>
+                        </div>
+                        <br />
+                        <div>
+                            <button class="btn btn-primary btn-block py-3 px-5" type="submit" id="registerButton">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                    <br>
+                    <p class="text-center">Already have an account? <a (click)="redirectToLogin()"
+                            class="nav-item nav-link">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

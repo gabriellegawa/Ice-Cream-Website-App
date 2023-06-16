@@ -8,13 +8,13 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class StorageService {
-  constructor() {}
+  constructor() { }
 
   clean(): void {
     window.localStorage.clear()
   }
 
-  public setSession(authResult:any) {
+  public setSession(authResult: any) {
     const expiresAt = moment().add(authResult.expiresIn, 'second')
 
     localStorage.setItem('id_token', authResult.idToken)
@@ -26,8 +26,7 @@ export class StorageService {
   }
 
   logout() {
-    localStorage.removeItem("id_token")
-    localStorage.removeItem("expires_at")
+    localStorage.clear();
   }
 
   public isLoggedIn(): boolean {

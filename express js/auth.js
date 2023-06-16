@@ -8,7 +8,7 @@ const RSA_PRIVATE_KEY = fs.readFileSync(
 function generateToken(id) {
   return jwt.sign({}, RSA_PRIVATE_KEY, {
     algorithm: "HS256",
-    expiresIn: 120,
+    expiresIn: "2h",
     subject: id,
   });
 }

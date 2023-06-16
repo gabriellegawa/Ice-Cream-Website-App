@@ -10,6 +10,10 @@
     <span class="error" *ngIf="createServiceForm.controls.veh_description.invalid &&
     createServiceForm.controls.veh_description.dirty">Must be 3 characters</span>
     <br>
+    Image Name: <br>
+    <input type="text" formControlName="veh_img_name" />
+    <span class="error" *ngIf="createServiceForm.controls.veh_img_name.invalid &&
+    createServiceForm.controls.veh_img_name.dirty">Must be 3 characters</span>
     <br/>
 
 

@@ -26,7 +26,7 @@ export class CreateServiceFormComponent implements OnInit {
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private service : AppServiceService) { }
+  constructor(private service: AppServiceService) { }
 
   ngOnInit(): void {
     this.createServiceForm = new FormGroup({

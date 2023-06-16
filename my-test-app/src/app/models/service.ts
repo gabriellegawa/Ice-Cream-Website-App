@@ -9,7 +9,7 @@ export class Service {
     image ?: Image
     containsImage ?: boolean
 
-    constructor(obj?:Service) {
+    constructor(obj?: Service) {
         this._id = obj?._id ?? 0
         this.title = obj?.title ?? ''
         this.description = obj?.description ?? ''

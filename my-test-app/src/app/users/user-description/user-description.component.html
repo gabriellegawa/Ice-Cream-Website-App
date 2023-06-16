@@ -1,31 +1,29 @@
-<p>Number: {{ currentIndex }}</p>
-<p>first Name {{ currentUser.firstName }}</p>
-<p>last Name {{ currentUser.lastName }}</p>
-<p>Email address {{ currentUser.emailAddress }}</p>
-<p>Phone Number {{ currentUser.phoneNumber }}</p>
-<p>Date of Birth {{ currentUser.dateOfBirth }}</p>
-<p>postal Code {{ currentUser.password }}</p>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container *ngFor="let column of userData; index as i" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef>
+        <div style="display: flex; align-items: center;">
+          <span mat-sort-header>{{displayedColumns[i]}}</span>
+        </div>
+      </th> 
+      <td mat-cell *matCellDef="let user"> {{ user[column] }} </td>
+    </ng-container>
+    <ng-container [matColumnDef]="'Actions'">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-icon-button (click)="editUser(user)">
+          <mat-icon mat-icon-button color='primary'>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete(user)">
+          <mat-icon mat-icon-button color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
 
-<button>View</button>
-<button
-  (click)="editUser(currentUser); modalService.open(String(currentIndex))"
->
-  Update
-</button>
-<button>Delete</button>
-<button (click)="onCancel()">Cancel</button>
-<hr />
+  <mat-paginator [pageSize]="5" 
+  [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
 
-<jw-modal id="{{ currentIndex }}">
-  <div align="right">
-    <button (click)="modalService.close(String(currentIndex))">&#10006;</button>
-  </div>
-  <app-update-user-form
-    *ngIf="userToEdit == currentUser"
-    [user]="currentUser"
-    (on-submit)="commitEdit($event); modalService.close(String(currentIndex))"
-  ></app-update-user-form>
-  <button (click)="onCancel(); modalService.close(String(currentIndex))">
-    Cancel
-  </button>
-</jw-modal>
+</div>

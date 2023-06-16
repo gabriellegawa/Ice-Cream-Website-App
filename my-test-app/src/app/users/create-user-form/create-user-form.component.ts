@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Role } from 'src/app/models/role';
 import { AppServiceService } from '../../app-service.service';
 import { User } from '../../models/user';
@@ -12,7 +13,7 @@ import { User } from '../../models/user';
 })
 export class CreateUserFormComponent implements OnInit {
 
-  createUserForm !:FormGroup
+  createUserForm !: FormGroup
 
   @Input()
   newUser = new User()
@@ -20,31 +21,31 @@ export class CreateUserFormComponent implements OnInit {
   @Output("on-submit")
   emitter = new EventEmitter
 
-  constructor(private service : AppServiceService) { }
+  constructor(private service: AppServiceService, public dialogRef: MatDialogRef<CreateUserFormComponent>) { }
 
   ngOnInit(): void {
     this.createUserForm = new FormGroup({
       veh_firstName: new FormControl(
-      this.newUser.firstName, [Validators.minLength(3), Validators.required]),
+        this.newUser.firstName, [Validators.minLength(3), Validators.required]),
       veh_lastName: new FormControl(
-      this.newUser.lastName, [Validators.minLength(3), Validators.required]),
+        this.newUser.lastName, [Validators.minLength(3), Validators.required]),
       veh_emailAddress: new FormControl(
-      this.newUser.emailAddress, [Validators.email, Validators.required]),
+        this.newUser.emailAddress, [Validators.email, Validators.required]),
       veh_phoneNumber: new FormControl(
-      this.newUser.phoneNumber, [Validators.minLength(3), Validators.required]),
+        this.newUser.phoneNumber, [Validators.minLength(3), Validators.required]),
       veh_dateOfBirth: new FormControl(
-      this.newUser.dateOfBirth, [Validators.minLength(3), Validators.required]),
+        this.newUser.dateOfBirth, [Validators.minLength(3), Validators.required]),
       veh_password: new FormControl(
-      this.newUser.password, [Validators.minLength(3), Validators.required]),
+        this.newUser.password, [Validators.minLength(3), Validators.required]),
       veh_confirmPassword: new FormControl(
-      this.newUser.password, [Validators.minLength(3), Validators.required]),
-      })
+        this.newUser.password, [Validators.minLength(3), Validators.required]),
+    })
   }
 
-  handleCreate(){
+  handleCreate() {
     const input = this.createUserForm.value
 
-    const user = new User({ 
+    const user = new User({
       _id: input.veh__id,
       firstName: input.veh_firstName,
       lastName: input.veh_lastName,
@@ -59,13 +60,14 @@ export class CreateUserFormComponent implements OnInit {
       data => console.log('Success!', data),
       error => console.error('error!', error)
     )
-    
+
     this.handleClear()
 
     this.emitter.emit()
+    this.service.refresh();
   }
 
-  handleClear(){
+  handleClear() {
     this.createUserForm.controls.veh_firstName.reset();
     this.createUserForm.controls.veh_lastName.reset();
     this.createUserForm.controls.veh_emailAddress.reset();

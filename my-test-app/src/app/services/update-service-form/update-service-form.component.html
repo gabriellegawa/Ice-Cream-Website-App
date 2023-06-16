@@ -22,6 +22,17 @@
     >Must be 3 characters</span
   >
   <br />
+  Image Name (With extension): <br />
+  <input type="text" formControlName="veh_img_name" />
+  <span
+    class="error"
+    *ngIf="
+      updateServiceForm.controls.veh_img_name.invalid &&
+      updateServiceForm.controls.veh_img_name.dirty
+    "
+    >Must be 3 characters</span
+  >
+  <br />
   <br />
   <button
     class="button"
