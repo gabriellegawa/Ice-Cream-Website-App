@@ -15,12 +15,12 @@ import { UserRegisterFormComponent } from './user-register-form/user-register-fo
 var defaultPath = ''
 var storageService = new StorageService()
 
-if (storageService.isLoggedIn()) {
-    defaultPath = 'service-gallery'
-}
-else {
-    defaultPath = 'user-login-form'
-}
+// if (storageService.isLoggedIn()) {
+//     defaultPath = 'service-gallery'
+// }
+// else {
+//     defaultPath = 'user-login-form'
+// }
 
 const routes: Routes = [
     { path: '', redirectTo: defaultPath, pathMatch: 'full' },

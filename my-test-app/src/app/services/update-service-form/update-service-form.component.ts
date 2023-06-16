@@ -24,7 +24,7 @@ export class UpdateServiceFormComponent implements OnInit {
     this.updateServiceForm = new FormGroup({
       veh_title: new FormControl(this.service.title, [Validators.minLength(3), Validators.required]),
       veh_description: new FormControl(this.service.description, [Validators.minLength(3), Validators.required]),
-      veh_img_name: new FormControl(this.service.imgPath, [Validators.minLength(3), Validators.required])
+      // veh_img_name: new FormControl(this.service.imgPath, [Validators.minLength(3), Validators.required])
     })
   }
 
@@ -38,9 +38,7 @@ export class UpdateServiceFormComponent implements OnInit {
       title: input.veh_title,
       description: input.veh_description,
       dateAdded: this.service.dateAdded,
-      lastModified: todayString,
-      imgPath: input.veh_img_name,
-      user: input.veh_user
+      lastModified: todayString
     })
 
     this.appService.updateService(val).subscribe(

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var objectId = require('mongoose').Types.ObjectId; 
 
 var userAccountModel = require('./userAccounts.models')
-var imageModel = require('./images.models')
+var imageModel = require('./image.models')
 
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost:27017/iCreamDB", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -38,15 +38,15 @@ const servicesSchema = mongoose.Schema({
     image: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "image",
-        validate: {
-            async validator(val) {
-                const result = await imageModel.findOne({
-                    "_id": val
-                })
-                return result != null ? true : false
-            },
-            message: "image doesn't exists"
-        }
+        // validate: {
+        //     async validator(val) {
+        //         const result = await imageModel.findOne({
+        //             "_id": val
+        //         })
+        //         return result != null ? true : false
+        //     },
+        //     message: "image doesn't exists"
+        // }
     }
  });
 

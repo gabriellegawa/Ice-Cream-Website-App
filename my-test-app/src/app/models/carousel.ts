@@ -1,14 +1,17 @@
-export class carousel {
-  title: string;
-  description: string;
-  imgPath: string;
-  imgAltText: string;
+import { Image } from "./image";
 
-  constructor(obj?: carousel) {
-    this.title = obj?.title ?? '';
-    this.description = obj?.description ?? '';
-    this.imgPath = obj?.imgPath ?? '';
-    this.imgAltText = obj?.imgAltText ?? '';
-  }
+export class carousel{
+    title: string;
+    description: string;
+    image: Image;
 
+    constructor(obj?:carousel){
+      this.title = obj?.title ?? '';
+      this.description = obj?.description ?? '';
+      this.image = obj?.image ?? new Image();
+
+      //Temporary solution
+      this.image.imagePath = 'backend/images/' + this.image.imagePath
+    }
+    
 }

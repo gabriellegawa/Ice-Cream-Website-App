@@ -2,7 +2,8 @@ const { getUserAccountByUserNameDb } = require('../../components/userAccounts/se
 var crypto = require("crypto")
 
 const isPasswordAndUserMatch = (request, response, next) => {
-    if (request.body.userName) {
+    console.log(request.body)
+    if (request.body.userName || request.body.password) {
         getUserAccountByUserNameDb(request.body.userName)
         .then((user)=>{
             if(!user[0]){
@@ -21,7 +22,7 @@ const isPasswordAndUserMatch = (request, response, next) => {
             }
         })
     } else {
-        return next()
+        response.status(400).send({errors: ['Missing required authentication fields']})
     }
     
 }

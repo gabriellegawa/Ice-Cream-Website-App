@@ -28,7 +28,7 @@ export class AppServiceService {
   }
 
   getServiceList() {
-    return this.http.get<Service[]>('/api/getService')
+    return this.http.get<Service[]>('/backend/api/services')
   }
 
   registerProduct(product: Product) {
@@ -40,7 +40,7 @@ export class AppServiceService {
   }
 
   registerService(service: Service) {
-    return this.http.put<Service>('/api/registerService', service)
+    return this.http.post<Service>('/backend/api/services', service)
   }
 
   deleteService(service: Service) {

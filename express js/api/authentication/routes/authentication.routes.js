@@ -8,4 +8,8 @@ router.post('/login', [
     controllers.login
 ])
 
+router.get('/login', (request, response) => {
+    response.send('App is working')
+  })
+
 module.exports = router

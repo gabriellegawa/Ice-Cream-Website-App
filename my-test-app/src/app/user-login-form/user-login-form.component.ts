@@ -30,7 +30,7 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      veh_email: new FormControl(this.user.emailAddress, [Validators.required, Validators.email]),
+      veh_email: new FormControl(this.user.emailAddress, [Validators.required]),
       veh_password: new FormControl(this.user.password, [Validators.required])
     })
   }
@@ -43,10 +43,9 @@ export class UserLoginFormComponent implements OnInit {
     loginUser.password = input.veh_password
 
     const response = this.authService.login(loginUser).subscribe((Response) => {
-      this.storageService.setSession(Response)
       this.isLoginFailed = false
       this.isLoggedIn = true
-      this.router.navigate(["service-gallery"])
+      // this.router.navigate(["service-gallery"])
     }, (error) => {
       this.errorResponse = error
       this.isLoginFailed = true

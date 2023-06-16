@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const serviceModel = require("../../../../models/services.models")
 const ValidationError = require('../../../lib/Validation/Exception/ValidationError')
 const ValidatorError = require('../../../lib/Validation/Exception/ValidatorError')
-const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator');
+const { isUndefinedString } = require('../../../lib/Validation/CommonUtils/StringValidator/StringValidator')
 
 const { createImageDb } = require('../../images/services/images.services')
 
-const getAllServicesDb = () => {
+const getAllServicesDb = async () => {
     //TODO: ADD DATA VALIDATION TO ENSURE ONLY CONSUME GOOD DATA
-    var result = serviceModel.find()
+    var result = await serviceModel.find().populate('image')
     return result
 }
 
@@ -27,12 +27,7 @@ const createServiceDb = async(request) => {
     
     var errorsList = new Map()
 
-    console.log(request.body)
-
-    if(request.body.containsImage){
-
-        
-
+    if(request.body.image){
         try{
             var newImage = await createImageDb(request, session)
         }catch(error){

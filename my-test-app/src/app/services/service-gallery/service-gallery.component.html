@@ -1,6 +1,19 @@
-<button *ngIf="getRole() == 'Admin'" (click)="modalService.open('Add Service')">
-  Add Service
-</button>
+<div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <ul class="list-inline mb-4 pb-2" id="portfolio-flters">
+            <li class="btn btn-sm btn-outline-primary m-1 active" (click)="modalService.open('Add Service')">Add Service</li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="filtersLoaded | async" class="row">
+      <div class="col-12 text-center">
+          <h3>Featured Service</h3>
+          <app-carousel [itemLists]="serviceList"></app-carousel>
+      </div>
+    </div>
+</div>
+
 <jw-modal id="Add Service">
   <div align="right">
     <button (click)="modalService.close('Add Service')">&#10006;</button>
@@ -9,6 +22,3 @@
     (on-submit)="modalService.close('Add Service')"
   ></app-create-service-form>
 </jw-modal>
-<div *ngIf="filtersLoaded | async">
-  <app-carousel [itemLists]="serviceList"></app-carousel>
-</div>

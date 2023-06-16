@@ -10,11 +10,18 @@
     <span class="error" *ngIf="createServiceForm.controls.veh_description.invalid &&
     createServiceForm.controls.veh_description.dirty">Must be 3 characters</span>
     <br>
-    Image Name: <br>
-    <input type="text" formControlName="veh_img_name" />
-    <span class="error" *ngIf="createServiceForm.controls.veh_img_name.invalid &&
-    createServiceForm.controls.veh_img_name.dirty">Must be 3 characters</span>
-    <br/>
+
+
+    <label class="image-upload-container btn btn-bwm">
+        <span>Select Image</span>
+        <input #imageInput
+               type="file"
+               accept="image/*"
+               formControlName="veh_image"
+               (change)="handleFileInput($event)">
+        <img id="blah" [src]="url || 'http://placehold.it/180'" alt="your image" />
+    </label>
+
     <button class="button" (click)="handleCreate()" [disabled]="createServiceForm.invalid">Submit</button>
     &nbsp;
     <button class="button" (click)="handleClear()">Clear</button>

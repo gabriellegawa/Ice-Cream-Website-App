@@ -1,3 +1,12 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
+<div *ngIf="router.url != '/user-login-form'">
+    <h1>HOME PAGE :)</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet commodo nulla facilisi. Euismod elementum nisi quis eleifend quam adipiscing vitae proin. In nulla posuere sollicitudin aliquam ultrices sagittis orci. Sit amet purus gravida quis blandit. Lorem ipsum dolor sit amet consectetur adipiscing. Dui ut ornare lectus sit amet est placerat in. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Phasellus faucibus scelerisque eleifend donec pretium. Velit dignissim sodales ut eu. Dui nunc mattis enim ut. Nulla facilisi cras fermentum odio eu feugiat pretium nibh. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa.
+    
+    </p>
+</div>
+<div *ngIf="this.authService.isLogged | async">
+    <h1>Welcome Back {{ '{' }} Insert Name {{ '}' }}</h1>
+</div>
 <app-footer></app-footer>

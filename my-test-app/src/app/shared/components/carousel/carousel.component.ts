@@ -16,16 +16,13 @@ export class CarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.itemLists)
-
     for (let i = 0; i < this.itemLists.length; i++) {
       this.carouselItemLists[i] = new carousel(this.itemLists[i])
-      console.log(this.carouselItemLists[i])
     }
 
   }
 
   onItemChange($event: any): void {
-    console.log('Carousel onItemChange', $event);
+    // console.log('Carousel onItemChange', $event);
   }
 }
