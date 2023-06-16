@@ -214,6 +214,7 @@ describe('CreateUserFormComponent', () => {
   }));
 
   it('should call registerUser service when all fields are filled and button is clicked', fakeAsync(inject([AppServiceService], (service: AppServiceService) => {
+
     spyOn(service, "registerUser");
 
     setAllFormControlValues();
