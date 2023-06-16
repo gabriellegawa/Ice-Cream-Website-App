@@ -6,6 +6,10 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import { MockService, ngMocks } from 'ng-mocks';
+import { AppServiceService } from './app/app-service.service';
+import { EMPTY } from 'rxjs';
+import { User } from './app/models/user';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
@@ -17,3 +21,9 @@ getTestBed().initTestEnvironment(
     errorOnUnknownProperties: true,
   },
 );
+
+ngMocks.autoSpy('jasmine');
+
+ngMocks.defaultMock(AppServiceService, () => {
+  registerUser: () => EMPTY;
+})
