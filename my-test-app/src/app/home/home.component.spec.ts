@@ -37,4 +37,12 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render header component', () => {
+    expect(fixture.nativeElement.querySelector('app-header')).toBeTruthy();
+  });
+
+  it('should render footer component', () => {
+    expect(fixture.nativeElement.querySelector('app-footer')).toBeTruthy();
+  })
 });
