@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap  } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthResponse } from '../models/authResponse';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
-import {shareReplay } from 'rxjs/operators'
+import { shareReplay } from 'rxjs/operators'
 import { map } from 'rxjs/operators';
 import * as moment from "moment"
 
@@ -24,24 +24,24 @@ export class AuthService {
   private logged = new BehaviorSubject<boolean>(false);
   isLogged = this.logged.asObservable();
 
-  constructor(private http: HttpClient, private router:Router) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(user: User): Observable<any> {
     var email = user.emailAddress
     var password = user.password
 
-    var obj:any = {}
-    obj.userName = "UserNameTest"
-    obj.password = "5"
+    var obj: any = {}
+    obj.userName = email
+    obj.password = password
 
-    const body=JSON.stringify(obj);
+    const body = JSON.stringify(obj);
     console.log(body)
 
     return this.http.post<AuthResponse>('/backend/auth/login', obj).pipe(
       tap(res => this.setAuthResponse(res)),
       shareReplay()
-      )
+    )
   }
 
   set token(token: string) {
@@ -56,11 +56,11 @@ export class AuthService {
     return this.accessToken;
   }
 
-  private setAuthResponse(response: AuthResponse){
+  private setAuthResponse(response: AuthResponse) {
     this.accessToken = response.accessToken
     this.expiresIn = response.expiresIn
 
-    
+
     const expiresAt = moment().add(response.expiresIn, 'second')
     localStorage.setItem('id_token', response.accessToken)
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
@@ -75,11 +75,11 @@ export class AuthService {
       this.logged.next(false);
     }
   }
-  
+
 
   redirectToLogin() {
     this.router.navigate(['user-login-form']);
   }
 
-  
+
 }

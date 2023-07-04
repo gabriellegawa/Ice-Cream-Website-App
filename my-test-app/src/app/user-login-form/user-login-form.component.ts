@@ -45,7 +45,7 @@ export class UserLoginFormComponent implements OnInit {
     const response = this.authService.login(loginUser).subscribe((Response) => {
       this.isLoginFailed = false
       this.isLoggedIn = true
-      // this.router.navigate(["service-gallery"])
+      this.router.navigate(["service-gallery"])
     }, (error) => {
       this.errorResponse = error
       this.isLoginFailed = true
